@@ -1,19 +1,29 @@
 {% from 'bootstrap/wtf.html' import form_field %}
 <form id="addRoundForm" method="POST" action="" autocomplete="off">
     {{ form.hidden_tag() }}
-    <div class="form-group">
-        {{ form.date_played.label(class="form-control-label", style="padding-right: 1rem;") }}
-
-        {% if form.date_played.errors %}
-            <input id="datepick" name="date_played" type="date" class="form-control date-custom is-invalid" value="">
-            <div class="invalid-feedback" style="padding-left: 5.8rem;">
-                {% for error in form.date_played.errors %}
-                    <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-        {% else %}
-            <input id="datepick" name="date_played" type="date" class="form-control date-custom form-borderless" value="">
-        {% endif %}
+    <div class="row">
+        <div class="form-group">
+            {{ form.date_played.label(class="form-control-label") }}
+    
+            {% if form.date_played.errors %}
+                <input id="datepick" name="date_played" type="date" class="form-control date-custom is-invalid" value="">
+                <div class="invalid-feedback" style="padding-left: 5.8rem;">
+                    {% for error in form.date_played.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <input id="datepick" name="date_played" type="date" class="form-control date-custom form-borderless" value="">
+            {% endif %}
+        </div>
+        <div class="form-group" style="padding-left: 1rem;">
+            {{ form.course_played.label(class="form-control-label") }}
+                <select name="course_played" class="selectpicker form-control date-custom form-borderless">
+                  {% for golf_course in golf_courses %}
+                  <option value="{{ golf_course.name }}">{{ golf_course.name }}</option>
+                  {% endfor %}
+                </select>
+        </div>
     </div>
     <table class="table golf-table">
         <thead>

@@ -7,7 +7,6 @@ from datetime import datetime
 from multitool.models import Golf_Round, User
 
 class Add_Round(FlaskForm):
-    # h1Score = IntegerField('Hole 1 Score', validators=[DataRequired(), NumberRange(1, 15)])
     h1Score = IntegerField('Hole 1 Score', validators=[NumberRange(1, 15), Optional()])
     h2Score = IntegerField('Hole 2 Score', validators=[NumberRange(1, 15), Optional()])
     h3Score = IntegerField('Hole 3 Score', validators=[NumberRange(1, 15), Optional()])
@@ -49,4 +48,9 @@ class Add_Round(FlaskForm):
     totalScore = StringField('Total Score')
     description = TextAreaField('Description')
     date_played = DateField('Date Played', format='%Y-%m-%d', validators=[DataRequired()], default=datetime.today)
+    course_played = StringField('Course Played')
     submit = SubmitField('Add Round')
+
+class Add_Course(FlaskForm):
+    name = StringField('Course Name', validators=[DataRequired()])
+    submit = SubmitField('Add Course')

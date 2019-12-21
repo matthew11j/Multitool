@@ -1,11 +1,11 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
 from multitool import db, bcrypt
-from multitool.golf.forms import Add_Round
+from multitool.golf.forms import Add_Round, Add_Course
 from multitool.models import Golf_Round, Golf_Course
 
 golf = Blueprint('golf', __name__)
 
-@golf.route("/golftracker", methods=['GET', 'POST'])
+@golf.route("/golftracker")
 def golftracker():
     golf_rounds = Golf_Round.query.all()
     golf_courses = Golf_Course.query.all()
@@ -14,6 +14,7 @@ def golftracker():
 @golf.route("/golftracker/addround", methods=['GET', 'POST'])
 def addround():
     form = Add_Round()
+    golf_courses = Golf_Course.query.all()
     if form.validate_on_submit():
         # Calculating front, back, total Scores
         # Defaulting empty scores
@@ -57,9 +58,20 @@ def addround():
                                         h12Putt=form.h12Putt.data, h13Putt=form.h13Putt.data, h14Putt=form.h14Putt.data,
                                         h15Putt=form.h15Putt.data, h16Putt=form.h16Putt.data, h17Putt=form.h17Putt.data,
                                         h18Putt=form.h18Putt.data, date_played=form.date_played.data,
-                                        backScore=back, frontScore=front, totalScore=total)
+                                        backScore=back, frontScore=front, totalScore=total, course_played=form.course_played.data)
         db.session.add(new_golf_round)
         db.session.commit()
         flash('Round added!', 'success')
         return jsonify(status='ok')
-    return render_template('addround/add.html', form=form)
+    return render_template('addround/add.html', form=form, golf_courses=golf_courses)
+
+@golf.route("/golftracker/addcourse", methods=['GET', 'POST'])
+def addcourse():
+    form = Add_Course()
+    if form.validate_on_submit():
+        new_golf_course = Golf_Course(name=form.name.data)
+        db.session.add(new_golf_course)
+        db.session.commit()
+        flash('Course added!', 'success')
+        return jsonify(status='ok')
+    return render_template('addcourse/add.html', form=form)

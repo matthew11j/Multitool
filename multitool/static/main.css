@@ -293,3 +293,8 @@ select:-webkit-autofill:focus {
   color: #DFDFDF;
   font-size: 0.75em;
 }
+
+.form-control-label {
+  padding-left: 1em;
+  padding-right: .5em;
+}

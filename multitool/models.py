@@ -85,6 +85,7 @@ class Golf_Round(db.Model):
     frontScore = db.Column(db.Integer)
     backScore = db.Column(db.Integer)
     totalScore = db.Column(db.Integer)
+    course_played = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
         return f"Golf_Round('{self.description}', '{self.date_played}')"

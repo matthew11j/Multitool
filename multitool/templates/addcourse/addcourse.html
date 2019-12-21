@@ -1,0 +1,23 @@
+{% from 'bootstrap/wtf.html' import form_field %}
+<form id="addCourseForm" method="POST" action="" autocomplete="off">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label(class="form-control-label") }}
+
+        {% if form.name.errors %}
+            {{ form.name(class="form-control form-content-custom-text is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.name(class="form-control form-content-custom-text form-borderless") }}
+        {% endif %}
+    </div>
+    <hr>
+    <div class="form-group" style="float: right; margin-bottom: 0 !important;">
+        <button type="button" class="btn btn-dismiss" data-dismiss="modal">Dismiss</button>
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>

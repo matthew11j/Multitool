@@ -9,7 +9,8 @@
                           <tr>
                             <th style="width: 2%;"></th>
                             <!-- <th scope="col">ID</th> -->
-                            <th scope="col">Date Played</th>
+                            <th scope="col" style="text-align: left; padding: 0.25rem; width: 20%;">Course</th>
+                            <th scope="col" style="text-align: left; padding: 0.25rem;">Date</th>
                             <th scope="col">1</th>
                             <th scope="col">2</th>
                             <th scope="col">3</th>
@@ -38,7 +39,8 @@
                                 <tr>
                                     <td></td>
                                     <!-- <td>{{ golf_round.id }}</td> -->
-                                    <td>{{ golf_round.date_played.strftime('%m/%d/%y') }}</td>
+                                    <td style="text-align: left;">{{ golf_round.course_played }}</td style="text-align: left;">
+                                    <td style="text-align: left;">{{ golf_round.date_played.strftime('%m/%d/%y') }}</td style="text-align: left;">
                                     <td><span class="cell-score">{{ golf_round.h1Score }}</span> <span class="cell-putt"> {{ golf_round.h1Putt }}</span></td>
                                     <td><span class="cell-score">{{ golf_round.h2Score }}</span> <span class="cell-putt"> {{ golf_round.h2Putt }}</span></td>
                                     <td><span class="cell-score">{{ golf_round.h3Score }}</span> <span class="cell-putt"> {{ golf_round.h3Putt }}</span></td>
@@ -70,8 +72,9 @@
         <div class="col-md-3">
             <div class="card dark-card mb-5 mx-2">
                 <div class="row card-content">
-                    <div class="col-md-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoundModal" id="open-modal">Add Round</button>
+                    <div class="col-md-12">
+                        <span style="padding-right: 0.5em;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoundModal" id="open-modal">Add Round</button></span>
+                        <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="open-modal2">Add Course</button></span>
                     </div>
                     <!-- <div class="col-md-4">
                         <button type="button" class="btn btn-primary" id="addStepButton">Output</button>
@@ -93,5 +96,12 @@
           <div class="modal-content modal-content-custom">
           </div>
         </div>
-      </div>
+    </div>
+
+    <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content modal-content-custom">
+          </div>
+        </div>
+    </div>
 {% endblock content %}
