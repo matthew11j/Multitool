@@ -1,0 +1,386 @@
+{% from 'bootstrap/wtf.html' import form_field %}
+<form id="addRoundForm" method="POST" action="" autocomplete="off">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.date_played.label(class="form-control-label", style="padding-right: 1rem;") }}
+
+        {% if form.date_played.errors %}
+            <input id="datepick" name="date_played" type="date" class="form-control date-custom is-invalid" value="">
+            <div class="invalid-feedback" style="padding-left: 5.8rem;">
+                {% for error in form.date_played.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            <input id="datepick" name="date_played" type="date" class="form-control date-custom form-borderless" value="">
+        {% endif %}
+    </div>
+    <table class="table golf-table">
+        <thead>
+            <tr>
+                <th style="width: 3%;" scope="col">Hole</th>
+                {%for i in range(1, 19)%} 
+                    <th scope="col">{{ i }}</th>
+                {% endfor %}
+            </tr>
+          </thead>
+        <tbody>
+            <!-- Score -->
+            <tr>
+                <th style="width: 3%;" scope="row">Score</th>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h1Score.errors %}
+                            {{ form.h1Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h1Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h2Score.errors %}
+                            {{ form.h2Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h2Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h3Score.errors %}
+                            {{ form.h3Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h3Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h4Score.errors %}
+                            {{ form.h4Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h4Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h5Score.errors %}
+                            {{ form.h5Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h5Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h6Score.errors %}
+                            {{ form.h6Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h6Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h7Score.errors %}
+                            {{ form.h7Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h7Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h8Score.errors %}
+                            {{ form.h8Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h8Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h9Score.errors %}
+                            {{ form.h9Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h9Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h10Score.errors %}
+                            {{ form.h10Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h10Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h11Score.errors %}
+                            {{ form.h11Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h11Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h12Score.errors %}
+                            {{ form.h12Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h12Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h13Score.errors %}
+                            {{ form.h13Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h13Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h14Score.errors %}
+                            {{ form.h14Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h14Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h15Score.errors %}
+                            {{ form.h15Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h15Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h16Score.errors %}
+                            {{ form.h16Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h16Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h17Score.errors %}
+                            {{ form.h17Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h17Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h18Score.errors %}
+                            {{ form.h18Score(class="form-control form-content-custom is-invalid", maxlength="2") }}
+                        {% else %}
+                            {{ form.h18Score(class="form-control form-content-custom form-borderless", maxlength="2") }}
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            <!-- Putts -->
+            <tr>
+                <th style="width: 3%;">Putts</th>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h1Putt.errors %}
+                            {{ form.h1Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h1Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h2Putt.errors %}
+                            {{ form.h2Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h2Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h3Putt.errors %}
+                            {{ form.h3Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h3Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h4Putt.errors %}
+                            {{ form.h4Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h4Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h5Putt.errors %}
+                            {{ form.h5Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h5Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h6Putt.errors %}
+                            {{ form.h6Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h6Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h7Putt.errors %}
+                            {{ form.h7Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h7Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h8Putt.errors %}
+                            {{ form.h8Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h8Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h9Putt.errors %}
+                            {{ form.h9Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h9Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h10Putt.errors %}
+                            {{ form.h10Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h10Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h11Putt.errors %}
+                            {{ form.h11Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h11Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h12Putt.errors %}
+                            {{ form.h12Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h12Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h13Putt.errors %}
+                            {{ form.h13Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h13Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h14Putt.errors %}
+                            {{ form.h14Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h14Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h15Putt.errors %}
+                            {{ form.h15Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h15Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h16Putt.errors %}
+                            {{ form.h16Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h16Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h17Putt.errors %}
+                            {{ form.h17Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h17Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="golf-table-cell">
+                    <div class="form-group">
+                        {% if form.h18Putt.errors %}
+                            {{ form.h18Putt(class="form-control form-content-custom is-invalid", maxlength="1") }}
+                        {% else %}
+                            {{ form.h18Putt(class="form-control form-content-custom form-borderless", maxlength="1") }}
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <fieldset class="form-group" style="margin-bottom: 0 !important;">
+        <div class="form-group">
+            {{ form.description.label(class="form-control-label") }}
+
+            {% if form.description.errors %}
+                {{ form.description(class="form-control form-content-custom-text is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.description(class="form-control form-content-custom-text form-borderless") }}
+            {% endif %}
+        </div>
+        <hr>
+        <div class="form-group" style="float: right; margin-bottom: 0 !important;">
+            <button type="button" class="btn btn-dismiss" data-dismiss="modal">Dismiss</button>
+            <!-- {{ form_field(form.submit) }} -->
+            {{ form.submit(class="btn btn-primary") }}
+
+        </div>
+    </fieldset>
+</form>
