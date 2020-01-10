@@ -29,10 +29,15 @@ def create_app(config_class=Config):
     from multitool.users.routes import users
     from multitool.main.routes import main
     from multitool.golf.routes import golf
+    from multitool.music.routes import music
     from multitool.errors.handlers import errors
     app.register_blueprint(users)
     app.register_blueprint(main)
     app.register_blueprint(golf)
+    app.register_blueprint(music)
     app.register_blueprint(errors)
+
+    with app.app_context():
+        music.spotifyTest()
 
     return app
