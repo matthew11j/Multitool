@@ -5,6 +5,7 @@ import spotipy
 import spotipy.util as util
 import json
 import yaml
+import os
 # from multitool.spotipy.forms import Add_Round, Add_Course
 # from multitool.models import Golf_Round, Golf_Course
 
@@ -12,7 +13,8 @@ music = Blueprint('music', __name__)
 
 def load_config():
     global user_config
-    # stream = open('spotify_config.yaml')
+    project_root = os.path.dirname(os.path.dirname(__file__))
+    stream = open(project_root + '\spotify_config.yaml')
     user_config = yaml.load(stream)
 
 def spotifyTest():
@@ -26,7 +28,7 @@ def spotifyTest():
         print("No Token found.")
 
 load_config()
-spotifyTest()
+#spotifyTest()
 
 @music.route("/spotipy")
 def spotipy():

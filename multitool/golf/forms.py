@@ -53,4 +53,5 @@ class Add_Round(FlaskForm):
 
 class Add_Course(FlaskForm):
     name = StringField('Course Name', validators=[DataRequired()])
+    h1Par = IntegerField('Hole 1 Par', validators=[NumberRange(1, 6), Optional()])
     submit = SubmitField('Add Course')
