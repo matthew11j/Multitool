@@ -1,4 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
+from flask_wtf import Form
+from wtforms.fields.html5 import DateField
 from multitool import db, bcrypt
 from multitool.golf.forms import Add_Round, Add_Course
 from multitool.models import Golf_Round, Golf_Course
@@ -63,6 +65,10 @@ def addround():
         db.session.commit()
         flash('Round added!', 'success')
         return jsonify(status='ok')
+    else:
+        old_date = request.form.get('date_played')
+        #print(old_date)
+        #request.form.add('date_played', old_date)
     return render_template('addround/add.html', form=form, golf_courses=golf_courses)
 
 @golf.route("/golftracker/addcourse", methods=['GET', 'POST'])

@@ -1,4 +1,6 @@
 {% from 'bootstrap/wtf.html' import form_field %}
+
+{% block content %}
 <form id="addRoundForm" method="POST" action="" autocomplete="off">
     {{ form.hidden_tag() }}
     <div class="row">
@@ -14,6 +16,7 @@
                 </div>
             {% else %}
                 <input id="datepick" name="date_played" type="date" class="form-control date-custom form-borderless" value="">
+                <!-- {{ form.date_played() }} -->
             {% endif %}
         </div>
         <div class="form-group" style="padding-left: 1rem;">
@@ -394,3 +397,4 @@
         </div>
     </fieldset>
 </form>
+{% endblock content %}

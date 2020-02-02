@@ -1,4 +1,5 @@
 {% from 'bootstrap/wtf.html' import form_field %}
+{% block content %}
 <form id="addCourseForm" method="POST" action="" autocomplete="off">
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -15,7 +16,7 @@
             {{ form.name(class="form-control form-content-custom-text form-borderless") }}
         {% endif %}
     </div>
-    <!-- <table class="table golf-table">
+    <table class="table golf-table">
         <thead>
             <tr>
                 <th style="width: 3%;" scope="col">Hole</th>
@@ -192,9 +193,10 @@
             </tr>
         </tbody>
     </table>
-    <hr> -->
+    <hr> 
     <div class="form-group" style="float: right; margin-bottom: 0 !important;">
         <button type="button" class="btn btn-dismiss" data-dismiss="modal">Dismiss</button>
         {{ form.submit(class="btn btn-primary") }}
     </div>
 </form>
+{% endblock content %}
