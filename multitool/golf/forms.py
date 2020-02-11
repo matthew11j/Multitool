@@ -47,7 +47,7 @@ class Add_Round(FlaskForm):
     backScore = StringField('Back Score')
     totalScore = StringField('Total Score')
     description = TextAreaField('Description')
-    date_played = DateField('Date Played', format='%Y-%m-%d', validators=[DataRequired()], default=datetime.today, id='datepick')
+    date_played = DateField('Date Played', format='%Y-%m-%d', validators=[Optional()])
     course_played = StringField('Course Played')
     submit = SubmitField('Add Round')
 

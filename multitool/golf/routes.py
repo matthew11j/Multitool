@@ -3,6 +3,8 @@ from flask_wtf import Form
 from wtforms.fields.html5 import DateField
 from multitool import db, bcrypt
 from multitool.golf.forms import Add_Round, Add_Course
+from datetime import datetime, date
+
 from multitool.models import Golf_Round, Golf_Course
 
 golf = Blueprint('golf', __name__)
@@ -47,6 +49,8 @@ def addround():
             if not putt.data:
                 putt.data = 0
 
+        if not form.date_played.data:
+            form.date_played.data = date(2020,1,1)
         new_golf_round = Golf_Round(description=form.description.data, h1Score=form.h1Score.data, h2Score=form.h2Score.data,
                                         h3Score=form.h3Score.data, h4Score=form.h4Score.data, h5Score=form.h5Score.data,
                                         h6Score=form.h6Score.data, h7Score=form.h7Score.data, h8Score=form.h8Score.data,
@@ -65,17 +69,17 @@ def addround():
         db.session.commit()
         flash('Round added!', 'success')
         return jsonify(status='ok')
-    else:
-        old_date = request.form.get('date_played')
-        #print(old_date)
-        #request.form.add('date_played', old_date)
     return render_template('addround/add.html', form=form, golf_courses=golf_courses)
 
 @golf.route("/golftracker/addcourse", methods=['GET', 'POST'])
 def addcourse():
     form = Add_Course()
     if form.validate_on_submit():
-        new_golf_course = Golf_Course(name=form.name.data)
+        new_golf_course = Golf_Course(name=form.name.data, h1Par=form.h1Par.data, h2Par=form.h2Par.data, h3Par=form.h3Par.data,
+                                         h4Par=form.h4Par.data, h5Par=form.h5Par.data, h6Par=form.h6Par.data, h7Par=form.h7Par.data,
+                                         h8Par=form.h8Par.data, h9Par=form.h9Par.data, h10Par=form.h10Par.data, h11Par=form.h11Par.data,
+                                         h12Par=form.h12Par.data, h13Par=form.h13Par.data, h14Par=form.h14Par.data, h15Par=form.h15Par.data,
+                                         h16Par=form.h16Par.data, h17Par=form.h17Par.data, h18Par=form.h18Par.data)
         db.session.add(new_golf_course)
         db.session.commit()
         flash('Course added!', 'success')

@@ -45,7 +45,7 @@ class Module(db.Model):
 class Golf_Round(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text, nullable=False, default="N/A")
-    date_played = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_played = db.Column(db.DateTime, default="N/A")
     h1Score = db.Column(db.Integer)
     h2Score = db.Column(db.Integer)
     h3Score = db.Column(db.Integer)
@@ -93,6 +93,24 @@ class Golf_Round(db.Model):
 class Golf_Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    h1Par = db.Column(db.Integer)
+    h2Par = db.Column(db.Integer)
+    h3Par = db.Column(db.Integer)
+    h4Par = db.Column(db.Integer)
+    h5Par = db.Column(db.Integer)
+    h6Par = db.Column(db.Integer)
+    h7Par = db.Column(db.Integer)
+    h8Par = db.Column(db.Integer)
+    h9Par = db.Column(db.Integer)
+    h10Par = db.Column(db.Integer)
+    h11Par = db.Column(db.Integer)
+    h12Par = db.Column(db.Integer)
+    h13Par = db.Column(db.Integer)
+    h14Par = db.Column(db.Integer)
+    h15Par = db.Column(db.Integer)
+    h16Par = db.Column(db.Integer)
+    h17Par = db.Column(db.Integer)
+    h18Par = db.Column(db.Integer)
 
     def __repr__(self):
         return f"Golf_Course('{self.name}')"
