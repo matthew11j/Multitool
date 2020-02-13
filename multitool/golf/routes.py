@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint,
 from flask_wtf import Form
 from wtforms.fields.html5 import DateField
 from multitool import db, bcrypt
-from multitool.golf.forms import Add_Round, Add_Course
+from multitool.golf.forms import Round, Course
 from datetime import datetime, date
 
 from multitool.models import Golf_Round, Golf_Course
@@ -17,9 +17,9 @@ def golftracker():
 
 @golf.route("/golftracker/addround", methods=['GET', 'POST'])
 def addround():
-    form = Add_Round()
+    form = Round()
     golf_courses = Golf_Course.query.all()
-    if form.validate_on_submit():
+    if form.validate():
         # Calculating front, back, total Scores
         # Defaulting empty scores
         scores = []
@@ -51,6 +51,7 @@ def addround():
 
         if not form.date_played.data:
             form.date_played.data = date(2020,1,1)
+            
         new_golf_round = Golf_Round(description=form.description.data, h1Score=form.h1Score.data, h2Score=form.h2Score.data,
                                         h3Score=form.h3Score.data, h4Score=form.h4Score.data, h5Score=form.h5Score.data,
                                         h6Score=form.h6Score.data, h7Score=form.h7Score.data, h8Score=form.h8Score.data,
@@ -69,11 +70,11 @@ def addround():
         db.session.commit()
         flash('Round added!', 'success')
         return jsonify(status='ok')
-    return render_template('addround/add.html', form=form, golf_courses=golf_courses)
+    return render_template('dialogs/round/add.html', form=form, golf_courses=golf_courses, action="Add Round")
 
 @golf.route("/golftracker/addcourse", methods=['GET', 'POST'])
 def addcourse():
-    form = Add_Course()
+    form = Course()
     if form.validate_on_submit():
         new_golf_course = Golf_Course(name=form.name.data, h1Par=form.h1Par.data, h2Par=form.h2Par.data, h3Par=form.h3Par.data,
                                          h4Par=form.h4Par.data, h5Par=form.h5Par.data, h6Par=form.h6Par.data, h7Par=form.h7Par.data,
@@ -84,4 +85,52 @@ def addcourse():
         db.session.commit()
         flash('Course added!', 'success')
         return jsonify(status='ok')
-    return render_template('addcourse/add.html', form=form)
+    return render_template('dialogs/course/add.html', form=form)
+
+@golf.route("/golftracker/editround/<int:round_id>", methods=['GET', 'POST'])
+def editround(round_id):
+    golf_courses = Golf_Course.query.all()
+    golf_round = db.session.query(Golf_Round).filter(Golf_Round.id == round_id).one_or_none()
+    form = Round(obj=golf_round)
+    if form.validate():
+        # Calculating front, back, total Scores
+        # Defaulting empty scores
+        scores = []
+        scores.extend((form.h1Score, form.h2Score, form.h3Score, form.h4Score, form.h5Score, form.h6Score, form.h7Score, form.h8Score,
+                            form.h9Score, form.h10Score, form.h11Score, form.h12Score, form.h13Score, form.h14Score, form.h15Score, form.h16Score,
+                            form.h17Score, form.h18Score))
+        front = 0
+        back = 0
+        cnt = 0
+        for score in scores:
+            if not score.data:
+                score.data = 0
+            int_score = int(score.data)
+            if cnt < 9:
+                front = front + int_score
+            else:
+                back = back + int_score
+            cnt = cnt + 1
+        total = back + front
+
+        # Defaulting empty putts
+        putts = []
+        putts.extend((form.h1Putt, form.h2Putt, form.h3Putt, form.h4Putt, form.h5Putt, form.h6Putt, form.h7Putt, form.h8Putt,
+                            form.h9Putt, form.h10Putt, form.h11Putt, form.h12Putt, form.h13Putt, form.h14Putt, form.h15Putt, form.h16Putt,
+                            form.h17Putt, form.h18Putt))
+        for putt in putts:
+            if not putt.data:
+                putt.data = 0
+
+        if not form.date_played.data:
+            form.date_played.data = date(2020,1,1)
+            
+        form.frontScore.data = front
+        form.backScore.data = back
+        form.totalScore.data = total
+
+        form.populate_obj(golf_round)
+        db.session.commit()
+        flash('Round updated!', 'success')
+        return jsonify(status='ok')
+    return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='Edit Round')

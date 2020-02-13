@@ -2,3 +2,5 @@ multitool/config.py
 multitool/site.db
 multitool/spotify_config.yaml
 **/__pycache__
+*.pyo
+*.pyc

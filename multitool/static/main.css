@@ -23,6 +23,11 @@ hr {
   border-top: 1px solid #424242;
 }
 
+i:hover {
+  color: #8064A2;
+  cursor: pointer;
+}
+
 /* ::-webkit-datetime-edit { padding: 1em; } */
 [type="date"]::-webkit-inner-spin-button {
   display: none;

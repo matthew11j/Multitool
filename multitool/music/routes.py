@@ -6,8 +6,6 @@ import spotipy.util as util
 import json
 import yaml
 import os
-# from multitool.spotipy.forms import Add_Round, Add_Course
-# from multitool.models import Golf_Round, Golf_Course
 
 music = Blueprint('music', __name__)
 

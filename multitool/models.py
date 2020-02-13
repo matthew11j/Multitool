@@ -88,7 +88,7 @@ class Golf_Round(db.Model):
     course_played = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
-        return f"Golf_Round('{self.description}', '{self.date_played}')"
+        return f"Golf_Round('{self.id}', '{self.date_played}')"
 
 class Golf_Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
