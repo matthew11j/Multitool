@@ -49,7 +49,7 @@ class Round(FlaskForm):
     description = TextAreaField('Description')
     date_played = DateField('Date Played', format='%Y-%m-%d', validators=[Optional()])
     course_played = StringField('Course Played')
-    submit = SubmitField('Add Round')
+    submit = SubmitField('')
 
 class Course(FlaskForm):
     name = StringField('Course Name', validators=[DataRequired()])

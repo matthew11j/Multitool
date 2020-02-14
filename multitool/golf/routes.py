@@ -19,6 +19,7 @@ def golftracker():
 def addround():
     form = Round()
     golf_courses = Golf_Course.query.all()
+    form.submit.label.text = "Add Round"
     if form.validate():
         # Calculating front, back, total Scores
         # Defaulting empty scores
@@ -92,6 +93,7 @@ def editround(round_id):
     golf_courses = Golf_Course.query.all()
     golf_round = db.session.query(Golf_Round).filter(Golf_Round.id == round_id).one_or_none()
     form = Round(obj=golf_round)
+    form.submit.label.text = "Save"
     if form.validate():
         # Calculating front, back, total Scores
         # Defaulting empty scores
