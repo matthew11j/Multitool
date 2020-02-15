@@ -12,8 +12,8 @@ music = Blueprint('music', __name__)
 def load_config():
     global user_config
     project_root = os.path.dirname(os.path.dirname(__file__))
-    stream = open(project_root + '\spotify_config.yaml')
-    user_config = yaml.load(stream)
+    #stream = open(project_root + '\spotify_config.yaml')
+    #user_config = yaml.load(stream)
 
 def spotifyTest():
     scope = 'user-top-read user-read-private user-library-read user-read-recently-played playlist-modify-private playlist-modify-public'
@@ -25,7 +25,7 @@ def spotifyTest():
     else:
         print("No Token found.")
 
-load_config()
+#Sload_config()
 #spotifyTest()
 
 @music.route("/spotipy")

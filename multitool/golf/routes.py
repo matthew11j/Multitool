@@ -71,7 +71,7 @@ def addround():
         db.session.commit()
         flash('Round added!', 'success')
         return jsonify(status='ok')
-    return render_template('dialogs/round/add.html', form=form, golf_courses=golf_courses, action="Add Round")
+    return render_template('dialogs/round/add.html', form=form, golf_courses=golf_courses, action="add")
 
 @golf.route("/golftracker/addcourse", methods=['GET', 'POST'])
 def addcourse():
@@ -135,4 +135,12 @@ def editround(round_id):
         db.session.commit()
         flash('Round updated!', 'success')
         return jsonify(status='ok')
-    return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='Edit Round')
+    return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='edit')
+
+@golf.route("/golftracker/deleteround/<int:round_id>", methods=['POST'])
+def deleteround(round_id):
+    Golf_Round.query.filter_by(id=round_id).delete()
+    db.session.commit()
+    flash('Round deleted!', 'success')
+    return redirect(url_for('golf.golftracker'))
+    # return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='Edit Round')
