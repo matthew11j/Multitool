@@ -4,7 +4,7 @@ from wtforms.fields.html5 import DateField
 from multitool import db, bcrypt
 from multitool.golf.forms import Round, Course
 from datetime import datetime, date
-
+from multitool.golf.utils import submit_round
 from multitool.models import Golf_Round, Golf_Course
 
 golf = Blueprint('golf', __name__)
@@ -21,38 +21,7 @@ def addround():
     golf_courses = Golf_Course.query.all()
     form.submit.label.text = "Add Round"
     if form.validate():
-        # Calculating front, back, total Scores
-        # Defaulting empty scores
-        scores = []
-        scores.extend((form.h1Score, form.h2Score, form.h3Score, form.h4Score, form.h5Score, form.h6Score, form.h7Score, form.h8Score,
-                            form.h9Score, form.h10Score, form.h11Score, form.h12Score, form.h13Score, form.h14Score, form.h15Score, form.h16Score,
-                            form.h17Score, form.h18Score))
-        front = 0
-        back = 0
-        cnt = 0
-        for score in scores:
-            if not score.data:
-                score.data = 0
-            int_score = int(score.data)
-            if cnt < 9:
-                front = front + int_score
-            else:
-                back = back + int_score
-            cnt = cnt + 1
-        total = back + front
-
-        # Defaulting empty putts
-        putts = []
-        putts.extend((form.h1Putt, form.h2Putt, form.h3Putt, form.h4Putt, form.h5Putt, form.h6Putt, form.h7Putt, form.h8Putt,
-                            form.h9Putt, form.h10Putt, form.h11Putt, form.h12Putt, form.h13Putt, form.h14Putt, form.h15Putt, form.h16Putt,
-                            form.h17Putt, form.h18Putt))
-        for putt in putts:
-            if not putt.data:
-                putt.data = 0
-
-        if not form.date_played.data:
-            form.date_played.data = date(2020,1,1)
-            
+        form = submit_round(form)
         new_golf_round = Golf_Round(description=form.description.data, h1Score=form.h1Score.data, h2Score=form.h2Score.data,
                                         h3Score=form.h3Score.data, h4Score=form.h4Score.data, h5Score=form.h5Score.data,
                                         h6Score=form.h6Score.data, h7Score=form.h7Score.data, h8Score=form.h8Score.data,
@@ -66,12 +35,12 @@ def addround():
                                         h12Putt=form.h12Putt.data, h13Putt=form.h13Putt.data, h14Putt=form.h14Putt.data,
                                         h15Putt=form.h15Putt.data, h16Putt=form.h16Putt.data, h17Putt=form.h17Putt.data,
                                         h18Putt=form.h18Putt.data, date_played=form.date_played.data,
-                                        backScore=back, frontScore=front, totalScore=total, course_played=form.course_played.data)
+                                        backScore=form.backScore.data, frontScore=form.frontScore.data, totalScore=form.totalScore.data, course_played=form.course_played.data)
         db.session.add(new_golf_round)
         db.session.commit()
         flash('Round added!', 'success')
         return jsonify(status='ok')
-    return render_template('dialogs/round/add.html', form=form, golf_courses=golf_courses, action="Add Round")
+    return render_template('dialogs/round/add.html', form=form, golf_courses=golf_courses, action="add")
 
 @golf.route("/golftracker/addcourse", methods=['GET', 'POST'])
 def addcourse():
@@ -95,44 +64,18 @@ def editround(round_id):
     form = Round(obj=golf_round)
     form.submit.label.text = "Save"
     if form.validate():
-        # Calculating front, back, total Scores
-        # Defaulting empty scores
-        scores = []
-        scores.extend((form.h1Score, form.h2Score, form.h3Score, form.h4Score, form.h5Score, form.h6Score, form.h7Score, form.h8Score,
-                            form.h9Score, form.h10Score, form.h11Score, form.h12Score, form.h13Score, form.h14Score, form.h15Score, form.h16Score,
-                            form.h17Score, form.h18Score))
-        front = 0
-        back = 0
-        cnt = 0
-        for score in scores:
-            if not score.data:
-                score.data = 0
-            int_score = int(score.data)
-            if cnt < 9:
-                front = front + int_score
-            else:
-                back = back + int_score
-            cnt = cnt + 1
-        total = back + front
-
-        # Defaulting empty putts
-        putts = []
-        putts.extend((form.h1Putt, form.h2Putt, form.h3Putt, form.h4Putt, form.h5Putt, form.h6Putt, form.h7Putt, form.h8Putt,
-                            form.h9Putt, form.h10Putt, form.h11Putt, form.h12Putt, form.h13Putt, form.h14Putt, form.h15Putt, form.h16Putt,
-                            form.h17Putt, form.h18Putt))
-        for putt in putts:
-            if not putt.data:
-                putt.data = 0
-
-        if not form.date_played.data:
-            form.date_played.data = date(2020,1,1)
-            
-        form.frontScore.data = front
-        form.backScore.data = back
-        form.totalScore.data = total
+        form = submit_round(form)
 
         form.populate_obj(golf_round)
         db.session.commit()
         flash('Round updated!', 'success')
         return jsonify(status='ok')
-    return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='Edit Round')
+    return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='edit')
+
+@golf.route("/golftracker/deleteround/<int:round_id>", methods=['POST'])
+def deleteround(round_id):
+    Golf_Round.query.filter_by(id=round_id).delete()
+    db.session.commit()
+    flash('Round deleted!', 'success')
+    return redirect(url_for('golf.golftracker'))
+    # return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='Edit Round')

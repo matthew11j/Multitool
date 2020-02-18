@@ -28,6 +28,10 @@ i:hover {
   cursor: pointer;
 }
 
+.form-control {
+  background-color: #424242;
+}
+
 /* ::-webkit-datetime-edit { padding: 1em; } */
 [type="date"]::-webkit-inner-spin-button {
   display: none;
