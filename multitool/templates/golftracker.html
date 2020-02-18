@@ -2,6 +2,12 @@
 {% block content %}
     <div class="row">
         <div class="col-md-12">
+            <div class="action-area">
+                <!-- <span style="padding-right: 0.5em;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoundModal" id="open-modal">Add Round</button></span>
+                <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="open-modal2">Add Course</button></span> -->
+                <span style="padding-right: 1.5em;" class="action" data-toggle="modal" data-target="#addRoundModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Round</span>
+                <span class="action" data-toggle="modal" data-target="#addCourseModal" id="open-modal2"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Course</span>
+            </div>
             <div class="card dark-card mb-5 mx-2">
                 <div class="card-content">
                     <table class="table golf-table">
@@ -69,22 +75,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-md-3"> -->
-            <div class="card dark-card mb-5 mx-2">
-                <div class="row card-content">
-                    <div class="col-md-12">
-                        <span style="padding-right: 0.5em;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoundModal" id="open-modal">Add Round</button></span>
-                        <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="open-modal2">Add Course</button></span>
-                    </div>
-                    <!-- <div class="col-md-4">
-                        <button type="button" class="btn btn-primary" id="addStepButton">Output</button>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="open-modal">Output</button>
-                    </div> -->
-                </div>
-            </div>
-        <!-- </div> -->
     </div>
     <!-- <div id="div1" class="col-md-3">
         <p><a href='/' class='btn btn-primary btn-block' role='button'><span class='glyphicon glyphicon-chevron-left'></span> Back</a></p>

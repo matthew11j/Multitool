@@ -19,6 +19,7 @@ def golftracker():
 def addround():
     form = Round()
     golf_courses = Golf_Course.query.all()
+    form.course_played.choices = [(course.name, course.name) for course in golf_courses]
     form.submit.label.text = "Add Round"
     if form.validate():
         form = submit_round(form)
@@ -62,6 +63,7 @@ def editround(round_id):
     golf_courses = Golf_Course.query.all()
     golf_round = db.session.query(Golf_Round).filter(Golf_Round.id == round_id).one_or_none()
     form = Round(obj=golf_round)
+    form.course_played.choices = [(course.name, course.name) for course in golf_courses]
     form.submit.label.text = "Save"
     if form.validate():
         form = submit_round(form)
@@ -78,4 +80,3 @@ def deleteround(round_id):
     db.session.commit()
     flash('Round deleted!', 'success')
     return redirect(url_for('golf.golftracker'))
-    # return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='Edit Round')

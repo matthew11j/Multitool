@@ -1,4 +1,4 @@
-$('button#open-modal').on('click', function(e){
+$('span#open-modal').on('click', function(e){
     var url = "/golftracker/addround";
     $.get(url, function(data) {
         $('#addRoundModal .modal-content').html(data);
@@ -7,7 +7,7 @@ $('button#open-modal').on('click', function(e){
     });
 });
 
-$('button#open-modal2').on('click', function(e){
+$('span#open-modal2').on('click', function(e){
     var url = "/golftracker/addcourse";
     $.get(url, function(data) {
         $('#addCourseModal .modal-content').html(data);

@@ -23,7 +23,16 @@ hr {
   border-top: 1px solid #424242;
 }
 
-i:hover {
+.action-area {
+  padding: 0rem 1rem .5rem 1rem;
+  text-align: left;
+}
+
+.action {
+  font-style: italic;
+}
+
+i:hover, .action:hover {
   color: #8064A2;
   cursor: pointer;
 }

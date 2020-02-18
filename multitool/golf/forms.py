@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, TextAreaField, DateField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, TextAreaField, DateField, SelectField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError, NumberRange, Optional
 from flask_login import current_user
 from datetime import datetime
@@ -48,7 +48,8 @@ class Round(FlaskForm):
     totalScore = StringField('Total Score')
     description = TextAreaField('Description')
     date_played = DateField('Date Played', format='%Y-%m-%d', validators=[Optional()])
-    course_played = StringField('Course Played')
+    # course_played = StringField('Course Played')
+    course_played = SelectField('Course Played', coerce=str)
     submit = SubmitField('')
 
 class Course(FlaskForm):

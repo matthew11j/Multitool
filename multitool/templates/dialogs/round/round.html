@@ -24,11 +24,12 @@
         </div>
         <div class="form-group" style="padding-left: 1rem;">
             {{ form.course_played.label(class="form-control-label") }}
-                <select name="course_played" class="selectpicker form-control date-custom form-borderless">
-                  {% for golf_course in golf_courses %}
-                  <option value="{{ golf_course.name }}">{{ golf_course.name }}</option>
-                  {% endfor %}
-                </select>
+            <!-- <select name="course_played" class="form-control date-custom form-borderless">
+                {% for golf_course in golf_courses %}
+                <option value="{{ golf_course.name }}">{{ golf_course.name }}</option>
+                {% endfor %}
+            </select> -->
+            {{ form.course_played(class="form-control date-custom form-borderless") }}
         </div>
     </div>
     <table class="table golf-table">
