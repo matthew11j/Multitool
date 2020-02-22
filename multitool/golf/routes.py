@@ -6,6 +6,7 @@ from multitool.golf.forms import Round, Course
 from datetime import datetime, date
 from multitool.golf.utils import submit_round
 from multitool.models import Golf_Round, Golf_Course
+import json
 
 golf = Blueprint('golf', __name__)
 
@@ -13,7 +14,25 @@ golf = Blueprint('golf', __name__)
 def golftracker():
     golf_rounds = Golf_Round.query.all()
     golf_courses = Golf_Course.query.all()
-    return render_template('golftracker.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses)
+
+    GCCnt = 0;
+    BCCnt = 0
+    MiscCnt = 0
+    for golf_round in golf_rounds:
+        course = golf_round.course_played
+        if (course == 'Green Crest'):
+            GCCnt += 1
+        elif (course == 'Beech Creek'):
+            BCCnt += 1
+        else:
+            MiscCnt += 1
+
+    Dict = {}
+    Dict['GCCnt'] = GCCnt
+    Dict['BCCnt'] = BCCnt
+    Dict['MiscCnt'] = MiscCnt
+
+    return render_template('golftracker.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload=json.dumps(Dict))
 
 @golf.route("/golftracker/addround", methods=['GET', 'POST'])
 def addround():

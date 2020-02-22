@@ -28,9 +28,9 @@ hr {
   text-align: left;
 }
 
-.action {
+/* .action {
   font-style: italic;
-}
+} */
 
 i:hover, .action:hover {
   color: #8064A2;
