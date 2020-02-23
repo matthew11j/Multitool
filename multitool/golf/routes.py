@@ -4,7 +4,7 @@ from wtforms.fields.html5 import DateField
 from multitool import db, bcrypt
 from multitool.golf.forms import Round, Course
 from datetime import datetime, date
-from multitool.golf.utils import submit_round
+from multitool.golf.utils import submit_round, get_par_averages
 from multitool.models import Golf_Round, Golf_Course
 import json
 
@@ -31,6 +31,8 @@ def golftracker():
     Dict['GCCnt'] = GCCnt
     Dict['BCCnt'] = BCCnt
     Dict['MiscCnt'] = MiscCnt
+
+    Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
 
     return render_template('golftracker.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload=json.dumps(Dict))
 

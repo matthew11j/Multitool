@@ -38,3 +38,19 @@ def submit_round(form):
     form.totalScore.data = total
      
     return form
+
+def get_par_averages(golf_courses, golf_rounds):
+    Dict = {}
+    Courses = {}
+    for course in golf_courses:
+        Course = {}
+        Course['name'] = course.name
+        for i in range(18):
+            var = "h" + str(i) + "Par"
+            print(type(course))
+
+
+    # Dict['3Cnt'] = 3Cnt
+    # Dict['4Cnt'] = 4Cnt
+    # Dict['5Cnt'] = 5Cnt
+    return Dict
