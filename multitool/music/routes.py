@@ -6,6 +6,7 @@ import spotipy.util as util
 import json
 import yaml
 import os
+from multitool.static.scripts.weeklyTrackPlaylist import run
 
 music = Blueprint('music', __name__)
 
@@ -23,7 +24,7 @@ def spotifyTest():
     if token:
         spotifyObject = spotipy.Spotify(auth=token)
         recent = spotifyObject.current_user_recently_played(limit='50')
-        print(json.dumps(recent, indent=2, sort_keys=True))
+        #print(json.dumps(recent, indent=2, sort_keys=True))
         return recent
     else:
         print("No Token found.")
@@ -42,5 +43,11 @@ def spotify():
         Dict['name'] = name
         recentTracks.append(Dict)
     
-    print(json.dumps(recentTracks, indent=2, sort_keys=True))
+    #print(json.dumps(recentTracks, indent=2, sort_keys=True))
     return render_template('spotipy.html', title='Spotipy', recentSongs=recentSongs, recentTracksData=json.dumps(recentTracks), recentTracks=recentTracks)
+
+@music.route('/spotify/weeklyTrackPlaylist', methods=['POST', 'GET'])
+def weeklyTrackPlaylist():
+    run(user_config)
+    flash('Synced!', 'success')
+    return redirect(url_for('music.spotify'))
