@@ -323,3 +323,11 @@ select:-webkit-autofill:focus {
   padding-left: 1em;
   padding-right: .5em;
 }
+
+.colTable > div {
+  text-align: center;
+}
+
+.colTable > div > h4 {
+  font-style: italic;
+}

@@ -34,7 +34,7 @@ def golftracker():
 
     Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
 
-    return render_template('golftracker.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload=json.dumps(Dict))
+    return render_template('golftracker.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payloadJS=json.dumps(Dict), payload=Dict)
 
 @golf.route("/golftracker/addround", methods=['GET', 'POST'])
 def addround():

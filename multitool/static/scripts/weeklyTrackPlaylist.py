@@ -139,8 +139,7 @@ def run(config):
         detailsDate = datetime.strptime(todaysDate.strftime('%Y/%m/%d'),'%Y/%m/%d').strftime('%m/%d/%Y')
         playlistName = 'New Music for ' + detailsDate
         description = '***** Updated ' + detailsDate + ' ***** Artist\'s included in this week\'s search: ' + artistString
-        print(datetime.today())
-        print(description)
+        #print(description)
         replaceTracks(tracksToAdd, playlistName, description)
         print('Success!')
         # print(json.dumps(tracksToAdd, indent=2, sort_keys=True))

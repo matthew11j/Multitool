@@ -13,7 +13,6 @@ music = Blueprint('music', __name__)
 def load_config():
     global user_config
     project_root = os.path.dirname(os.path.dirname(__file__))
-    print(project_root)
     #stream = open(project_root + '\spotify_config.yaml')
     stream = open(project_root + '/spotify_config.yaml')
     user_config = yaml.load(stream)
@@ -35,7 +34,6 @@ load_config()
 @music.route("/spotify")
 def spotify():
     recentSongs = spotifyTest()
-    #print(json.dumps(recentSongs, indent=2, sort_keys=True))
     recentTracks = []
     for item in recentSongs['items']:
         Dict = {}
