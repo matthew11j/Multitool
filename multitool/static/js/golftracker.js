@@ -1,69 +1,62 @@
-$('span#open-modal').on('click', function(e){
-    var url = "/golftracker/addround";
-    $.get(url, function(data) {
-        $('#addRoundModal .modal-content').html(data);
-        $('#addRoundModal').modal();
-        validateRound(url, data);
-    });
-});
+// golftracker.js
 
-$('span#open-modal2').on('click', function(e){
-    var url = "/golftracker/addcourse";
-    $.get(url, function(data) {
-        $('#addCourseModal .modal-content').html(data);
-        $('#addCourseModal').modal();
-        validateCourse(url, data);
-    });
-});
+var isFiltered = false;
+var deleteFilter = document.getElementById("removeFilter")
+deleteFilter.style.display = "none";
 
-$('i#open-modal3').on('click', function(e){
-    var round_id = $(this).data('id');
-    var url = "/golftracker/editround/" + round_id;
-    $.get(url, function(data) {
-        $('#addRoundModal .modal-content').html(data);
-        $('#addRoundModal').modal();
-        validateRound(url, data);
-    });
-});
+function selectFilter() {
+    console.log(isFiltered);
+    var selectedValue = document.getElementById("courseSelector").value;
+    var rows = document.querySelector("#golfTable tbody").rows;
+    var deleteFilter = document.getElementById("removeFilter");
+    
+    if (selectedValue != "") {
+        deleteFilter.style.display = "";
+    } else {
+        deleteFilter.style.display = "none";
+    }
 
-function validateRound(url, data) {
-  $('#submit').click(function(event) {
-      event.preventDefault();
-      var f = $("#addRoundForm");
-      var formData = f.serialize();
+    for (var i = 0; i < rows.length; i++) {
+        var firstCol = rows[i].cells[1].textContent
+        if (firstCol.indexOf(selectedValue) > -1) {
+            rows[i].style.display = "";
+            isFiltered = false;
+        } else {
+            rows[i].style.display = "none";
+            isFiltered = true;
+        }      
+    }
 
-      $.post(url, data=formData, function(data, statusCode) {
-          if (data.status == 'ok') {
-              $('#addRoundModal').modal('hide');
-              location.reload();
-          }
-          else {
-            $('#addRoundModal .modal-content').html(data);
-            validateRound(url, data)
-          }
-      });
+    if (selectedValue != "") {
+        deleteFilter.style.display = "";
+    } else {
+        deleteFilter.style.display = "none";
+    }
+}
+
+
+$(document).ready(function($) {
+    /* $('table').hide();
+    $('#mySelector').change(function() {
+      $('table').show();
+      var selection = $(this).val();
+      var dataset = $('#myTable tbody').find('tr');
+      // show all rows first
+      dataset.show();
+      // filter the rows that should be hidden
+      dataset.filter(function(index, item) {
+        return $(item).find('td:first-child').text().split(',').indexOf(selection) === -1;
+      }).hide();
+  
+    }); */
   });
-};
 
-function validateCourse(url, data) {
-  $('#submit').click(function(event) {
-      event.preventDefault();
-      var f = $("#addCourseForm");
-      var formData = f.serialize();
+//document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 
-      $.post(url, data=formData, function(data, statusCode) {
-          if (data.status == 'ok') {
-              $('#addCourseModal').modal('hide');
-              location.reload();
-          }
-          else {
-            $('#addCourseModal .modal-content').html(data);
-            validateCourse(url, data)
-          }
-      });
-  });
-};
 
+
+// ----- Charts --------------------------------------------------------------------------------
+// Courses Played (Pie)
 var ctx = document.getElementById('myChart').getContext('2d');
 var data = document.getElementById('payload').textContent;    
 var obj = JSON.parse(data);
@@ -101,6 +94,13 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
+        legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+                fontColor: '#fff'
+            }
+        },
         // scales: {
         //     yAxes: [{
         //         ticks: {
@@ -111,3 +111,74 @@ var myChart = new Chart(ctx, {
         responsive: false
     }
 });
+
+// ----- Modals --------------------------------------------------------------------------------
+// Add Round
+$('span#open-modal').on('click', function(e){
+    var url = "/golftracker/addround";
+    $.get(url, function(data) {
+        $('#addRoundModal .modal-content').html(data);
+        $('#addRoundModal').modal();
+        validateRound(url, data);
+    });
+});
+
+// Add Course
+$('span#open-modal2').on('click', function(e){
+    var url = "/golftracker/addcourse";
+    $.get(url, function(data) {
+        $('#addCourseModal .modal-content').html(data);
+        $('#addCourseModal').modal();
+        validateCourse(url, data);
+    });
+});
+
+// Edit Round
+$('i#open-modal3').on('click', function(e){
+    var round_id = $(this).data('id');
+    var url = "/golftracker/editround/" + round_id;
+    $.get(url, function(data) {
+        $('#addRoundModal .modal-content').html(data);
+        $('#addRoundModal').modal();
+        validateRound(url, data);
+    });
+});
+
+// ----- Validators --------------------------------------------------------------
+function validateRound(url, data) {
+  $('#submit').click(function(event) {
+      event.preventDefault();
+      var f = $("#addRoundForm");
+      var formData = f.serialize();
+
+      $.post(url, data=formData, function(data, statusCode) {
+          if (data.status == 'ok') {
+              $('#addRoundModal').modal('hide');
+              location.reload();
+          }
+          else {
+            $('#addRoundModal .modal-content').html(data);
+            validateRound(url, data)
+          }
+      });
+  });
+};
+
+function validateCourse(url, data) {
+  $('#submit').click(function(event) {
+      event.preventDefault();
+      var f = $("#addCourseForm");
+      var formData = f.serialize();
+
+      $.post(url, data=formData, function(data, statusCode) {
+          if (data.status == 'ok') {
+              $('#addCourseModal').modal('hide');
+              location.reload();
+          }
+          else {
+            $('#addCourseModal .modal-content').html(data);
+            validateCourse(url, data)
+          }
+      });
+  });
+};

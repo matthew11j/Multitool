@@ -4,41 +4,61 @@
 <div class="row">
     <div class="col-md-12">
         <div class="action-area">
+            <span class="action-area-left">
+                <span style="padding-right: 1.5em;" class="action" data-toggle="modal" data-target="#addRoundModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Round</span>
+                <span class="action" data-toggle="modal" data-target="#addCourseModal" id="open-modal2"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Course</span>    
+            </span>
+            <span class="action-area-right">
+                <label style="padding-right: 10px;">Course Played</label>
+                <select id='courseSelector' onchange="selectFilter()" class="select-tag-page form-borderless">
+                    <option value="">Show All</option>
+                    {% for golf_course in golf_courses %}
+                    <option value="{{ golf_course.name }}">{{ golf_course.name }}</option>
+                    {% endfor %}
+                </select>
+                <i class="fa fa-times icon-delete" style="padding-right: 0.4em; font-size: 18px;" id="removeFilter"></i>
+            </span>
+        </div>
+    </div>
+</div>
             <!-- <span style="padding-right: 0.5em;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoundModal" id="open-modal">Add Round</button></span>
             <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="open-modal2">Add Course</button></span> -->
-            <span style="padding-right: 1.5em;" class="action" data-toggle="modal" data-target="#addRoundModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Round</span>
+   <!--          <span style="padding-right: 1.5em;" class="action" data-toggle="modal" data-target="#addRoundModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Round</span>
             <span class="action" data-toggle="modal" data-target="#addCourseModal" id="open-modal2"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Course</span>
-        </div>
+     -->        <!-- <input id="myInput" type="text" /> -->
+     
+<div class="row">
+    <div class="col-md-12">
         <div class="card dark-card mb-5 mx-2">
-            <div class="card-content">
-                <table class="table golf-table">
+            <div class="card-content" style="min-height: 300px;">
+                <table id="golfTable" class="table golf-table">
                     <thead>
-                        <tr>
-                        <th style="width: 2%;"></th>
-                        <!-- <th scope="col">ID</th> -->
-                        <th scope="col" style="text-align: left; padding: 0.25rem; width: 20%;">Course</th>
-                        <th scope="col" style="text-align: left; padding: 0.25rem;">Date</th>
-                        <th scope="col">1</th>
-                        <th scope="col">2</th>
-                        <th scope="col">3</th>
-                        <th scope="col">4</th>
-                        <th scope="col">5</th>
-                        <th scope="col">6</th>
-                        <th scope="col">7</th>
-                        <th scope="col">8</th>
-                        <th scope="col">9</th>
-                        <th scope="col">10</th>
-                        <th scope="col">11</th>
-                        <th scope="col">12</th>
-                        <th scope="col">13</th>
-                        <th scope="col">14</th>
-                        <th scope="col">15</th>
-                        <th scope="col">16</th>
-                        <th scope="col">17</th>
-                        <th scope="col">18</th>
-                        <th scope="col" width="2%" class="golf-table-bordered">Out</th>
-                        <th scope="col" width="2%" class="golf-table-bordered">In</th>
-                        <th scope="col" width="2%" class="golf-table-bordered">Tot</th>
+                        <tr class="header">
+                            <th style="width: 2%;"></th>
+                            <!-- <th scope="col">ID</th> -->
+                            <th scope="col" style="text-align: left; padding: 0.25rem; width: 20%;">Course</th>
+                            <th scope="col" style="text-align: left; padding: 0.25rem;">Date</th>
+                            <th scope="col">1</th>
+                            <th scope="col">2</th>
+                            <th scope="col">3</th>
+                            <th scope="col">4</th>
+                            <th scope="col">5</th>
+                            <th scope="col">6</th>
+                            <th scope="col">7</th>
+                            <th scope="col">8</th>
+                            <th scope="col">9</th>
+                            <th scope="col">10</th>
+                            <th scope="col">11</th>
+                            <th scope="col">12</th>
+                            <th scope="col">13</th>
+                            <th scope="col">14</th>
+                            <th scope="col">15</th>
+                            <th scope="col">16</th>
+                            <th scope="col">17</th>
+                            <th scope="col">18</th>
+                            <th scope="col" width="2%" class="golf-table-bordered">Out</th>
+                            <th scope="col" width="2%" class="golf-table-bordered">In</th>
+                            <th scope="col" width="2%" class="golf-table-bordered">Tot</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,7 +92,7 @@
                             </tr>
                         {% endfor %}
                     </tbody>
-                    </table>
+                </table>
             </div>
         </div>
     </div>
@@ -80,25 +100,25 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card dark-card mb-5 mx-2">
-            <div style="text-align: center;">
+            <div class="card-content" style="margin: auto; position: relative;">
                 <canvas id="myChart" width="400" height="400"></canvas>
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card dark-card mb-5 mx-2">
-            <div class="row colTable">
+            <div class="row colTable card-content">
                 <div class="col-md-4">
-                    <h4>Par 3 Average</h4>
-                    <h3>{{payload.avgPars.par3Avg}}</h3>
+                    <h1>{{payload.avgPars.par3Avg}}</h1>
+                    <h6>Par 3</h6>
                 </div>
                 <div class="col-md-4">
-                    <h4>Par 4 Average</h4>
-                    <h3>{{payload.avgPars.par4Avg}}</h3>
+                    <h1>{{payload.avgPars.par4Avg}}</h1>
+                    <h6>Par 4</h6>
                 </div>
                 <div class="col-md-4">
-                    <h4>Par 5 Average</h4>
-                    <h3>{{payload.avgPars.par5Avg}}</h3>
+                    <h1>{{payload.avgPars.par5Avg}}</h1>
+                    <h6>Par 5</h6>
                 </div>
             </div>
         </div>

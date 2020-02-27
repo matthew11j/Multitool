@@ -26,6 +26,15 @@ hr {
 .action-area {
   padding: 0rem 1rem .5rem 1rem;
   text-align: left;
+  height: 45px;
+}
+
+.action-area-left {
+  float: left;
+}
+
+.action-area-right {
+  float: right;
 }
 
 /* .action {
@@ -37,9 +46,29 @@ i:hover, .action:hover {
   cursor: pointer;
 }
 
+.action {
+  vertical-align: -webkit-baseline-middle;
+}
+
+.icon-delete:hover {
+  color: #9c0000;
+  border-color: #7c0000;
+  cursor: pointer;
+}
+
+.icon-delete {
+  padding-left: 0.4em;
+  font-size: 18px;
+  color: rgba(255,255,255,0.40);
+  vertical-align: middle;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,color .15s ease-in-out; 
+}
+
 .form-control {
   background-color: #424242;
+  color: #ffffff;
 }
+
 
 /* ::-webkit-datetime-edit { padding: 1em; } */
 [type="date"]::-webkit-inner-spin-button {
@@ -203,7 +232,6 @@ a.article-title:hover {
 }
 
 .card-content {
-  min-height: 300px;
   color: #ffffff;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
@@ -266,10 +294,6 @@ select:-webkit-autofill:focus {
   caret-color: white;
 }
 
-.form-control {
-  color: #ffffff;
-}
-
 .table td {
   border-top: none;
 }
@@ -330,4 +354,16 @@ select:-webkit-autofill:focus {
 
 .colTable > div > h4 {
   font-style: italic;
+}
+
+.select-tag-page {
+  background-color: #424242;
+  padding: .375rem .5rem;
+  width: 10vw !important;
+  display: unset !important;
+  height: 30px !important;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  color: #ffffff;
+  border: none;
 }
