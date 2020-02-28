@@ -16,7 +16,9 @@
                     <option value="{{ golf_course.name }}">{{ golf_course.name }}</option>
                     {% endfor %}
                 </select>
-                <i class="fa fa-times icon-delete" style="padding-right: 0.4em; font-size: 18px;" id="removeFilter"></i>
+                <span onclick="removeCourseFilter()">
+                    <i class="fa fa-times icon-delete" style="padding-right: 0.4em; font-size: 18px;" id="removeFilter"></i>
+                </span>
             </span>
         </div>
     </div>
@@ -36,8 +38,8 @@
                         <tr class="header">
                             <th style="width: 2%;"></th>
                             <!-- <th scope="col">ID</th> -->
-                            <th scope="col" style="text-align: left; padding: 0.25rem; width: 20%;">Course</th>
-                            <th scope="col" style="text-align: left; padding: 0.25rem;">Date</th>
+                            <th id="course-column" scope="col" style="text-align: left; padding: 0.25rem; width: 20%;">Course</th>
+                            <th id="date-played-column" scope="col" style="text-align: left; padding: 0.25rem;">Date</th>
                             <th scope="col">1</th>
                             <th scope="col">2</th>
                             <th scope="col">3</th>

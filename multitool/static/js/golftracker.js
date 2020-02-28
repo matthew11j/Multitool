@@ -5,14 +5,14 @@ var deleteFilter = document.getElementById("removeFilter")
 deleteFilter.style.display = "none";
 
 function selectFilter() {
-    console.log(isFiltered);
     var selectedValue = document.getElementById("courseSelector").value;
     var rows = document.querySelector("#golfTable tbody").rows;
     var deleteFilter = document.getElementById("removeFilter");
     
+    // If it is NOT "Show All" then the deleteFilter button will show
     if (selectedValue != "") {
         deleteFilter.style.display = "";
-    } else {
+    } else { // otherwise hidden
         deleteFilter.style.display = "none";
     }
 
@@ -27,13 +27,48 @@ function selectFilter() {
         }      
     }
 
-    if (selectedValue != "") {
+    // After filter if selectedValue is NOT "Show All" then deleteFilter will show
+    if (selectedValue != "") { 
         deleteFilter.style.display = "";
-    } else {
+    } else { // otherwise hidden
         deleteFilter.style.display = "none";
     }
-}
+};
 
+function removeCourseFilter() {
+    var x = document.getElementById("courseSelector").value;
+    document.getElementById("courseSelector").value = ""
+    document.getElementById("courseSelector").onchange();
+};
+
+document.getElementById("course-column").addEventListener("click", function() {
+   // columnFilterClick(0);
+}, false);
+
+document.getElementById("date-played-column").addEventListener("click", function() {
+   // columnFilterClick(1);
+}, false);
+
+// WIP
+function columnFilterClick(n) {
+    var rows = document.querySelector("#golfTable tbody").rows;
+    var xdd = $("tbody tr:nth-child(8)");
+    for (var i = 0; i < (rows.length-1); i++) {
+        let inc = i + 1;
+        var firstRow = rows[i].cells[1].textContent[0];
+        var secondRow = rows[inc].cells[1].textContent[0];
+        // < a ------- > z ----------- J > G
+        if (firstRow > secondRow) {
+            var temp = rows[i].rowIndex;
+            rows[i].rowIndex = 2
+            //rows[i].rowIndex[i] = rows[inc].rowIndex[inc];
+            //rows[inc].rowIndex[inc] = temp;
+        } else {
+            //rows[i].style.display = "none";
+            //isFiltered = true;
+        }      
+    }
+}
 
 $(document).ready(function($) {
     /* $('table').hide();
