@@ -41,50 +41,26 @@ function removeCourseFilter() {
     document.getElementById("courseSelector").onchange();
 };
 
-document.getElementById("course-column").addEventListener("click", function() {
-   // columnFilterClick(0);
-}, false);
+$('th').click(function(){
+    if (isNaN(this.textContent)) {
+        var table = $(this).parents('table').eq(0);
+        var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+        this.asc = !this.asc;
+        if (!this.asc){rows = rows.reverse()};
+        for (var i = 0; i < rows.length; i++){table.append(rows[i])};
+    }
+})
 
-document.getElementById("date-played-column").addEventListener("click", function() {
-   // columnFilterClick(1);
-}, false);
-
-// WIP
-function columnFilterClick(n) {
-    var rows = document.querySelector("#golfTable tbody").rows;
-    var xdd = $("tbody tr:nth-child(8)");
-    for (var i = 0; i < (rows.length-1); i++) {
-        let inc = i + 1;
-        var firstRow = rows[i].cells[1].textContent[0];
-        var secondRow = rows[inc].cells[1].textContent[0];
-        // < a ------- > z ----------- J > G
-        if (firstRow > secondRow) {
-            var temp = rows[i].rowIndex;
-            rows[i].rowIndex = 2
-            //rows[i].rowIndex[i] = rows[inc].rowIndex[inc];
-            //rows[inc].rowIndex[inc] = temp;
-        } else {
-            //rows[i].style.display = "none";
-            //isFiltered = true;
-        }      
+function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index);
+        var valATrim = valA.split(" "), valBTrim = valB.split(" ");
+        return $.isNumeric(valATrim[0]) && $.isNumeric(valBTrim[0]) ? valATrim[0] - valBTrim[0] : valATrim[0].toString().localeCompare(valBTrim[0]);
     }
 }
 
-$(document).ready(function($) {
-    /* $('table').hide();
-    $('#mySelector').change(function() {
-      $('table').show();
-      var selection = $(this).val();
-      var dataset = $('#myTable tbody').find('tr');
-      // show all rows first
-      dataset.show();
-      // filter the rows that should be hidden
-      dataset.filter(function(index, item) {
-        return $(item).find('td:first-child').text().split(',').indexOf(selection) === -1;
-      }).hide();
-  
-    }); */
-  });
+function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+
 
 //document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 

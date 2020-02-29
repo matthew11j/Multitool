@@ -323,6 +323,12 @@ select:-webkit-autofill:focus {
   font-style: italic;
 }
 
+.golf-table th.filterable:hover {
+  cursor: pointer;
+  background-color: rgba(94, 94, 94, 0.5);
+  transition: ease-in-out 1s;
+}
+
 .golf-table td{
   padding: 0.3rem !important;
   text-align: center;
