@@ -17,6 +17,7 @@ def golftracker():
 
     GCCnt = 0;
     BCCnt = 0
+    AFCnt = 0
     MiscCnt = 0
     for golf_round in golf_rounds:
         course = golf_round.course_played
@@ -24,12 +25,15 @@ def golftracker():
             GCCnt += 1
         elif (course == 'Beech Creek'):
             BCCnt += 1
+        elif (course == 'Avon Fields'):
+            AFCnt += 1
         else:
             MiscCnt += 1
 
     Dict = {}
     Dict['GCCnt'] = GCCnt
     Dict['BCCnt'] = BCCnt
+    Dict['AFCnt'] = AFCnt
     Dict['MiscCnt'] = MiscCnt
 
     Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)

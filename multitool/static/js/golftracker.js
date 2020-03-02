@@ -1,11 +1,18 @@
 // golftracker.js
 
 var isFiltered = false;
-var deleteFilter = document.getElementById("removeFilter")
+var deleteFilter = document.getElementById("removeFilter");
 deleteFilter.style.display = "none";
+setRoundListCounter();
 
-function selectFilter() {
-    var selectedValue = document.getElementById("courseSelector").value;
+function selectFilter(val) {
+    var selectedValue = "";
+    if (val != undefined) {
+        selectedValue = val;
+        document.getElementById("courseSelector").value = val;
+    } else {
+        selectedValue = document.getElementById("courseSelector").value;
+    }
     var rows = document.querySelector("#golfTable tbody").rows;
     var deleteFilter = document.getElementById("removeFilter");
     
@@ -16,11 +23,13 @@ function selectFilter() {
         deleteFilter.style.display = "none";
     }
 
+    let displayedRowCnt = 0;
     for (var i = 0; i < rows.length; i++) {
         var firstCol = rows[i].cells[1].textContent
         if (firstCol.indexOf(selectedValue) > -1) {
             rows[i].style.display = "";
             isFiltered = false;
+            displayedRowCnt++;
         } else {
             rows[i].style.display = "none";
             isFiltered = true;
@@ -33,14 +42,30 @@ function selectFilter() {
     } else { // otherwise hidden
         deleteFilter.style.display = "none";
     }
+    setRoundListCounter(selectedValue, displayedRowCnt);
 };
 
 function removeCourseFilter() {
     var x = document.getElementById("courseSelector").value;
-    document.getElementById("courseSelector").value = ""
+    document.getElementById("courseSelector").value = "";
     document.getElementById("courseSelector").onchange();
 };
 
+function setRoundListCounter(course, val) {
+    var rowCount = 0;
+    var courseName = "All Courses";
+    if (val != undefined && course != null ) {
+        rowCount = val;
+        if (course != "")
+            courseName = course;
+    } else {
+        rowCount = $('#golfTable tr').length - 1;
+    }
+    var header = courseName + " (" + rowCount + ")";
+    document.getElementById("golf-table-header").textContent = header;
+};
+
+// Filter on <th> click
 $('th').click(function(){
     if (isNaN(this.textContent)) {
         var table = $(this).parents('table').eq(0);
@@ -68,29 +93,38 @@ function getCellValue(row, index){ return $(row).children('td').eq(index).text()
 
 // ----- Charts --------------------------------------------------------------------------------
 // Courses Played (Pie)
-var ctx = document.getElementById('myChart').getContext('2d');
+
+var canvas = document.getElementById('myChart');
+var ctx = canvas.getContext('2d');
 var data = document.getElementById('payload').textContent;    
 var obj = JSON.parse(data);
 
 let GCCnt = obj.GCCnt
 let BCCnt = obj.BCCnt
+let AFCnt = obj.AFCnt
 let MiscCnt = obj.MiscCnt
 
-var color1 = "rgba(128, 100, 162, 0.7)"
-var color2 = "rgba(64, 215, 245, 0.7)"
-var color3 = "rgba(50, 217, 89, 0.7)"
+var color1 = "rgba(170, 179, 243, 1)"   // Purple
+var color2 = "rgba(152, 222, 243, 1)"   // Blue
+var color3 = "rgba(194, 243, 159, 1)"   // Green
+var color4 = "rgba(253, 244, 171, 1)"   // Yellow
+var color5 = "rgba(248, 194, 206, 1)"   // Red
+var color6 = "rgba(219, 181, 247, 1)"   // Violet
 
-var color1b = "rgba(128, 100, 162, 1)"
-var color2b = "rgba(64, 215, 245, 1)"
-var color3b = "rgba(50, 217, 89, 1)"
+var color1b = "rgba(170, 179, 243, 1)"
+var color2b = "rgba(152, 222, 243, 1)"
+var color3b = "rgba(194, 243, 159, 1)"
+var color4b = "rgba(253, 249, 237, 1)"
+var color5b = "rgba(248, 194, 206, 1)"
+var color6b = "rgba(219, 181, 247, 1)"
 
 var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ['Green Crest', 'Beech Creek', 'Misc'],
+        labels: ['Beech Creek', 'Green Crest', 'Avon Fields'],
         datasets: [{
             label: 'Courses Played',
-            data: [GCCnt, BCCnt, MiscCnt],
+            data: [BCCnt, GCCnt, AFCnt],
             backgroundColor: [
                 color1,
                 color2,
@@ -122,6 +156,21 @@ var myChart = new Chart(ctx, {
         responsive: false
     }
 });
+
+canvas.onclick = function(evt) {
+    var activePoints = myChart.getElementsAtEvent(evt);
+    if (activePoints[0]) {
+      var chartData = activePoints[0]['_chart'].config.data;
+      var idx = activePoints[0]['_index'];
+
+      var label = chartData.labels[idx];
+      if (document.getElementById("courseSelector").value == label) {
+        removeCourseFilter();
+      } else {
+        selectFilter(label);
+      }
+    }
+};
 
 // ----- Modals --------------------------------------------------------------------------------
 // Add Round
