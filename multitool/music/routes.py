@@ -15,7 +15,7 @@ def load_config():
     project_root = os.path.dirname(os.path.dirname(__file__))
     #stream = open(project_root + '\spotify_config.yaml')
     stream = open(project_root + '/spotify_config.yaml')
-    user_config = yaml.load(stream)
+    user_config = yaml.load(stream, Loader=yaml.FullLoader)
 
 def spotifyTest():
     scope = 'user-top-read user-read-private user-library-read user-read-recently-played playlist-modify-private playlist-modify-public'
