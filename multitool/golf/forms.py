@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, Integ
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError, NumberRange, Optional
 from flask_login import current_user
 from datetime import datetime
-from multitool.models import Golf_Round, User
+from multitool.models import Golf_Round, Users
 
 class Round(FlaskForm):
     h1Score = IntegerField('Hole 1 Score', validators=[NumberRange(0, 15), Optional()])
