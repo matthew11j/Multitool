@@ -288,6 +288,11 @@ a.article-title:hover {
   color: #ffffff;
 }
 
+.empty-page {
+  font-style: italic;
+  margin-top: 10px;
+}
+
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

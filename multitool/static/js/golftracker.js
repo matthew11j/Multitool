@@ -2,8 +2,11 @@
 
 var isFiltered = false;
 var deleteFilter = document.getElementById("removeFilter");
-deleteFilter.style.display = "none";
-setRoundListCounter();
+if (deleteFilter) {
+    deleteFilter.style.display = "none";
+    setRoundListCounter();
+    render_course_chart();
+}
 
 function selectFilter(val) {
     var selectedValue = "";
@@ -93,84 +96,85 @@ function getCellValue(row, index){ return $(row).children('td').eq(index).text()
 
 // ----- Charts --------------------------------------------------------------------------------
 // Courses Played (Pie)
+function render_course_chart() {
+    var canvas = document.getElementById('myChart');
+    var ctx = canvas.getContext('2d');
+    var data = document.getElementById('payload').textContent;    
+    var obj = JSON.parse(data);
 
-var canvas = document.getElementById('myChart');
-var ctx = canvas.getContext('2d');
-var data = document.getElementById('payload').textContent;    
-var obj = JSON.parse(data);
+    let GCCnt = obj.GCCnt
+    let BCCnt = obj.BCCnt
+    let AFCnt = obj.AFCnt
+    let MiscCnt = obj.MiscCnt
 
-let GCCnt = obj.GCCnt
-let BCCnt = obj.BCCnt
-let AFCnt = obj.AFCnt
-let MiscCnt = obj.MiscCnt
+    var color1 = "rgba(170, 179, 243, 1)"   // Purple
+    var color2 = "rgba(152, 222, 243, 1)"   // Blue
+    var color3 = "rgba(194, 243, 159, 1)"   // Green
+    var color4 = "rgba(253, 244, 171, 1)"   // Yellow
+    var color5 = "rgba(248, 194, 206, 1)"   // Red
+    var color6 = "rgba(219, 181, 247, 1)"   // Violet
 
-var color1 = "rgba(170, 179, 243, 1)"   // Purple
-var color2 = "rgba(152, 222, 243, 1)"   // Blue
-var color3 = "rgba(194, 243, 159, 1)"   // Green
-var color4 = "rgba(253, 244, 171, 1)"   // Yellow
-var color5 = "rgba(248, 194, 206, 1)"   // Red
-var color6 = "rgba(219, 181, 247, 1)"   // Violet
+    var color1b = "rgba(170, 179, 243, 1)"
+    var color2b = "rgba(152, 222, 243, 1)"
+    var color3b = "rgba(194, 243, 159, 1)"
+    var color4b = "rgba(253, 249, 237, 1)"
+    var color5b = "rgba(248, 194, 206, 1)"
+    var color6b = "rgba(219, 181, 247, 1)"
 
-var color1b = "rgba(170, 179, 243, 1)"
-var color2b = "rgba(152, 222, 243, 1)"
-var color3b = "rgba(194, 243, 159, 1)"
-var color4b = "rgba(253, 249, 237, 1)"
-var color5b = "rgba(248, 194, 206, 1)"
-var color6b = "rgba(219, 181, 247, 1)"
-
-var myChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ['Beech Creek', 'Green Crest', 'Avon Fields'],
-        datasets: [{
-            label: 'Courses Played',
-            data: [BCCnt, GCCnt, AFCnt],
-            backgroundColor: [
-                color1,
-                color2,
-                color3
-            ],
-            borderColor: [
-                color1b,
-                color2b,
-                color3b
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        legend: {
-            display: true,
-            position: 'bottom',
-            labels: {
-                fontColor: '#fff'
-            }
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Beech Creek', 'Green Crest', 'Avon Fields'],
+            datasets: [{
+                label: 'Courses Played',
+                data: [BCCnt, GCCnt, AFCnt],
+                backgroundColor: [
+                    color1,
+                    color2,
+                    color3
+                ],
+                borderColor: [
+                    color1b,
+                    color2b,
+                    color3b
+                ],
+                borderWidth: 1
+            }]
         },
-        // scales: {
-        //     yAxes: [{
-        //         ticks: {
-        //             beginAtZero: true
-        //         }
-        //     }]
-        // },
-        responsive: false
-    }
-});
+        options: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    fontColor: '#fff'
+                }
+            },
+            // scales: {
+            //     yAxes: [{
+            //         ticks: {
+            //             beginAtZero: true
+            //         }
+            //     }]
+            // },
+            responsive: false
+        }
+    });   
 
-canvas.onclick = function(evt) {
-    var activePoints = myChart.getElementsAtEvent(evt);
-    if (activePoints[0]) {
-      var chartData = activePoints[0]['_chart'].config.data;
-      var idx = activePoints[0]['_index'];
-
-      var label = chartData.labels[idx];
-      if (document.getElementById("courseSelector").value == label) {
-        removeCourseFilter();
-      } else {
-        selectFilter(label);
-      }
-    }
-};
+    canvas.onclick = function(evt) {
+        var activePoints = myChart.getElementsAtEvent(evt);
+        if (activePoints[0]) {
+          var chartData = activePoints[0]['_chart'].config.data;
+          var idx = activePoints[0]['_index'];
+    
+          var label = chartData.labels[idx];
+          if (document.getElementById("courseSelector").value == label) {
+            removeCourseFilter();
+          } else {
+            selectFilter(label);
+          }
+        }
+    };
+}
 
 // ----- Modals --------------------------------------------------------------------------------
 // Add Round
