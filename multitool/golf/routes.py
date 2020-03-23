@@ -3,6 +3,7 @@ from flask_wtf import Form
 from wtforms.fields.html5 import DateField
 from multitool import db, bcrypt
 from multitool.golf.forms import Round, Course
+from flask_login import current_user
 from datetime import datetime, date
 from multitool.golf.utils import submit_round, get_par_averages
 from multitool.models import Golf_Round, Golf_Course
@@ -12,31 +13,33 @@ golf = Blueprint('golf', __name__)
 
 @golf.route("/golftracker")
 def golftracker():
-    golf_rounds = Golf_Round.query.all()
+    #golf_rounds = Golf_Round.query.all()
+    print(current_user)
+    golf_rounds = Golf_Round.query.filter_by(created_by=current_user.username)
     golf_courses = Golf_Course.query.all()
 
+    Dict = {}
     GCCnt = 0;
     BCCnt = 0
     AFCnt = 0
     MiscCnt = 0
-    for golf_round in golf_rounds:
-        course = golf_round.course_played
-        if (course == 'Green Crest'):
-            GCCnt += 1
-        elif (course == 'Beech Creek'):
-            BCCnt += 1
-        elif (course == 'Avon Fields'):
-            AFCnt += 1
-        else:
-            MiscCnt += 1
+    if golf_rounds.count() > 0:
+        for golf_round in golf_rounds:
+            course = golf_round.course_played
+            if (course == 'Green Crest'):
+                GCCnt += 1
+            elif (course == 'Beech Creek'):
+                BCCnt += 1
+            elif (course == 'Avon Fields'):
+                AFCnt += 1
+            else:
+                MiscCnt += 1
+        Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
 
-    Dict = {}
     Dict['GCCnt'] = GCCnt
     Dict['BCCnt'] = BCCnt
     Dict['AFCnt'] = AFCnt
     Dict['MiscCnt'] = MiscCnt
-
-    Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
 
     return render_template('golftracker.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payloadJS=json.dumps(Dict), payload=Dict)
 

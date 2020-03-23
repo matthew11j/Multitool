@@ -58,39 +58,43 @@ def get_par_averages(golf_courses, golf_rounds):
     par3Cnt = 0
     par4Cnt = 0
     par5Cnt = 0
-    for golf_round in golf_rounds:
-        courseName = golf_round.course_played
-        scores = []
-        scores.extend((golf_round.h1Score, golf_round.h2Score, golf_round.h3Score, golf_round.h4Score, golf_round.h5Score, golf_round.h6Score, golf_round.h7Score, golf_round.h8Score,
-                        golf_round.h9Score, golf_round.h10Score, golf_round.h11Score, golf_round.h12Score, golf_round.h13Score, golf_round.h14Score, golf_round.h15Score, golf_round.h16Score,
-                        golf_round.h17Score, golf_round.h18Score))
-        for course in courseList:
-            index = 0
-            if course['name'] == courseName:
-                while True:
-                    score = scores[index]
-                    pars = course['pars']
-                    if score == 0:
-                        break
-                    
-                    if pars[index] == 3:
-                        par3Total += 1
-                        par3Cnt += score
-                    elif pars[index] == 4:
-                        par4Total += 1
-                        par4Cnt += score
-                    elif pars[index] == 5:
-                        par5Total += 1
-                        par5Cnt += score
-                    else:
-                        break
-                    index += 1
-                    if index > 17:
-                        break
-
-    par3Avg = round(par3Cnt/par3Total,2)
-    par4Avg = round(par4Cnt/par4Total,2)
-    par5Avg = round(par5Cnt/par5Total,2)
+    if golf_rounds.count() > 0:
+        for golf_round in golf_rounds:
+            courseName = golf_round.course_played
+            scores = []
+            scores.extend((golf_round.h1Score, golf_round.h2Score, golf_round.h3Score, golf_round.h4Score, golf_round.h5Score, golf_round.h6Score, golf_round.h7Score, golf_round.h8Score,
+                            golf_round.h9Score, golf_round.h10Score, golf_round.h11Score, golf_round.h12Score, golf_round.h13Score, golf_round.h14Score, golf_round.h15Score, golf_round.h16Score,
+                            golf_round.h17Score, golf_round.h18Score))
+            for course in courseList:
+                index = 0
+                if course['name'] == courseName:
+                    while True:
+                        score = scores[index]
+                        pars = course['pars']
+                        if score == 0:
+                            break
+                        
+                        if pars[index] == 3:
+                            par3Total += 1
+                            par3Cnt += score
+                        elif pars[index] == 4:
+                            par4Total += 1
+                            par4Cnt += score
+                        elif pars[index] == 5:
+                            par5Total += 1
+                            par5Cnt += score
+                        else:
+                            break
+                        index += 1
+                        if index > 17:
+                            break
+        par3Avg = round(par3Cnt/par3Total,2)
+        par4Avg = round(par4Cnt/par4Total,2)
+        par5Avg = round(par5Cnt/par5Total,2)
+    else:
+        par3Avg = 0
+        par4Avg = 0
+        par5Avg = 0
 
     Payload['par3Avg'] = par3Avg
     Payload['par4Avg'] = par4Avg

@@ -86,6 +86,7 @@ class Golf_Round(db.Model):
     backScore = db.Column(db.Integer)
     totalScore = db.Column(db.Integer)
     course_played = db.Column(db.Text, nullable=False)
+    created_by = db.Column(db.String(50), nullable=False, default="matthew11j")
 
     def __repr__(self):
         return f"Golf_Round('{self.id}', '{self.date_played}')"

@@ -3,6 +3,7 @@
 <div style="display: none;" id="payload">{{ payloadJS|safe }}</div>
 
 <div class="row">
+    {% if payload.avgPars %}
     <div class="col-md-6">
         <div class="card dark-card mb-5 mx-2">
             <div class="card-content" style="margin: auto; position: relative;">
@@ -10,24 +11,25 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card dark-card mb-5 mx-2">
-            <div class="row colTable card-content">
-                <div class="col-md-4">
-                    <h1>{{payload.avgPars.par3Avg}}</h1>
-                    <h6>Par 3</h6>
-                </div>
-                <div class="col-md-4">
-                    <h1>{{payload.avgPars.par4Avg}}</h1>
-                    <h6>Par 4</h6>
-                </div>
-                <div class="col-md-4">
-                    <h1>{{payload.avgPars.par5Avg}}</h1>
-                    <h6>Par 5</h6>
+        <div class="col-md-6">
+            <div class="card dark-card mb-5 mx-2">
+                <div class="row colTable card-content">
+                    <div class="col-md-4">
+                        <h1>{{payload.avgPars.par3Avg}}</h1>
+                        <h6>Par 3</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h1>{{payload.avgPars.par4Avg}}</h1>
+                        <h6>Par 4</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h1>{{payload.avgPars.par5Avg}}</h1>
+                        <h6>Par 5</h6>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 </div>
 <div class="row">
     <div class="col-md-12">
