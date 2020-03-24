@@ -7,6 +7,7 @@ import json
 import yaml
 import os
 from multitool.static.scripts.weeklyTrackPlaylist import run
+from multitool.music.utils import get_track_obj
 
 music = Blueprint('music', __name__)
 
@@ -33,16 +34,31 @@ load_config()
 
 @music.route("/spotify")
 def spotify():
-    recentSongs = spotifyTest()
-    recentTracks = []
-    for item in recentSongs['items']:
-        Dict = {}
-        name = item['track']['name']
-        Dict['name'] = name
-        recentTracks.append(Dict)
+    scope = 'user-top-read user-read-private user-library-read user-read-recently-played playlist-modify-private playlist-modify-public'
+    token = util.prompt_for_user_token(user_config['username'], scope=scope, client_id=user_config['client_id'], client_secret=user_config['client_secret'], redirect_uri=user_config['redirect_uri'])
+    if token:
+        spotifyObject = spotipy.Spotify(auth=token)
+        # topArtists = spotifyObject.current_user_top_artists(limit='20')
+        topTracksS = spotifyObject.current_user_top_tracks(limit='20', time_range="short_term")
+        topTracksM = spotifyObject.current_user_top_tracks(limit='20', time_range="medium_term")
+        topTracksL = spotifyObject.current_user_top_tracks(limit='20', time_range="long_term")
+
+        topTracks_Short = []
+        for track in topTracksS['items']:
+            topTracks_Short.append(get_track_obj(track))
+        
+        topTracks_Medium = []
+        for track in topTracksM['items']:
+            topTracks_Medium.append(get_track_obj(track))
+        
+        topTracks_Long = []
+        for track in topTracksL['items']:
+            topTracks_Long.append(get_track_obj(track))
+                
+        return render_template('spotify.html', title='Spotipy', topTracks_Short_Payload=json.dumps(topTracks_Short), topTracks_Short=topTracks_Short, topTracks_Medium=topTracks_Medium, topTracks_Long=topTracks_Long)
+    else:
+        print("No Token found.")
     
-    #print(json.dumps(recentTracks, indent=2, sort_keys=True))
-    return render_template('spotipy.html', title='Spotipy', recentSongs=recentSongs, recentTracksData=json.dumps(recentTracks), recentTracks=recentTracks)
 
 @music.route('/spotify/weeklyTrackPlaylist', methods=['POST', 'GET'])
 def weeklyTrackPlaylist():

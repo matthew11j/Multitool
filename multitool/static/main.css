@@ -290,7 +290,6 @@ a.article-title:hover {
 
 .empty-page {
   font-style: italic;
-  margin-top: 10px;
 }
 
 /* Change Autocomplete styles in Chrome*/
@@ -439,3 +438,19 @@ select:-webkit-autofill:focus {
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+.artist-card {
+  border-radius: 5px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.artist-card > table > tbody > tr {
+  background-color: #212121;
+}
+
+.artist-name {
+  font-style: italic;
+  font-size: .8rem;
+}

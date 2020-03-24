@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="display: none;" id="recentTracks">{{ topTracks_Short_Payload|safe }}</div>
+<form class="script-btn" action="{{ url_for('music.weeklyTrackPlaylist') }}">
+    <div class="action-area" style="height: 60px !important;">
+        <input class="btn btn-dismiss" type="submit" id='script' name="submit" value="Sync Weekly Playlist">
+    </div>
+</form>
+{% if current_user.is_authenticated %}
+<div class="row">
+    <!-- Short Term -->
+    <div class="col-md-4">
+        <div class="card dark-card mb-5 mx-2">
+            <div class="card-content" style="min-height: 300px;">
+                <div class="row" style="padding-bottom: 5px;">
+                    <h4 id="golf-table-header" style="font-style: italic; padding-left: 1rem; font-weight: bold;">Top Tracks (S)</h4>
+                </div>
+                {% for item in topTracks_Short %}
+                <div class="artist-card container">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 64px; vertical-align: middle;">
+                                    <img class="rounded-circle artist-img" src="{{ item.images[2].url }}"> 
+                                </td>
+                                <td>
+                                    <div style="font-size: 1.1rem;">{{ item.name }}</div>
+                                    <p class="artist-name">{{ item.artist.name }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Medium Term -->
+    <div class="col-md-4">
+        <div class="card dark-card mb-5 mx-2">
+            <div class="card-content" style="min-height: 300px;">
+                <div class="row" style="padding-bottom: 5px;">
+                    <h4 id="golf-table-header" style="font-style: italic; padding-left: 1rem; font-weight: bold;">Top Tracks (M)</h4>
+                </div>
+                {% for item in topTracks_Medium %}
+                <div class="artist-card container">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 64px; vertical-align: middle;">
+                                    <img class="rounded-circle artist-img" src="{{ item.images[2].url }}"> 
+                                </td>
+                                <td>
+                                    <div style="font-size: 1.1rem;">{{ item.name }}</div>
+                                    <p class="artist-name">{{ item.artist.name }}</p>
+                                </td>
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Long Term -->
+    <div class="col-md-4">
+        <div class="card dark-card mb-5 mx-2">
+            <div class="card-content" style="min-height: 300px;">
+                <div class="row" style="padding-bottom: 5px;">
+                    <h4 id="golf-table-header" style="font-style: italic; padding-left: 1rem; font-weight: bold;">Top Tracks (L)</h4>
+                </div>
+                {% for item in topTracks_Long %}
+                <div class="artist-card container">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td style="width: 64px; vertical-align: middle;">
+                                    <img class="rounded-circle artist-img" src="{{ item.images[2].url }}"> 
+                                </td>
+                                <td>
+                                    <div style="font-size: 1.1rem;">{{ item.name }}</div>
+                                    <p class="artist-name">{{ item.artist.name }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}
