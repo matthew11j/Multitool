@@ -1,0 +1,26 @@
+[data-theme="dark"] hr {
+    margin: 10px;
+    border: 0;
+    border-top: var(--btop);
+}
+
+[data-theme="dark"] .secondary-text {
+    color: var(--color2);
+}
+
+[data-theme="dark"] .slider {
+    background-color: var(--toggle-bg-b);
+}
+  
+[data-theme="dark"] input:checked + .slider {
+    background-color: var(--toggle-bg);
+}
+  
+[data-theme="dark"] input:focus + .slider {
+    box-shadow: 0 0 1px var(--toggle-bg);
+}
+
+[data-theme="dark"] .navbar {
+    background-color: var(--header-bg);
+    /* color: white; */
+  }
