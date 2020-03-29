@@ -15,6 +15,7 @@
   --link-color: #0a86da;
   --link-white-color: #c1bfbd;
   --bg: var(--dark0);
+  --bg2: var(--dark1);
   --header-bg: var(--dark2);
   --color: white;
   --color2: #b2becd;
@@ -27,8 +28,9 @@
   --link-color: #0a86da;
   --link-white-color: #c1bfbd;
   --bg: var(--light0);
-  --header-bg: var(--light2);
-  --color: black;
+  --bg2: var(--light1);
+  --header-bg: var(--purple0);
+  --color: #424242;
   --color2: #424242;
   --btop: 1px solid #424242;
   --toggle-bg-b: #424242;
@@ -41,11 +43,11 @@ body {
   background: var(--bg);
   color: var(--color);
   margin-top: 5rem;
-  transition: background 500ms ease-in-out, color 1000ms ease-in-out;
+  /* transition: background 500ms ease-in-out, color 1000ms ease-in-out; */
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #ffffff;
+  color: var(--color);
 }
 
 textarea {
@@ -66,6 +68,11 @@ a {
 }
 
 a:hover {
+  color: var(--color);
+}
+
+.no-hover, .no-hover:hover {
+  text-decoration: none;
   color: var(--white);
 }
 
@@ -165,14 +172,14 @@ i:hover, .action:hover {
 .icon-delete {
   padding-left: 0.4em;
   font-size: 18px;
-  color: rgba(255,255,255,0.40);
+  color: var(--color2);
   vertical-align: middle;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,color .15s ease-in-out; 
 }
 
 .form-control {
-  background-color: #424242;
-  color: #ffffff;
+  background-color: var(--bg2);
+  color: var(--color);
 }
 
 [data-theme="light"].secondary-text {
@@ -188,8 +195,8 @@ i:hover, .action:hover {
   opacity: 0;
 }
 [type="date"] {
-  background:#fff url(images/calendar-icon.png)  97% 50% no-repeat;
-  color: #fff;
+  background: var(--color) url(images/calendar-icon.png)  97% 50% no-repeat;
+  color: var(--color);
 }
 /* [type="date"]:hover {
   cursor: pointer;
@@ -200,8 +207,8 @@ i:hover, .action:hover {
   /* color: white; */
 }
 
-.navbar-nav > .nav-item {
-  color: rgba(255,255,255,.5);
+[data-theme="light"] .navbar-nav > .nav-item {
+  color: rgba(255,255,255,.7);
 }
 
 /* .article-title {
@@ -329,24 +336,24 @@ a.article-title:hover {
   }
 }
 
-.dark-card-sm {
-  background: #424242;
+.card-sm {
+  background: var(--bg);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  /* transition: all 0.3s cubic-bezier(.25,.8,.25,1); */
   width: 23vw;
 }
 
-.dark-card {
-  background: #424242;
+.card {
+  background: var(--bg);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.dark-card-sm:hover {
+.card-sm:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .card-content {
-  color: #ffffff;
+  color: var(--color);
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -355,24 +362,24 @@ a.article-title:hover {
 
 .modal-content-custom {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  background: #303030 !important;
+  background: var(--bg) !important;
   overflow-y: hidden;
   padding: 1rem;
 }
 
 .form-content-custom {
-  background-color: #424242;
+  background-color: var(--bg2);
   padding: .375rem .5rem;
   text-align: center;
 }
 
 .form-content-custom-text {
-  background-color: #424242;
+  background-color: var(--bg2);
   padding: .375rem .5rem;
 }
 
 .date-custom {
-  background-color: #424242;
+  background-color: var(--bg2);
   padding: .375rem .5rem;
   width: 10vw !important;
   display: unset !important;
@@ -384,11 +391,11 @@ a.article-title:hover {
 
 .form-control:focus {
   color: #495057;
-  background-color: #424242;
+  background-color: var(--bg2);
   border-color: #8064A2;
   outline: 0;
   box-shadow: 0 0 0 0.1rem #8064A2;
-  color: #ffffff;
+  color: var(--color);
 }
 
 .empty-page {
@@ -405,11 +412,11 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  box-shadow: 0 0 0px 1000px #424242 inset;;
-  -webkit-text-fill-color: #ffffff;
-  -webkit-box-shadow: 0 0 0px 1000px #424242 inset;
+  box-shadow: 0 0 0px 1000px var(--bg2) inset;
+  -webkit-text-fill-color: var(--color);
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg2) inset;
   transition: background-color 5000s ease-in-out 0s;
-  caret-color: white;
+  caret-color: var(--color);
 }
 
 .table td {
@@ -424,7 +431,7 @@ select:-webkit-autofill:focus {
 .table thead th {
   vertical-align: bottom;
   padding-bottom: 5px;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid var(--color);
 }
 
 .modal-custom {
@@ -454,8 +461,8 @@ select:-webkit-autofill:focus {
 }
 
 .golf-table-bordered {
-  border-right: 1px solid #fff;
-  border-left: 1px solid #fff;
+  border-right: 1px solid var(--color);
+  border-left: 1px solid var(--color);
 }
 
 .cell-score {
@@ -481,14 +488,18 @@ select:-webkit-autofill:focus {
 }
 
 .select-tag-page {
-  background-color: #424242;
+  background-color: var(--bg2);
   padding: .375rem .5rem;
   width: 10vw !important;
   display: unset !important;
   height: 30px !important;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  color: #ffffff;
+  color: var(--color);
+  border: none;
+}
+
+[data-theme="light"] .select-tag-page {
   border: none;
 }
 
@@ -549,7 +560,7 @@ select:-webkit-autofill:focus {
 }
 
 .artist-card > table > tbody > tr {
-  background-color: #212121;
+  background-color: var(--bg2);
 }
 
 .artist-name {

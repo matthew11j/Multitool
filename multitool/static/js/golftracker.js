@@ -1,4 +1,11 @@
 // golftracker.js
+var cssColor = getComputedStyle(document.body).getPropertyValue('--color');
+
+// WIP for re-rendering chart on theme change
+// document.body.addEventListener("change", function() {
+//     cssColor = getComputedStyle(document.body).getPropertyValue('--color');
+//     render_course_chart();
+// });
 
 var isFiltered = false;
 var deleteFilter = document.getElementById("removeFilter");
@@ -97,6 +104,7 @@ function getCellValue(row, index){ return $(row).children('td').eq(index).text()
 // ----- Charts --------------------------------------------------------------------------------
 // Courses Played (Pie)
 function render_course_chart() {
+    let fontColor = cssColor;
     var canvas = document.getElementById('myChart');
     var ctx = canvas.getContext('2d');
     var data = document.getElementById('payload').textContent;    
@@ -146,7 +154,7 @@ function render_course_chart() {
                 display: true,
                 position: 'bottom',
                 labels: {
-                    fontColor: '#fff'
+                    fontColor: fontColor
                 }
             },
             // scales: {

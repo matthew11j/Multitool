@@ -23,4 +23,8 @@
 [data-theme="dark"] .navbar {
     background-color: var(--header-bg);
     /* color: white; */
-  }
+}
+
+[data-theme="dark"] .navbar-nav > .nav-item {
+    color: rgba(255,255,255,.7);
+}

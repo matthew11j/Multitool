@@ -16,13 +16,6 @@ function initTheme() {
 
 initTheme();
 
-const darkButton = document.getElementById('dark');
-const lightButton = document.getElementById('light');
-
-/* $('#nav_img').click(function(){
-
-}) */
-
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function userDropdown() {
@@ -31,7 +24,8 @@ function userDropdown() {
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
-    if (!event.target.matches('#nav_img') && !event.target.matches('#user_dropdown')) {
+    var element = document.getElementById('user_dropdown');
+    if (!event.target.matches('#nav_img') && (event.target !== element && !element.contains(event.target))) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
         for (i = 0; i < dropdowns.length; i++) {
@@ -42,20 +36,6 @@ window.onclick = function(event) {
         }
     }
 }
-
-// darkButton.onclick = () => {
-//     // body.classList.remove('light');
-//     // body.classList.add('dark');
-//     document.body.setAttribute('data-theme', 'dark');
-//     window.localStorage.setItem('data-theme', 'dark');
-// }
-
-// lightButton.onclick = () => {
-//     // body.classList.remove('dark');
-//     // body.classList.add('light');
-//     document.body.setAttribute('data-theme', 'light');
-//     window.localStorage.setItem('data-theme', 'light');
-// }
 
 function toggleTheme() {
     theme = window.localStorage.getItem('data-theme');

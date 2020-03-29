@@ -5,14 +5,14 @@
 <div class="row">
     {% if payload.avgPars %}
     <div class="col-md-6">
-        <div class="card dark-card mb-5 mx-2">
+        <div class="card mb-5 mx-2">
             <div class="card-content" style="margin: auto; position: relative;">
                 <canvas id="myChart" width="400" height="400"></canvas>
             </div>
         </div>
     </div>
         <div class="col-md-6">
-            <div class="card dark-card mb-5 mx-2">
+            <div class="card mb-5 mx-2">
                 <div class="row colTable card-content">
                     <div class="col-md-4">
                         <h1>{{payload.avgPars.par3Avg}}</h1>
@@ -64,7 +64,7 @@
 <div class="row">
     <div class="col-md-12">
         {% if current_user.is_authenticated %}
-        <div class="card dark-card mb-5 mx-2">
+        <div class="card mb-5 mx-2">
             <div class="card-content" style="min-height: 300px;">
                 <div class="row">
                     <h4 id="golf-table-header" style="font-style: italic; padding-left: 1rem; font-weight: bold;"></h4>
