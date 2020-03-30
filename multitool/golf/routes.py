@@ -6,15 +6,23 @@ from multitool.golf.forms import Round, Course
 from flask_login import current_user
 from datetime import datetime, date
 from multitool.golf.utils import submit_round, get_par_averages
-from multitool.models import Golf_Round, Golf_Course
+from multitool.models import Golf_Round, Golf_Course, Users
+from sqlalchemy import func, or_, and_
 import json
 
 golf = Blueprint('golf', __name__)
 
+@golf.route("/golftracker")
+def golftrackerDash():
+    omitUsers = ['test', 'testuser']
+    # users = Users.query.filter(or_(*[Users.username.like(name) for name in omitUsers])).all()
+    users = Users.query.filter(Users.username.notin_(omitUsers)).all()
+
+    return render_template('golftracker.html', title='Golf Tracker Dashboard', users=users)
+
+
 @golf.route("/golftracker/<username>")
 def golftracker(username):
-    #golf_rounds = Golf_Round.query.all()
-    #if current_user.is_authenticated and current_user.username == username:
     if current_user.is_authenticated:
         if current_user.username != username:
             usernameCreated = username
@@ -49,7 +57,7 @@ def golftracker(username):
     Dict['AFCnt'] = AFCnt
     Dict['MiscCnt'] = MiscCnt
 
-    return render_template('golftracker.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payloadJS=json.dumps(Dict), payload=Dict, usernameCreated=usernameCreated)
+    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payloadJS=json.dumps(Dict), payload=Dict, usernameCreated=usernameCreated)
 
 @golf.route("/golftracker/<username>/addround", methods=['GET', 'POST'])
 def addround(username):

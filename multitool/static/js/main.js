@@ -7,11 +7,14 @@ function initTheme() {
         document.body.setAttribute('data-theme', 'dark');
     }
 
-    if (theme === 'dark') {
-        document.getElementById("themeToggle").checked = true;
-    } else {
-        document.getElementById("themeToggle").checked = false;
-    }
+    let toggle = document.getElementById("themeToggle");
+    if (toggle) {
+        if (theme === 'dark') {
+            document.getElementById("themeToggle").checked = true;
+        } else {
+            document.getElementById("themeToggle").checked = false;
+        }
+    } 
 }
 
 initTheme();

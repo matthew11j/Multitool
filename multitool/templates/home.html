@@ -2,18 +2,29 @@
 {% block content %}
     <div class="serv">
         <ul>
-        {% for module in modules %}
-        
-        <!-- TODO -->
-        <li><a href="/{{ module.url }}/{{current_user.userame}}" style="text-decoration: none;">
-            <div class="card card-sm mb-5 mx-2">
-                <div class="card-content">
-                    <h5 class="card-title">{{ module.title }}</h5>
-                    <p class="card-text">{{ module.description }}</p>
-                </div>
-            </div>
-        </li></a>
-        {% endfor %}
+            {% for module in modules %}
+            <li>
+                {% if module.id == 1 %}
+                <a href="{{ url_for('golf.golftrackerDash') }}" style="text-decoration: none;">
+                    <div class="card card-sm mb-5 mx-2">
+                        <div class="card-content">
+                            <h5 class="card-title">{{ module.title }}</h5>
+                            <p class="card-text">{{ module.description }}</p>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                <a href="{{ module.url }}" style="text-decoration: none;">
+                    <div class="card card-sm mb-5 mx-2">
+                        <div class="card-content">
+                            <h5 class="card-title">{{ module.title }}</h5>
+                            <p class="card-text">{{ module.description }}</p>
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
+            </li>
+            {% endfor %}
         </ul>
     </div>
 {% endblock content %}
