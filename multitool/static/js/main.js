@@ -28,7 +28,7 @@ function userDropdown() {
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
     var element = document.getElementById('user_dropdown');
-    if (!event.target.matches('#nav_img') && (event.target !== element && !element.contains(event.target))) {
+    if (element && !event.target.matches('#nav_img') && (event.target !== element && !element.contains(event.target))) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
         for (i = 0; i < dropdowns.length; i++) {

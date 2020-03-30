@@ -1,4 +1,4 @@
-// golftracker.js
+// golftrackerUser.js
 var cssColor = getComputedStyle(document.body).getPropertyValue('--color');
 
 // WIP for re-rendering chart on theme change
@@ -9,22 +9,24 @@ var cssColor = getComputedStyle(document.body).getPropertyValue('--color');
 
 var isFiltered = false;
 var deleteFilter = document.getElementById("removeFilter");
-if (deleteFilter) {
-    deleteFilter.style.display = "none";
+
+var data = document.getElementById('payload').textContent;    
+if (data) {
+    if (deleteFilter)
+        deleteFilter.style.display = "none";
+        
     setRoundListCounter();
-    var data = document.getElementById('payload').textContent;    
-    if (data) {
-        var obj = JSON.parse(data);
+    
+    var obj = JSON.parse(data);
 
-        // IMPROVE THIS
+    // IMPROVE THIS
 
-        let GCCnt = obj.GCCnt;
-        let BCCnt = obj.BCCnt;
-        let AFCnt = obj.AFCnt;
-        let MiscCnt = obj.MiscCnt;
-        if (GCCnt != 0 || BCCnt != 0 || AFCnt != 0 || MiscCnt != 0) {
-            render_course_chart(obj);
-        }
+    let GCCnt = obj.GCCnt;
+    let BCCnt = obj.BCCnt;
+    let AFCnt = obj.AFCnt;
+    let MiscCnt = obj.MiscCnt;
+    if (GCCnt != 0 || BCCnt != 0 || AFCnt != 0 || MiscCnt != 0) {
+        render_course_chart(obj);
     }
 }
 

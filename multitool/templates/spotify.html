@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 <div style="display: none;" id="recentTracks">{{ topTracks_Short_Payload|safe }}</div>
+{% if current_user.is_authenticated %}
 <form class="script-btn" action="{{ url_for('music.weeklyTrackPlaylist') }}">
     <div class="action-area" style="height: 60px !important;">
         <input class="btn btn-dismiss" type="submit" id='script' name="submit" value="Sync Weekly Playlist">
     </div>
 </form>
-{% if current_user.is_authenticated %}
 <div class="row">
     <!-- Short Term -->
     <div class="col-md-4">
@@ -91,5 +91,7 @@
         </div>
     </div>
 </div>
+{% else %}
+    <p class="empty-page" style="margin-top: 10px;">You must have an account to access this tool</p>
 {% endif %}
 {% endblock content %}

@@ -32,14 +32,18 @@
         </div>
     {% endif %}
 </div>
+
+{% if golf_rounds %}
 <div class="row">
     <div class="col-md-12">
         <div class="action-area">
+            {% if current_user.username == usernameCreated %}
             <span class="action-area-left">
                 <span style="padding-right: 1.5em;" class="action" data-toggle="modal" data-target="#addRoundModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Round</span>
                 <span class="action" data-toggle="modal" data-target="#addCourseModal" id="open-modal2"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Course</span>    
             </span>
-            {% if current_user.is_authenticated %}
+            {% endif %}
+            {% if golf_rounds %}
             <span class="action-area-right">
                 <label style="padding-right: 10px;">Course Played</label>
                 <select id='courseSelector' onchange="selectFilter()" class="select-tag-page form-borderless">
@@ -56,6 +60,7 @@
         </div>
     </div>
 </div>
+{% endif %}
             <!-- <span style="padding-right: 0.5em;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoundModal" id="open-modal">Add Round</button></span>
             <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="open-modal2">Add Course</button></span> -->
    <!--          <span style="padding-right: 1.5em;" class="action" data-toggle="modal" data-target="#addRoundModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Round</span>
@@ -64,7 +69,7 @@
      
 <div class="row">
     <div class="col-md-12">
-        {% if current_user.is_authenticated %}
+        {% if golf_rounds %}
         <div class="card mb-5 mx-2">
             <div class="card-content" style="min-height: 300px;">
                 <div class="row">
@@ -135,7 +140,7 @@
             </div>
         </div>
         {% else %}
-            <p class="empty-page" style="margin-top: 10px;">No courses have been tracked...</p>
+            <p class="empty-page" style="margin-top: 10px;">No rounds have been tracked...</p>
         {% endif %}
     </div>
 </div>

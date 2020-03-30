@@ -16,7 +16,9 @@ golf = Blueprint('golf', __name__)
 def golftrackerDash():
     omitUsers = ['test', 'testuser']
     # users = Users.query.filter(or_(*[Users.username.like(name) for name in omitUsers])).all()
-    users = Users.query.filter(Users.username.notin_(omitUsers)).all()
+    users = Users.query.filter(Users.username.notin_(omitUsers))\
+                        .order_by(Users.id)\
+                        .all()
 
     return render_template('golftracker.html', title='Golf Tracker Dashboard', users=users)
 
@@ -29,7 +31,7 @@ def golftracker(username):
         else:
             usernameCreated = current_user.username
     else: 
-        usernameCreated = ''
+        usernameCreated = username
     
     golf_rounds = Golf_Round.query.filter_by(created_by=usernameCreated)
     golf_courses = Golf_Course.query.all()
@@ -39,7 +41,7 @@ def golftracker(username):
     BCCnt = 0
     AFCnt = 0
     MiscCnt = 0
-    if golf_rounds.count() > 1:
+    if golf_rounds.count() > 0:
         for golf_round in golf_rounds:
             course = golf_round.course_played
             if (course == 'Green Crest'):
@@ -51,6 +53,8 @@ def golftracker(username):
             else:
                 MiscCnt += 1
         Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
+    else:
+        golf_rounds = None
 
     Dict['GCCnt'] = GCCnt
     Dict['BCCnt'] = BCCnt
@@ -132,9 +136,7 @@ def editround(username, round_id):
 
 @golf.route("/golftracker/<username>/deleteround/<int:round_id>", methods=['POST'])
 def deleteround(username, round_id):
-    print('here1')
     if current_user.username == username:
-        print('here')
         Golf_Round.query.filter_by(id=round_id).delete()
         db.session.commit()
         flash('Round deleted!', 'success')
