@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div style="display: none;" id="payload">{{ payloadJS|safe }}</div>
+<div style="display: none;" id="username">{{ usernameCreated|safe }}</div>
 
 <div class="row">
     {% if payload.avgPars %}

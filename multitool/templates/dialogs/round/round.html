@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if action == 'edit' %}
-<form id="deleteForm" action="{{ url_for('golf.deleteround', round_id=golf_round.id) }}" method="POST"></form>
+<form id="deleteForm" action="{{ url_for('golf.deleteround', username=usernameCreated, round_id=golf_round.id) }}" method="POST"></form>
 {% endif %}
 <form id="addRoundForm" method="POST" action="" autocomplete="off">
     {{ form.hidden_tag() }}

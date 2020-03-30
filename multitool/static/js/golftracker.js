@@ -12,7 +12,20 @@ var deleteFilter = document.getElementById("removeFilter");
 if (deleteFilter) {
     deleteFilter.style.display = "none";
     setRoundListCounter();
-    render_course_chart();
+    var data = document.getElementById('payload').textContent;    
+    if (data) {
+        var obj = JSON.parse(data);
+
+        // IMPROVE THIS
+
+        let GCCnt = obj.GCCnt;
+        let BCCnt = obj.BCCnt;
+        let AFCnt = obj.AFCnt;
+        let MiscCnt = obj.MiscCnt;
+        if (GCCnt != 0 || BCCnt != 0 || AFCnt != 0 || MiscCnt != 0) {
+            render_course_chart(obj);
+        }
+    }
 }
 
 function selectFilter(val) {
@@ -103,12 +116,10 @@ function getCellValue(row, index){ return $(row).children('td').eq(index).text()
 
 // ----- Charts --------------------------------------------------------------------------------
 // Courses Played (Pie)
-function render_course_chart() {
+function render_course_chart(obj) {
     let fontColor = cssColor;
     var canvas = document.getElementById('myChart');
     var ctx = canvas.getContext('2d');
-    var data = document.getElementById('payload').textContent;    
-    var obj = JSON.parse(data);
 
     let GCCnt = obj.GCCnt
     let BCCnt = obj.BCCnt
@@ -185,9 +196,11 @@ function render_course_chart() {
 }
 
 // ----- Modals --------------------------------------------------------------------------------
+var username = document.getElementById('username').textContent;    
+
 // Add Round
 $('span#open-modal').on('click', function(e){
-    var url = "/golftracker/addround";
+    var url = "/golftracker/" + username + "/addround";
     $.get(url, function(data) {
         $('#addRoundModal .modal-content').html(data);
         $('#addRoundModal').modal();
@@ -197,7 +210,7 @@ $('span#open-modal').on('click', function(e){
 
 // Add Course
 $('span#open-modal2').on('click', function(e){
-    var url = "/golftracker/addcourse";
+    var url = "/golftracker/" + username + "/addcourse";
     $.get(url, function(data) {
         $('#addCourseModal .modal-content').html(data);
         $('#addCourseModal').modal();
@@ -208,7 +221,7 @@ $('span#open-modal2').on('click', function(e){
 // Edit Round
 $('i#open-modal3').on('click', function(e){
     var round_id = $(this).data('id');
-    var url = "/golftracker/editround/" + round_id;
+    var url = "/golftracker/" + username + "/editround/" + round_id;
     $.get(url, function(data) {
         $('#addRoundModal .modal-content').html(data);
         $('#addRoundModal').modal();
