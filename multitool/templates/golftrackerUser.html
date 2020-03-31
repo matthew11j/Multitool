@@ -33,7 +33,6 @@
     {% endif %}
 </div>
 
-{% if golf_rounds %}
 <div class="row">
     <div class="col-md-12">
         <div class="action-area">
@@ -43,7 +42,7 @@
                 <span class="action" data-toggle="modal" data-target="#addCourseModal" id="open-modal2"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Course</span>    
             </span>
             {% endif %}
-            {% if golf_rounds %}
+            {% if golf_rounds != None %}
             <span class="action-area-right">
                 <label style="padding-right: 10px;">Course Played</label>
                 <select id='courseSelector' onchange="selectFilter()" class="select-tag-page form-borderless">
@@ -60,7 +59,6 @@
         </div>
     </div>
 </div>
-{% endif %}
             <!-- <span style="padding-right: 0.5em;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoundModal" id="open-modal">Add Round</button></span>
             <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal" id="open-modal2">Add Course</button></span> -->
    <!--          <span style="padding-right: 1.5em;" class="action" data-toggle="modal" data-target="#addRoundModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Round</span>
@@ -69,7 +67,7 @@
      
 <div class="row">
     <div class="col-md-12">
-        {% if golf_rounds %}
+        {% if golf_rounds != None %}
         <div class="card mb-5 mx-2">
             <div class="card-content" style="min-height: 300px;">
                 <div class="row">

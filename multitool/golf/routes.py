@@ -5,7 +5,7 @@ from multitool import db, bcrypt
 from multitool.golf.forms import Round, Course
 from flask_login import current_user
 from datetime import datetime, date
-from multitool.golf.utils import submit_round, get_par_averages
+from multitool.golf.utils import submit_round, get_par_averages, is_null
 from multitool.models import Golf_Round, Golf_Course, Users
 from sqlalchemy import func, or_, and_
 import json
@@ -41,7 +41,7 @@ def golftracker(username):
     BCCnt = 0
     AFCnt = 0
     MiscCnt = 0
-    if golf_rounds.count() > 0:
+    if is_null(golf_rounds) is 0:
         for golf_round in golf_rounds:
             course = golf_round.course_played
             if (course == 'Green Crest'):

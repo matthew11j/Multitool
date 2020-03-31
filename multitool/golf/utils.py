@@ -1,5 +1,13 @@
 from datetime import datetime, date
 
+def is_null(result):
+    try:
+        test = result[0]
+    except:
+        return 1
+    else:
+        return 0
+
 def submit_round(form):
     # Calculating front, back, total Scores
     # Defaulting empty scores
@@ -58,7 +66,10 @@ def get_par_averages(golf_courses, golf_rounds):
     par3Cnt = 0
     par4Cnt = 0
     par5Cnt = 0
-    if golf_rounds.count() > 0:
+    par3Avg = 0
+    par4Avg = 0
+    par5Avg = 0
+    if is_null(golf_rounds) is 0:
         for golf_round in golf_rounds:
             courseName = golf_round.course_played
             scores = []
@@ -88,13 +99,12 @@ def get_par_averages(golf_courses, golf_rounds):
                         index += 1
                         if index > 17:
                             break
-        par3Avg = round(par3Cnt/par3Total,2)
-        par4Avg = round(par4Cnt/par4Total,2)
-        par5Avg = round(par5Cnt/par5Total,2)
-    else:
-        par3Avg = 0
-        par4Avg = 0
-        par5Avg = 0
+        try:
+            par3Avg = round(par3Cnt/par3Total,2)
+            par4Avg = round(par4Cnt/par4Total,2)
+            par5Avg = round(par5Cnt/par5Total,2)
+        except:
+            print(':(')
 
     Payload['par3Avg'] = par3Avg
     Payload['par4Avg'] = par4Avg

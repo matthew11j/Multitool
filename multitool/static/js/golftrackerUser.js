@@ -14,8 +14,6 @@ var data = document.getElementById('payload').textContent;
 if (data) {
     if (deleteFilter)
         deleteFilter.style.display = "none";
-        
-    setRoundListCounter();
     
     var obj = JSON.parse(data);
 
@@ -27,6 +25,7 @@ if (data) {
     let MiscCnt = obj.MiscCnt;
     if (GCCnt != 0 || BCCnt != 0 || AFCnt != 0 || MiscCnt != 0) {
         render_course_chart(obj);
+        setRoundListCounter();
     }
 }
 
