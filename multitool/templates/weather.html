@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if current_user.is_authenticated %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-5 mx-2">
+            <div class="card-content" style="min-height: 300px;">
+                {% for item in weather_data %}
+                <div class="artist-card container">
+                    {{ item.date }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    <p class="empty-page" style="margin-top: 10px;">You must have an account to access this tool</p>
+{% endif %}
+{% endblock content %}

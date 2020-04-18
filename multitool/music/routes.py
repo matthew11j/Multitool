@@ -54,6 +54,9 @@ def spotify():
         topTracks_Long = []
         for track in topTracksL['items']:
             topTracks_Long.append(get_track_obj(track))
+
+        result = spotifyObject.recommendation_genre_seeds()
+        # print(json.dumps(result, indent=2, sort_keys=True))
                 
         return render_template('spotify.html', title='Spotipy', topTracks_Short_Payload=json.dumps(topTracks_Short), topTracks_Short=topTracks_Short, topTracks_Medium=topTracks_Medium, topTracks_Long=topTracks_Long)
     else:

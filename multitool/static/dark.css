@@ -8,23 +8,6 @@
     color: var(--color2);
 }
 
-[data-theme="dark"] .slider {
-    background-color: var(--toggle-bg-b);
-}
-  
-[data-theme="dark"] input:checked + .slider {
-    background-color: var(--toggle-bg);
-}
-  
-[data-theme="dark"] input:focus + .slider {
-    box-shadow: 0 0 1px var(--toggle-bg);
-}
-
-[data-theme="dark"] .navbar {
-    background-color: var(--header-bg);
-    /* color: white; */
-}
-
 [data-theme="dark"] .navbar-nav > .nav-item {
     color: rgba(255,255,255,.7);
 }
