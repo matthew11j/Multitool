@@ -93,7 +93,7 @@ def replaceTracks(tracks, playlistName, description):
     y = spotifyObject.user_playlist_change_details(user_config['username'], user_config['weekly_playlist_uri_partial'], name=playlistName, description=description)
 
 # -----------------------------------------------------------------------------
-def run(config):
+def WTP_run(config):
     global spotifyObject
     global user_config
     global todaysDate

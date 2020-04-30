@@ -38,8 +38,8 @@
               {% else %}
                 <a class="nav-item nav-link" href="{{ url_for('golf.golftrackerDash') }}">Golf Tracker</a>
               {% endif %}
-              <a class="nav-item nav-link" href="{{ url_for('music.spotify') }}">Spotipy</a>
-              <a class="nav-item nav-link" href="{{ url_for('weather.weatherDash') }}">Weather</a>
+              <!-- <a class="nav-item nav-link" href="{{ url_for('music.spotify') }}">Spotipy</a>
+              <a class="nav-item nav-link" href="{{ url_for('weather.weatherDash') }}">Weather</a> -->
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -122,6 +122,9 @@
     {% endif %}
     {% if title == 'Spotipy' %}
       <script src="{{ url_for('static', filename='js/spotipy.js') }}"></script>
+    {% endif %}
+    {% if title == 'Recommendations' %}
+      <script src="{{ url_for('static', filename='js/recommendations.js') }}"></script>
     {% endif %}
 </body>
 </html>

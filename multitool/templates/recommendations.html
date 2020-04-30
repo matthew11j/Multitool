@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- <div style="display: none;" id="recentTracks">{{ topTracks_Short_Payload|safe }}</div> -->
+{% if current_user.is_authenticated %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-5 mx-2">
+            <div class="card-content" style="min-height: 300px;">
+                <form id="recommendationForm" method="POST" action="" autocomplete="off">
+                    {{ form.hidden_tag() }}
+                    <h4 class="form-control-label">
+                        Seeds
+                    </h4>
+                    {% for s in form.seeds %}
+                        {{ s.form.hidden_tag() }}
+                        <div class="row form-group">
+                            <div class="col-md-1" style="padding-left: 1rem;">
+                                {{ s.form.seed_select(class="form-control date-custom2 form-borderless") }}
+                            </div>
+                            <div class="col-md-2" style="padding-left: 10px;">
+                                {{ s.form.seed_string(class="form-control form-content-custom-l form-borderless") }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    {{ form.submit(class="btn btn-primary") }} 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    <p class="empty-page" style="margin-top: 10px;">You must have an account to access this tool</p>
+{% endif %}
+{% endblock content %}

@@ -331,6 +331,11 @@ i:hover, .action:hover {
   text-align: center;
 }
 
+.form-content-custom-l {
+  background-color: var(--bg2);
+  padding: .375rem .5rem;
+}
+
 .form-content-custom-text {
   background-color: var(--bg2);
   padding: .375rem .5rem;
@@ -340,6 +345,12 @@ i:hover, .action:hover {
   background-color: var(--bg2);
   padding: .375rem .5rem;
   width: 10vw !important;
+  display: unset !important;
+}
+
+.date-custom2 {
+  background-color: var(--bg2);
+  padding: .375rem .5rem;
   display: unset !important;
 }
 
