@@ -10,7 +10,7 @@ import yaml
 import os
 from multitool.static.scripts.weeklyTrackPlaylist import WTP_run
 from multitool.static.scripts.my_spotify_api import getArtistUri, getSongUri
-from multitool.music.utils import get_track_obj, get_artist_uri_from_track
+from multitool.music.utils import get_track_obj, get_artist_uri_from_track, send_recommendation_email
 from multitool.music.forms import Recommendation
 
 music = Blueprint('music', __name__)
@@ -135,9 +135,12 @@ def test():
         # topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="short_term")
         topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="medium_term")
         # topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="long_term")
+
         tracks = []
+        tracksDisplay = []
         tracksToAdd = []
         count = 0 
+        track_display = ''
         # topTracks_Obj = []
         for track in topTracks['items']:
             # topTracks_Obj.append(get_track_obj(track))
@@ -148,21 +151,22 @@ def test():
                 if track['id'] not in tracksToAdd:
                     count=count+1
                     print(count)
+                    track_display = track['name'] + ' - ' + track['artists'][0]['name']
                     if count < 99:
                         tracksToAdd.append(track['id'])
                         tracks.append(get_track_obj(track))
+                        tracksDisplay.append(track_display)
                     else:
                         print('Track Over 100!!')
-                    print(track['name'] + ' - ' +
-                        track['artists'][0]['name'])
+                    print(track_display)
                 else:
                     print('Track Skipped!!')
-                    print(track['name'] + ' - ' +
-                        track['artists'][0]['name'])
+                    print(track_display)
 
         # playlistName = 'Automagic Test'
         # description = 'Automagic Test'
         # spotifyObject.user_playlist_change_details(user_config['username'], user_config['weekly_playlist_uri_partial'], name=playlistName, description=description)
         spotifyObject.user_playlist_replace_tracks(user_config['username'], user_config['test_playlist_uri_partial'], tracksToAdd)
+        send_recommendation_email(tracksDisplay)
     
     return render_template('recommendations.html', title='Recommendations', form=form, tracks=tracks, genre_seeds=genre_seeds)
