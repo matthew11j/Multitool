@@ -9,3 +9,6 @@ def get_track_obj(track):
     Dict['artist'] = artist
     Dict['popularity'] = popularity
     return Dict
+
+def get_artist_uri_from_track(track):
+    return track['artists'][0]['id']

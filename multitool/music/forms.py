@@ -9,5 +9,5 @@ class Seed(FlaskForm):
     seed_string = StringField('Seed String')
 
 class Recommendation(FlaskForm):
-    seeds = FieldList(FormField(Seed), min_entries=5,  max_entries=5)
+    seeds = FieldList(FormField(Seed), min_entries=1,  max_entries=5)
     submit = SubmitField('Create')
