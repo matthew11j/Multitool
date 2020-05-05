@@ -110,7 +110,10 @@ def recommendations():
                     else: # Empty Seed Row
                         uri = None
 
-                    results = spotifyObject.recommendations(seed_artists=artist_uris, seed_tracks=track_uris, seed_genres=genre_uris, target_popularity='90')
+                    # pre_defined_kwargs = {'target_acousticness': 0.90, 'target_popularity': 80}
+                    pre_defined_kwargs = {'target_popularity': 80}
+
+                    results = spotifyObject.recommendations(seed_artists=artist_uris, seed_tracks=track_uris, seed_genres=genre_uris, **pre_defined_kwargs)
                     for track in results['tracks']:
                         tracks.append(get_track_obj(track))
                         print(track['name'] + ' - ' +
@@ -132,8 +135,8 @@ def test():
         genre_seeds = spotifyObject.recommendation_genre_seeds()
         # print(json.dumps(result, indent=2, sort_keys=True))
 
-        # topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="short_term")
-        topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="medium_term")
+        topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="short_term")
+        # topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="medium_term")
         # topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="long_term")
 
         tracks = []

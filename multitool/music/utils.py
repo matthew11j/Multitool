@@ -1,6 +1,7 @@
 import json
 from flask_mail import Message
 from multitool import mail
+from multitool.config import Config
 
 def get_track_obj(track):
     Dict = {}
@@ -20,8 +21,8 @@ def get_artist_uri_from_track(track):
 
 def send_recommendation_email(payload):
     msg = Message(subject='Recommended Songs Playlist',
-                  sender='noreply@demo.com',
-                  recipients=['matthew011j@gmail.com'])
+                  sender='noreply@multitool.com',
+                  recipients=[Config.MAIL_USERNAME])
     msg.body = f'''This is a list of songs recommended from the test:
 {json.dumps(payload, indent=2, sort_keys=True)}
 '''
