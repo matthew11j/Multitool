@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
 from multitool.models import Module
-from multitool.static.scripts.arduinoSwitch import run
+from multitool.static.scripts.arduino_switch import run
 
 main = Blueprint('main', __name__)
 
@@ -14,8 +14,8 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
-@main.route('/about/arduinoSwitch/<action>', methods=['POST', 'GET'])
-def arduinoSwitch(action):
+@main.route('/about/arduino_switch/<action>', methods=['POST', 'GET'])
+def arduino_switch(action):
     run(action)
     flash('Success!', 'success')
     return redirect(url_for('main.about'))

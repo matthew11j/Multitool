@@ -13,10 +13,10 @@ import json
 golf = Blueprint('golf', __name__)
 
 @golf.route("/golftracker")
-def golftrackerDash():
-    omitUsers = ['test', 'testuser']
-    # users = Users.query.filter(or_(*[Users.username.like(name) for name in omitUsers])).all()
-    users = Users.query.filter(Users.username.notin_(omitUsers))\
+def golf_tracker_dash():
+    omit_users = ['test', 'testuser']
+    # users = Users.query.filter(or_(*[Users.username.like(name) for name in omit_users])).all()
+    users = Users.query.filter(Users.username.notin_(omit_users))\
                         .order_by(Users.id)\
                         .all()
 
@@ -27,13 +27,13 @@ def golftrackerDash():
 def golftracker(username):
     if current_user.is_authenticated:
         if current_user.username != username:
-            usernameCreated = username
+            username_created = username
         else:
-            usernameCreated = current_user.username
+            username_created = current_user.username
     else: 
-        usernameCreated = username
+        username_created = username
     
-    golf_rounds = Golf_Round.query.filter_by(created_by=usernameCreated)
+    golf_rounds = Golf_Round.query.filter_by(created_by=username_created)
     golf_courses = Golf_Course.query.all()
 
     Dict = {}
@@ -61,7 +61,7 @@ def golftracker(username):
     Dict['AFCnt'] = AFCnt
     Dict['MiscCnt'] = MiscCnt
 
-    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payloadJS=json.dumps(Dict), payload=Dict, usernameCreated=usernameCreated)
+    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload_js=json.dumps(Dict), payload=Dict, username_created=username_created)
 
 @golf.route("/golftracker/<username>/addround", methods=['GET', 'POST'])
 def addround(username):
@@ -132,7 +132,7 @@ def editround(username, round_id):
         else :
             flash('User not authenticated', 'danger')
         return jsonify(status='ok')
-    return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='edit', usernameCreated=username)
+    return render_template('dialogs/round/add.html', form=form, golf_round=golf_round, golf_courses=golf_courses, action='edit', username_created=username)
 
 @golf.route("/golftracker/<username>/deleteround/<int:round_id>", methods=['POST'])
 def deleteround(username, round_id):

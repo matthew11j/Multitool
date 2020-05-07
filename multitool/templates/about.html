@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>About Page</h1>
-    <form class="script-btn" action="{{ url_for('main.arduinoSwitch', action='ON') }}">
+    <form class="script-btn" action="{{ url_for('main.arduino_switch', action='ON') }}">
         <div class="action-area" style="height: 60px !important;">
             <input class="btn btn-dismiss" type="submit" id='script' name="submit" value="ON">
         </div>
     </form>
-    <form class="script-btn" action="{{ url_for('main.arduinoSwitch', action='OFF') }}">
+    <form class="script-btn" action="{{ url_for('main.arduino_switch', action='OFF') }}">
         <div class="action-area" style="height: 60px !important;">
             <input class="btn btn-dismiss" type="submit" id='script' name="submit" value="OFF">
         </div>

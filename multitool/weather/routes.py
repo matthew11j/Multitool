@@ -3,12 +3,12 @@ from multitool import db, bcrypt
 from datetime import date, datetime, timedelta
 import json
 
-from multitool.static.scripts.getWeatherData import run
+from multitool.static.scripts.get_weather_data import run
 
 weather = Blueprint('weather', __name__)
 
 @weather.route("/weather")
-def weatherDash():
+def weather_dash():
     json_obj = run()
     weather_data = json_obj['weather_data']
     # data = weather_data[0]

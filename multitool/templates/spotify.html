@@ -2,7 +2,7 @@
 {% block content %}
 <div style="display: none;" id="recentTracks">{{ topTracks_Short_Payload|safe }}</div>
 {% if current_user.is_authenticated %}
-<form class="script-btn" action="{{ url_for('music.weeklyTrackPlaylist') }}">
+<form class="script-btn" action="{{ url_for('music.weekly_track_playlist') }}">
     <div class="action-area" style="height: 60px !important;">
         <input class="btn btn-dismiss" type="submit" id='script' name="submit" value="Sync Weekly Playlist">
     </div>

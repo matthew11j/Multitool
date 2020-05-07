@@ -36,10 +36,10 @@
               {% if current_user.username %}
                 <a class="nav-item nav-link" href="{{ url_for('golf.golftracker', username=current_user.username) }}">Golf Tracker</a>
               {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('golf.golftrackerDash') }}">Golf Tracker</a>
+                <a class="nav-item nav-link" href="{{ url_for('golf.golf_tracker_dash') }}">Golf Tracker</a>
               {% endif %}
               <!-- <a class="nav-item nav-link" href="{{ url_for('music.spotify') }}">Spotipy</a>
-              <a class="nav-item nav-link" href="{{ url_for('weather.weatherDash') }}">Weather</a> -->
+              <a class="nav-item nav-link" href="{{ url_for('weather.weather_dash') }}">Weather</a> -->
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">

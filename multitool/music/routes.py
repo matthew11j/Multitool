@@ -8,8 +8,8 @@ import spotipy.util as util
 import json
 import yaml
 import os
-from multitool.static.scripts.weeklyTrackPlaylist import WTP_run
-from multitool.static.scripts.my_spotify_api import getArtistUri, getSongUri
+from multitool.static.scripts.weekly_track_playlist import WTP_run
+from multitool.static.scripts.my_spotify_api import get_artist_uri, get_song_uri
 from multitool.music.utils import get_track_obj, get_artist_uri_from_track, send_recommendation_email
 from multitool.music.forms import Recommendation
 
@@ -22,12 +22,12 @@ def load_config():
     stream = open(project_root + '/spotify_config.yaml')
     user_config = yaml.load(stream, Loader=yaml.FullLoader)
 
-def spotifyTest():
+def spotify_test():
     scope = 'user-top-read user-read-private user-library-read user-read-recently-played playlist-modify-private playlist-modify-public'
     token = util.prompt_for_user_token(user_config['username'], scope=scope, client_id=user_config['client_id'], client_secret=user_config['client_secret'], redirect_uri=user_config['redirect_uri'])
     if token:
-        spotifyObject = spotipy.Spotify(auth=token)
-        recent = spotifyObject.current_user_recently_played(limit='50')
+        spotify_object = spotipy.Spotify(auth=token)
+        recent = spotify_object.current_user_recently_played(limit='50')
         #print(json.dumps(recent, indent=2, sort_keys=True))
         return recent
     else:
@@ -41,11 +41,11 @@ def spotify():
     scope = 'user-top-read user-read-private user-library-read user-read-recently-played playlist-modify-private playlist-modify-public'
     token = util.prompt_for_user_token(user_config['username'], scope=scope, client_id=user_config['client_id'], client_secret=user_config['client_secret'], redirect_uri=user_config['redirect_uri'])
     if token:
-        spotifyObject = spotipy.Spotify(auth=token)
-        # topArtists = spotifyObject.current_user_top_artists(limit='20')
-        topTracksS = spotifyObject.current_user_top_tracks(limit='20', time_range="short_term")
-        topTracksM = spotifyObject.current_user_top_tracks(limit='20', time_range="medium_term")
-        topTracksL = spotifyObject.current_user_top_tracks(limit='20', time_range="long_term")
+        spotify_object = spotipy.Spotify(auth=token)
+        # topArtists = spotify_object.current_user_top_artists(limit='20')
+        topTracksS = spotify_object.current_user_top_tracks(limit='20', time_range="short_term")
+        topTracksM = spotify_object.current_user_top_tracks(limit='20', time_range="medium_term")
+        topTracksL = spotify_object.current_user_top_tracks(limit='20', time_range="long_term")
 
         topTracks_Short = []
         for track in topTracksS['items']:
@@ -64,8 +64,8 @@ def spotify():
         print("No Token found.")
     
 
-@music.route('/spotify/weeklyTrackPlaylist', methods=['POST', 'GET'])
-def weeklyTrackPlaylist():
+@music.route('/spotify/weeklTrackPlaylist', methods=['POST', 'GET'])
+def weekly_track_playlist():
     WTP_run(user_config)
     flash('Synced!', 'success')
     return redirect(url_for('music.spotify'))
@@ -86,7 +86,7 @@ def recommendations():
             scope = 'user-top-read user-read-private user-library-read user-read-recently-played playlist-modify-private playlist-modify-public'
             token = util.prompt_for_user_token(user_config['username'], scope=scope, client_id=user_config['client_id'], client_secret=user_config['client_secret'], redirect_uri=user_config['redirect_uri'])
             if token:
-                spotifyObject = spotipy.Spotify(auth=token)
+                spotify_object = spotipy.Spotify(auth=token)
                 artist_uris = []
                 track_uris = []
                 genre_uris = []
@@ -95,7 +95,7 @@ def recommendations():
                     seed_type = seed.seed_select.data
                     seed_string = seed.seed_string.data
                     if seed_type == 'artist':
-                        artist_uris.append(getArtistUri(spotifyObject, seed_string))
+                        artist_uris.append(get_artist_uri(spotify_object, seed_string))
                     elif seed_type == 'song':
                         strings = [x.strip() for x in seed_string.split(',')]
                         song_name = strings[0]
@@ -104,20 +104,20 @@ def recommendations():
                         else:
                             artist_name = None
 
-                        track_uris.append(getSongUri(spotifyObject, song_name, artist_name))
+                        track_uris.append(get_song_uri(spotify_object, song_name, artist_name))
                     elif seed_type == 'genre':
                         genre_uris.append(seed_string)
                     else: # Empty Seed Row
                         uri = None
 
-                    # pre_defined_kwargs = {'target_acousticness': 0.90, 'target_popularity': 80}
-                    pre_defined_kwargs = {'target_popularity': 80}
+                # pre_defined_kwargs = {'target_acousticness': 0.90, 'target_popularity': 80}
+                pre_defined_kwargs = {'target_popularity': 80}
 
-                    results = spotifyObject.recommendations(seed_artists=artist_uris, seed_tracks=track_uris, seed_genres=genre_uris, **pre_defined_kwargs)
-                    for track in results['tracks']:
-                        tracks.append(get_track_obj(track))
-                        print(track['name'] + ' - ' +
-                            track['artists'][0]['name'])
+                results = spotify_object.recommendations(seed_artists=artist_uris, seed_tracks=track_uris, seed_genres=genre_uris, limit=100, **pre_defined_kwargs)
+                for track in results['tracks']:
+                    tracks.append(get_track_obj(track))
+                    print(track['name'] + ' - ' +
+                        track['artists'][0]['name'])
 
                 return render_template('recommendations.html', title='Recommendations', form=form, tracks=tracks)
 
@@ -130,14 +130,17 @@ def test():
     scope = 'user-top-read user-read-private user-library-read user-read-recently-played playlist-modify-private playlist-modify-public'
     token = util.prompt_for_user_token(user_config['username'], scope=scope, client_id=user_config['client_id'], client_secret=user_config['client_secret'], redirect_uri=user_config['redirect_uri'])
     if token:
-        spotifyObject = spotipy.Spotify(auth=token)
+        spotify_object = spotipy.Spotify(auth=token)
 
-        genre_seeds = spotifyObject.recommendation_genre_seeds()
+        genre_seeds = spotify_object.recommendation_genre_seeds()
         # print(json.dumps(result, indent=2, sort_keys=True))
 
-        topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="short_term")
-        # topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="medium_term")
-        # topTracks = spotifyObject.current_user_top_tracks(limit='20', time_range="long_term")
+        topTracks = spotify_object.current_user_top_tracks(limit='20', time_range="short_term")
+        # topTracks = spotify_object.current_user_top_tracks(limit='20', time_range="medium_term")
+        # topTracks = spotify_object.current_user_top_tracks(limit='20', time_range="long_term")
+        ranges = ["short_term", "medium_term", "long_term"]
+
+        # for loop
 
         tracks = []
         tracksDisplay = []
@@ -149,7 +152,7 @@ def test():
             # topTracks_Obj.append(get_track_obj(track))
             artist_uris = []
             artist_uris.append(get_artist_uri_from_track(track))
-            results = spotifyObject.recommendations(seed_artists=artist_uris, target_popularity='90')
+            results = spotify_object.recommendations(seed_artists=artist_uris, target_popularity='90')
             for track in results['tracks']:
                 if track['id'] not in tracksToAdd:
                     count=count+1
@@ -168,8 +171,8 @@ def test():
 
         # playlistName = 'Automagic Test'
         # description = 'Automagic Test'
-        # spotifyObject.user_playlist_change_details(user_config['username'], user_config['weekly_playlist_uri_partial'], name=playlistName, description=description)
-        spotifyObject.user_playlist_replace_tracks(user_config['username'], user_config['test_playlist_uri_partial'], tracksToAdd)
+        # spotify_object.user_playlist_change_details(user_config['username'], user_config['weekly_playlist_uri_partial'], name=playlistName, description=description)
+        spotify_object.user_playlist_replace_tracks(user_config['username'], user_config['test_playlist_uri_partial'], tracksToAdd)
         send_recommendation_email(tracksDisplay)
     
     return render_template('recommendations.html', title='Recommendations', form=form, tracks=tracks, genre_seeds=genre_seeds)

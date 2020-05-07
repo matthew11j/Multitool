@@ -49,7 +49,7 @@ def submit_round(form):
 
 def get_par_averages(golf_courses, golf_rounds):
     Payload = {}
-    courseList = []
+    course_list = []
     for course in golf_courses:
         Course = {}
         Course['name'] = course.name
@@ -58,27 +58,27 @@ def get_par_averages(golf_courses, golf_rounds):
                         course.h9Par, course.h10Par, course.h11Par, course.h12Par, course.h13Par, course.h14Par, course.h15Par, course.h16Par,
                         course.h17Par, course.h18Par))
         Course['pars'] = course_pars
-        courseList.append(Course)    
+        course_list.append(Course)    
 
-    par3Total = 0
-    par4Total = 0
-    par5Total = 0
-    par3Cnt = 0
-    par4Cnt = 0
-    par5Cnt = 0
-    par3Avg = 0
-    par4Avg = 0
-    par5Avg = 0
+    par_3_total = 0
+    par_4_total = 0
+    par_5_total = 0
+    par_3_cnt = 0
+    par_4_cnt = 0
+    par_5_cnt = 0
+    par_3_avg = 0
+    par_4_avg = 0
+    par_5_avg = 0
     if is_null(golf_rounds) is 0:
         for golf_round in golf_rounds:
-            courseName = golf_round.course_played
+            course_name = golf_round.course_played
             scores = []
             scores.extend((golf_round.h1Score, golf_round.h2Score, golf_round.h3Score, golf_round.h4Score, golf_round.h5Score, golf_round.h6Score, golf_round.h7Score, golf_round.h8Score,
                             golf_round.h9Score, golf_round.h10Score, golf_round.h11Score, golf_round.h12Score, golf_round.h13Score, golf_round.h14Score, golf_round.h15Score, golf_round.h16Score,
                             golf_round.h17Score, golf_round.h18Score))
-            for course in courseList:
+            for course in course_list:
                 index = 0
-                if course['name'] == courseName:
+                if course['name'] == course_name:
                     while True:
                         score = scores[index]
                         pars = course['pars']
@@ -86,27 +86,27 @@ def get_par_averages(golf_courses, golf_rounds):
                             break
                         
                         if pars[index] == 3:
-                            par3Total += 1
-                            par3Cnt += score
+                            par_3_total += 1
+                            par_3_cnt += score
                         elif pars[index] == 4:
-                            par4Total += 1
-                            par4Cnt += score
+                            par_4_total += 1
+                            par_4_cnt += score
                         elif pars[index] == 5:
-                            par5Total += 1
-                            par5Cnt += score
+                            par_5_total += 1
+                            par_5_cnt += score
                         else:
                             break
                         index += 1
                         if index > 17:
                             break
         try:
-            par3Avg = round(par3Cnt/par3Total,2)
-            par4Avg = round(par4Cnt/par4Total,2)
-            par5Avg = round(par5Cnt/par5Total,2)
+            par_3_avg = round(par_3_cnt/par_3_total,2)
+            par_4_avg = round(par_4_cnt/par_4_total,2)
+            par_5_avg = round(par_5_cnt/par_5_total,2)
         except:
             print(':(')
 
-    Payload['par3Avg'] = par3Avg
-    Payload['par4Avg'] = par4Avg
-    Payload['par5Avg'] = par5Avg
+    Payload['par_3_avg'] = par_3_avg
+    Payload['par_4_avg'] = par_4_avg
+    Payload['par_5_avg'] = par_5_avg
     return Payload
