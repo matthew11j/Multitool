@@ -54,3 +54,47 @@ function toggleTheme() {
         }
     }
 }
+
+// ----- Modals --------------------------------------------------------------------------------
+// var username = document.getElementById('username').textContent;    
+
+// Add Module
+$('span#open-modal').on('click', function(e){
+    var url = "/addmodule";
+    $.get(url, function(data) {
+        $('#addModuleModal .modal-content').html(data);
+        $('#addModuleModal').modal();
+        validateModule(url, data);
+    });
+});
+
+// Edit Module
+$('i#open-modal2').on('click', function(e){
+    var module_id = $(this).data('id');
+    var url = "/editmodule/" + module_id;
+    $.get(url, function(data) {
+        $('#addModuleModal .modal-content').html(data);
+        $('#addModuleModal').modal();
+        validateModule(url, data);
+    });
+});
+
+// ----- Validators --------------------------------------------------------------
+function validateModule(url, data) {
+    $('#submit').click(function(event) {
+        event.preventDefault();
+        var f = $("#addModuleForm");
+        var formData = f.serialize();
+  
+        $.post(url, data=formData, function(data, statusCode) {
+            if (data.status == 'ok') {
+                $('#addModuleModal').modal('hide');
+                location.reload();
+            }
+            else {
+              $('#addModuleModal .modal-content').html(data);
+              validateModule(url, data)
+            }
+        });
+    });
+};

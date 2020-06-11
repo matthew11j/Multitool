@@ -1,30 +1,54 @@
 {% extends "layout.html" %}
 {% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="action-area">
+                {% if current_user.username == 'matthew11j' %}
+                <span class="action-area-left">
+                    <span class="action" data-toggle="modal" data-target="#addModuleModal" id="open-modal"><i style="padding-right: 0.4em;" class="far fa-plus-square"></i>Add Module</span>
+                </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
     <div class="serv">
         <ul>
             {% for module in modules %}
             <li>
                 {% if module.id == 1 %}
-                <a href="{{ url_for('golf.golf_tracker_dash') }}" style="text-decoration: none;">
-                    <div class="card card-sm mb-5 mx-2">
+                <div class="card card-sm mb-5 mx-2">
+                    <a href="{{ url_for('golf.golf_tracker_dash') }}" style="text-decoration: none;"></a>
                         <div class="card-content">
                             <h5 class="card-title">{{ module.title }}</h5>
                             <p class="card-text">{{ module.description }}</p>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
                 {% else %}
-                <a href="{{ module.url }}" style="text-decoration: none;">
-                    <div class="card card-sm mb-5 mx-2">
-                        <div class="card-content">
-                            <h5 class="card-title">{{ module.title }}</h5>
-                            <p class="card-text">{{ module.description }}</p>
+                <div class="card card-sm mb-5 mx-2">
+                    <div class="card-content">
+                        <a href="{{ module.url }}" style="text-decoration: none;">
+                            <div class="col-md-11" style="display: inline-block;">
+                                <h5 class="card-title">{{ module.title }}</h5>
+                                <p class="card-text">{{ module.description }}</p>
+                            </div>
+                        </a>
+                        <div class="col-md-1" style="float: right;">
+                            <i class="far fa-edit" data-toggle="modal" data-target="#addRoundModal" id="open-modal2" data-id="{{ module.id }}"></i>
                         </div>
                     </div>
-                </a>
+                </div>
                 {% endif %}
             </li>
             {% endfor %}
         </ul>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addModuleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-custom">
+            </div>
+        </div>
     </div>
 {% endblock content %}

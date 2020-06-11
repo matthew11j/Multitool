@@ -341,6 +341,10 @@ i:hover, .action:hover {
   padding: .375rem .5rem;
 }
 
+.form-content-custom-label {
+  margin-top: 1rem;
+}
+
 .date-custom {
   background-color: var(--bg2);
   padding: .375rem .5rem;

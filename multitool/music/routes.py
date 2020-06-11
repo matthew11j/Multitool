@@ -135,7 +135,7 @@ def test():
         genre_seeds = spotify_object.recommendation_genre_seeds()
         # print(json.dumps(result, indent=2, sort_keys=True))
 
-        topTracks = spotify_object.current_user_top_tracks(limit='20', time_range="short_term")
+        
         # topTracks = spotify_object.current_user_top_tracks(limit='20', time_range="medium_term")
         # topTracks = spotify_object.current_user_top_tracks(limit='20', time_range="long_term")
         ranges = ["short_term", "medium_term", "long_term"]
@@ -148,27 +148,29 @@ def test():
         count = 0 
         track_display = ''
         # topTracks_Obj = []
-        for track in topTracks['items']:
-            # topTracks_Obj.append(get_track_obj(track))
-            artist_uris = []
-            artist_uris.append(get_artist_uri_from_track(track))
-            results = spotify_object.recommendations(seed_artists=artist_uris, target_popularity='90')
-            for track in results['tracks']:
-                if track['id'] not in tracksToAdd:
-                    count=count+1
-                    print(count)
-                    track_display = track['name'] + ' - ' + track['artists'][0]['name']
-                    if count < 99:
-                        tracksToAdd.append(track['id'])
-                        tracks.append(get_track_obj(track))
-                        tracksDisplay.append(track_display)
+        for time_range in ranges:
+            topTracks = spotify_object.current_user_top_tracks(limit='20', time_range=time_range)
+            for track in topTracks['items']:
+                # topTracks_Obj.append(get_track_obj(track))
+                artist_uris = []
+                artist_uris.append(get_artist_uri_from_track(track))
+                results = spotify_object.recommendations(seed_artists=artist_uris, target_popularity='90')
+                for track in results['tracks']:
+                    if track['id'] not in tracksToAdd:
+                        count=count+1
+                        track_display = track['name'] + ' - ' + track['artists'][0]['name']
+                        if count < 99:
+                            tracksToAdd.append(track['id'])
+                            tracks.append(get_track_obj(track))
+                            tracksDisplay.append(track_display)
+                        else:
+                            print('Track Over 100!!')
+                        print(track_display)
                     else:
-                        print('Track Over 100!!')
-                    print(track_display)
-                else:
-                    print('Track Skipped!!')
-                    print(track_display)
-
+                        print('Track Skipped!!')
+                        print(track_display)
+                    print('---------------')
+                    
         # playlistName = 'Automagic Test'
         # description = 'Automagic Test'
         # spotify_object.user_playlist_change_details(user_config['username'], user_config['weekly_playlist_uri_partial'], name=playlistName, description=description)

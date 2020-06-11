@@ -1,0 +1,65 @@
+{% from 'bootstrap/wtf.html' import form_field %}
+
+{% block content %}
+{% if action == 'edit' %}
+<form id="deleteForm" action="{{ url_for('main.deletemodule', module_id=module.id) }}" method="POST"></form>
+{% endif %}
+<form id="addModuleForm" method="POST" action="" autocomplete="off">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <!-- Title -->
+        {{ form.title.label(class="form-control-label") }}
+
+        {% if form.title.errors %}
+            {{ form.title(class="form-control form-content-custom-text is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.title(class="form-control form-content-custom-text form-borderless") }}
+        {% endif %}
+
+        <!-- Url -->
+        {{ form.url.label(class="form-control-label form-content-custom-label") }}
+
+        {% if form.url.errors %}
+            {{ form.url(class="form-control form-content-custom-text is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.url.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.url(class="form-control form-content-custom-text form-borderless") }}
+        {% endif %}
+
+        <!-- Description -->
+        {{ form.description.label(class="form-control-label form-content-custom-label") }}
+
+        {% if form.description.errors %}
+            {{ form.description(class="form-control form-content-custom-text is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.description(class="form-control form-content-custom-text form-borderless") }}
+        {% endif %}
+    </div>
+    <hr>
+    <div class="form-group">
+        <div style="float: left;">
+            {% if action == 'edit' %}
+                <input class="btn btn-dismiss" type="submit" name="delete" value="Delete" form="deleteForm" />
+            {% endif %}
+        </div>
+        <div style="float: right;">
+            <button type="button" class="btn btn-dismiss" data-dismiss="modal">Dismiss</button>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </div>
+</form>
+{% endblock content %}

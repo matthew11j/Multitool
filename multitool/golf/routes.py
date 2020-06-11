@@ -35,33 +35,20 @@ def golftracker(username):
     
     golf_rounds = Golf_Round.query.filter_by(created_by=username_created)
     golf_courses = Golf_Course.query.all()
+    # test =  db.session.query(Golf_Course).join(Golf_Round, Golf_Round.course_played == Golf_Course.name).filter(Golf_Round.created_by == username_created).group_by(Golf_Course.id)
+
+    subquery = db.session.query(Golf_Round.course_played, func.count(Golf_Round.id).label('play_count'))\
+        .filter(Golf_Round.created_by == username_created)\
+        .group_by(Golf_Round.course_played).subquery()
+    
+    courses_played = db.session.query(Golf_Course.name, subquery.c.play_count)\
+        .outerjoin(subquery, Golf_Course.name == subquery.c.course_played)\
+        .all()
 
     Dict = {}
-    GCCnt = 0;
-    BCCnt = 0
-    AFCnt = 0
-    MiscCnt = 0
-    if is_null(golf_rounds) is 0:
-        for golf_round in golf_rounds:
-            course = golf_round.course_played
-            if (course == 'Green Crest'):
-                GCCnt += 1
-            elif (course == 'Beech Creek'):
-                BCCnt += 1
-            elif (course == 'Avon Fields'):
-                AFCnt += 1
-            else:
-                MiscCnt += 1
-        Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
-    else:
-        golf_rounds = None
+    Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
 
-    Dict['GCCnt'] = GCCnt
-    Dict['BCCnt'] = BCCnt
-    Dict['AFCnt'] = AFCnt
-    Dict['MiscCnt'] = MiscCnt
-
-    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload_js=json.dumps(Dict), payload=Dict, username_created=username_created)
+    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload_js=json.dumps(courses_played), payload=Dict, username_created=username_created)
 
 @golf.route("/golftracker/<username>/addround", methods=['GET', 'POST'])
 def addround(username):

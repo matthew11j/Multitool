@@ -17,13 +17,7 @@ if (data) {
     
     var obj = JSON.parse(data);
 
-    // IMPROVE THIS
-
-    let GCCnt = obj.GCCnt;
-    let BCCnt = obj.BCCnt;
-    let AFCnt = obj.AFCnt;
-    let MiscCnt = obj.MiscCnt;
-    if (GCCnt != 0 || BCCnt != 0 || AFCnt != 0 || MiscCnt != 0) {
+    if (obj != undefined && obj.length > 0) {
         render_course_chart(obj);
         setRoundListCounter();
     }
@@ -114,7 +108,6 @@ function getCellValue(row, index){ return $(row).children('td').eq(index).text()
 //document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 
 
-
 // ----- Charts --------------------------------------------------------------------------------
 // Courses Played (Pie)
 function render_course_chart(obj) {
@@ -122,10 +115,12 @@ function render_course_chart(obj) {
     var canvas = document.getElementById('myChart');
     var ctx = canvas.getContext('2d');
 
-    let GCCnt = obj.GCCnt
-    let BCCnt = obj.BCCnt
-    let AFCnt = obj.AFCnt
-    let MiscCnt = obj.MiscCnt
+    let courses = [];
+    let times_played = [];
+    for(let i=0; i<obj.length;i++) {
+        courses.push(obj[i][0]);
+        times_played.push(obj[i][1]);
+    }
 
     var color1 = "rgba(170, 179, 243, 1)"   // Purple
     var color2 = "rgba(152, 222, 243, 1)"   // Blue
@@ -144,19 +139,23 @@ function render_course_chart(obj) {
     var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Beech Creek', 'Green Crest', 'Avon Fields'],
+            labels: courses,
             datasets: [{
                 label: 'Courses Played',
-                data: [BCCnt, GCCnt, AFCnt],
+                data: times_played,
                 backgroundColor: [
                     color1,
                     color2,
-                    color3
+                    color3,
+                    color4,
+                    color5
                 ],
                 borderColor: [
                     color1b,
                     color2b,
-                    color3b
+                    color3b,
+                    color4b,
+                    color5b
                 ],
                 borderWidth: 1
             }]

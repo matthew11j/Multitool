@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if current_user.is_authenticated %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-5 mx-2">
+            <div class="card-content" style="min-height: 300px;">
+                <form id="convertForm" method="POST" action="" autocomplete="off">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        <!-- Url -->
+                        {{ form.url_string.label(class="form-control-label") }}
+                
+                        {% if form.url_string.errors %}
+                            {{ form.url_string(class="form-control form-content-custom-text is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.url_string.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.url_string(class="form-control form-content-custom-text form-borderless") }}
+                        {% endif %}
+                
+                        <!-- Download File Path -->
+                        {{ form.download_file_path.label(class="form-control-label form-content-custom-label") }}
+                
+                        {% if form.download_file_path.errors %}
+                            {{ form.download_file_path(class="form-control form-content-custom-text is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.download_file_path.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.download_file_path(class="form-control form-content-custom-text form-borderless") }}
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div style="float: right;">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    <p class="empty-page" style="margin-top: 10px;">You must have an account to access this tool</p>
+{% endif %}
+{% endblock content %}

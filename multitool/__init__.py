@@ -31,15 +31,14 @@ def create_app(config_class=Config):
     from multitool.golf.routes import golf
     from multitool.music.routes import music
     from multitool.weather.routes import weather
+    from multitool.mp3converter.routes import mp3converter
     from multitool.errors.handlers import errors
     app.register_blueprint(users)
     app.register_blueprint(main)
     app.register_blueprint(golf)
     app.register_blueprint(music)
     app.register_blueprint(weather)
+    app.register_blueprint(mp3converter)
     app.register_blueprint(errors)
-
-    #with app.app_context():
-        #music.spotifyTest()
 
     return app
