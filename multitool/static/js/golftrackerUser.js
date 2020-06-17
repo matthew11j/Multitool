@@ -23,6 +23,15 @@ if (data) {
     }
 }
 
+var data2 = document.getElementById('payload2').textContent;    
+if (data2) {
+    var obj2 = JSON.parse(data2);
+
+    if (obj2 != undefined) {
+        setParAvg(null);
+    }
+}
+
 function selectFilter(val) {
     var selectedValue = "";
     if (val != undefined) {
@@ -61,6 +70,7 @@ function selectFilter(val) {
         deleteFilter.style.display = "none";
     }
     setRoundListCounter(selectedValue, displayedRowCnt);
+    setParAvg(selectedValue);
 };
 
 function removeCourseFilter() {
@@ -81,6 +91,20 @@ function setRoundListCounter(course, val) {
     }
     var header = courseName + " (" + rowCount + ")";
     document.getElementById("golf-table-header").textContent = header;
+};
+
+function setParAvg(course) {
+    var avgObj = null;
+    if (course == null || course == "") {
+        avgObj = obj2["par_counts"]["Total"];
+    } else {
+        let course_key = course.replace(" ", "_")
+        avgObj = obj2["par_counts"][course_key]
+    }
+    
+    document.getElementById("golf-avg-3").textContent = (avgObj["par_3_avg"] > 0) ? avgObj["par_3_avg"] : "-";
+    document.getElementById("golf-avg-4").textContent = (avgObj["par_4_avg"] > 0) ? avgObj["par_4_avg"] : "-";
+    document.getElementById("golf-avg-5").textContent = (avgObj["par_5_avg"] > 0) ? avgObj["par_5_avg"] : "-";
 };
 
 // Filter on <th> click

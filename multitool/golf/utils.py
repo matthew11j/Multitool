@@ -50,6 +50,7 @@ def submit_round(form):
 def get_par_averages(golf_courses, golf_rounds):
     Payload = {}
     course_list = []
+    course_avg_dict = {}
     for course in golf_courses:
         Course = {}
         Course['name'] = course.name
@@ -58,7 +59,10 @@ def get_par_averages(golf_courses, golf_rounds):
                         course.h9Par, course.h10Par, course.h11Par, course.h12Par, course.h13Par, course.h14Par, course.h15Par, course.h16Par,
                         course.h17Par, course.h18Par))
         Course['pars'] = course_pars
-        course_list.append(Course)    
+        course_list.append(Course)   
+        course_key = course.name
+        course_key = course_key.replace(" ", "_")
+        course_avg_dict[course_key] = {'par_3_total': 0, 'par_3_cnt': 0, 'par_4_total': 0, 'par_4_cnt': 0, 'par_5_total': 0, 'par_5_cnt': 0}
 
     par_3_total = 0
     par_4_total = 0
@@ -80,18 +84,28 @@ def get_par_averages(golf_courses, golf_rounds):
                 index = 0
                 if course['name'] == course_name:
                     while True:
+                        course_key = course_name
+                        course_key = course_key.replace(" ", "_")
+                        course_avg = course_avg_dict[course_key]
+
                         score = scores[index]
                         pars = course['pars']
                         if score == 0:
                             break
                         
                         if pars[index] == 3:
+                            course_avg['par_3_total'] += 1
+                            course_avg['par_3_cnt'] += score
                             par_3_total += 1
                             par_3_cnt += score
                         elif pars[index] == 4:
+                            course_avg['par_4_total'] += 1
+                            course_avg['par_4_cnt'] += score
                             par_4_total += 1
                             par_4_cnt += score
                         elif pars[index] == 5:
+                            course_avg['par_5_total'] += 1
+                            course_avg['par_5_cnt'] += score
                             par_5_total += 1
                             par_5_cnt += score
                         else:
@@ -100,13 +114,40 @@ def get_par_averages(golf_courses, golf_rounds):
                         if index > 17:
                             break
         try:
+            for course in golf_courses:
+                course_key = course.name
+                course_key = course_key.replace(" ", "_")
+                course_obj = course_avg_dict[course_key] 
+                if course_obj['par_3_total'] > 0:
+                    course_obj['par_3_avg'] = round(course_obj['par_3_cnt']/course_obj['par_3_total'],2)
+                else:
+                    course_obj['par_3_avg'] = 0
+
+                if course_obj['par_4_total'] > 0:
+                    course_obj['par_4_avg'] = round(course_obj['par_4_cnt']/course_obj['par_4_total'],2)
+                else:
+                    course_obj['par_4_avg'] = 0
+
+                if course_obj['par_5_total'] > 0:
+                    course_obj['par_5_avg'] = round(course_obj['par_5_cnt']/course_obj['par_5_total'],2)
+                else:
+                    course_obj['par_5_avg'] = 0
+                
             par_3_avg = round(par_3_cnt/par_3_total,2)
             par_4_avg = round(par_4_cnt/par_4_total,2)
             par_5_avg = round(par_5_cnt/par_5_total,2)
+
+            total = {}
+            total['par_3_avg'] = par_3_avg
+            total['par_4_avg'] = par_4_avg
+            total['par_5_avg'] = par_5_avg
+
+            course_avg_dict['Total'] = total
         except:
             print(':(')
 
-    Payload['par_3_avg'] = par_3_avg
-    Payload['par_4_avg'] = par_4_avg
-    Payload['par_5_avg'] = par_5_avg
-    return Payload
+    # Payload['par_3_avg'] = par_3_avg
+    # Payload['par_4_avg'] = par_4_avg
+    # Payload['par_5_avg'] = par_5_avg
+    # return Payload
+    return course_avg_dict

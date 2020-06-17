@@ -46,9 +46,11 @@ def golftracker(username):
         .all()
 
     Dict = {}
-    Dict['avgPars'] = get_par_averages(golf_courses, golf_rounds)
+    Dict['par_counts'] = get_par_averages(golf_courses, golf_rounds)
 
-    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload_js=json.dumps(courses_played), payload=Dict, username_created=username_created)
+    # print(json.dumps(Dict, indent=2, sort_keys=True))
+
+    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload_js=json.dumps(courses_played), payload_js2=json.dumps(Dict), payload=Dict, username_created=username_created)
 
 @golf.route("/golftracker/<username>/addround", methods=['GET', 'POST'])
 def addround(username):
