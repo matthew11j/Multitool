@@ -29,6 +29,7 @@ if (data2) {
 
     if (obj2 != undefined) {
         setParAvg(null);
+        setStats(null);
     }
 }
 
@@ -71,6 +72,7 @@ function selectFilter(val) {
     }
     setRoundListCounter(selectedValue, displayedRowCnt);
     setParAvg(selectedValue);
+    setStats(selectedValue);
 };
 
 function removeCourseFilter() {
@@ -105,6 +107,24 @@ function setParAvg(course) {
     document.getElementById("golf-avg-3").textContent = (avgObj["par_3_avg"] > 0) ? avgObj["par_3_avg"] : "-";
     document.getElementById("golf-avg-4").textContent = (avgObj["par_4_avg"] > 0) ? avgObj["par_4_avg"] : "-";
     document.getElementById("golf-avg-5").textContent = (avgObj["par_5_avg"] > 0) ? avgObj["par_5_avg"] : "-";
+};
+
+function setStats(course) {
+    var statObj = null;
+    if (course == null || course == "") {
+        statObj = obj2["stats"]["Total"];
+    } else {
+        let course_key = course.replace(" ", "_")
+        statObj = obj2["stats"][course_key]
+    }
+    
+    document.getElementById("eagle").textContent = statObj["eagle"];
+    document.getElementById("birdie").textContent = statObj["birdie"];
+    document.getElementById("par").textContent = statObj["par"];
+    document.getElementById("bogey").textContent = statObj["bogey"];
+    document.getElementById("double_bogey").textContent = statObj["double_bogey"];
+    document.getElementById("triple_bogey").textContent = statObj["triple_bogey"];
+    document.getElementById("over").textContent = statObj["over"];
 };
 
 // Filter on <th> click

@@ -1,4 +1,5 @@
 from datetime import datetime, date
+import json
 
 def is_null(result):
     try:
@@ -48,7 +49,6 @@ def submit_round(form):
     return form
 
 def get_par_averages(golf_courses, golf_rounds):
-    Payload = {}
     course_list = []
     course_avg_dict = {}
     for course in golf_courses:
@@ -145,9 +145,85 @@ def get_par_averages(golf_courses, golf_rounds):
             course_avg_dict['Total'] = total
         except:
             print(':(')
-
-    # Payload['par_3_avg'] = par_3_avg
-    # Payload['par_4_avg'] = par_4_avg
-    # Payload['par_5_avg'] = par_5_avg
-    # return Payload
     return course_avg_dict
+
+def get_stats(golf_courses, golf_rounds):
+    course_list = []
+    stats = {}
+    for course in golf_courses:
+        Course = {}
+        Course['name'] = course.name
+        course_pars = []
+        course_pars.extend((course.h1Par, course.h2Par, course.h3Par, course.h4Par, course.h5Par, course.h6Par, course.h7Par, course.h8Par,
+                        course.h9Par, course.h10Par, course.h11Par, course.h12Par, course.h13Par, course.h14Par, course.h15Par, course.h16Par,
+                        course.h17Par, course.h18Par))
+        Course['pars'] = course_pars
+        course_list.append(Course)   
+        course_key = course.name
+        course_key = course_key.replace(" ", "_")
+        stats[course_key] = {'eagle': 0, 'birdie': 0, 'par': 0, 'bogey': 0, 'double_bogey': 0, 'triple_bogey': 0, 'over': 0}
+
+    stats['Total'] = {'eagle': 0, 'birdie': 0, 'par': 0, 'bogey': 0, 'double_bogey': 0, 'triple_bogey': 0, 'over': 0}
+    eagle = 0
+    birdie = 0
+    par = 0
+    bogey = 0
+    double_bogey = 0
+    triple_bogey = 0
+    triple_bogey = 0
+    over = 0
+    if is_null(golf_rounds) is 0:
+        for golf_round in golf_rounds:
+            course_name = golf_round.course_played
+            scores = []
+            scores.extend((golf_round.h1Score, golf_round.h2Score, golf_round.h3Score, golf_round.h4Score, golf_round.h5Score, golf_round.h6Score, golf_round.h7Score, golf_round.h8Score,
+                            golf_round.h9Score, golf_round.h10Score, golf_round.h11Score, golf_round.h12Score, golf_round.h13Score, golf_round.h14Score, golf_round.h15Score, golf_round.h16Score,
+                            golf_round.h17Score, golf_round.h18Score))
+            for course in course_list:
+                index = 0
+                if course['name'] == course_name:
+                    while True:
+                        course_key = course_name
+                        course_key = course_key.replace(" ", "_")
+                        course_stats = stats[course_key]
+
+                        score = scores[index]
+                        pars = course['pars']
+                        if score == 0:
+                            break
+                        
+                        difference = score - pars[index]
+                        if difference == -2:
+                            course_stats['eagle'] += 1
+                            stats['Total']['eagle'] += 1
+                            eagle += 1
+                        elif difference == -1:
+                            course_stats['birdie'] += 1
+                            stats['Total']['birdie'] += 1
+                            birdie += 1
+                        elif difference == 0:
+                            course_stats['par'] += 1
+                            stats['Total']['par'] += 1
+                            par += 1
+                        elif difference == 1:
+                            course_stats['bogey'] += 1
+                            stats['Total']['bogey'] += 1
+                            bogey += 1
+                        elif difference == 2:
+                            course_stats['double_bogey'] += 1
+                            stats['Total']['double_bogey'] += 1
+                            double_bogey += 1
+                        elif difference == 3:
+                            course_stats['triple_bogey'] += 1
+                            stats['Total']['triple_bogey'] += 1
+                            birdie += 1
+                        else:
+                            course_stats['over'] += 1
+                            stats['Total']['over'] += 1
+                            over += 1
+
+                        index += 1
+                        if index > 17:
+                            break
+
+    return stats

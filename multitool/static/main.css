@@ -456,10 +456,6 @@ select:-webkit-autofill:focus {
   text-align: center;
 }
 
-.colTable > div > h4 {
-  font-style: italic;
-}
-
 .select-tag-page {
   background-color: var(--bg2);
   padding: .375rem .5rem;

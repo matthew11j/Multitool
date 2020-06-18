@@ -5,7 +5,7 @@ from multitool import db, bcrypt
 from multitool.golf.forms import Round, Course
 from flask_login import current_user
 from datetime import datetime, date
-from multitool.golf.utils import submit_round, get_par_averages, is_null
+from multitool.golf.utils import submit_round, get_par_averages, get_stats, is_null
 from multitool.models import Golf_Round, Golf_Course, Users
 from sqlalchemy import func, or_, and_
 import json
@@ -47,6 +47,7 @@ def golftracker(username):
 
     Dict = {}
     Dict['par_counts'] = get_par_averages(golf_courses, golf_rounds)
+    Dict['stats'] = get_stats(golf_courses, golf_rounds)
 
     # print(json.dumps(Dict, indent=2, sort_keys=True))
 
