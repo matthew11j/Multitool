@@ -1,3 +1,4 @@
+import logging
 from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
 from flask_wtf import Form
 from wtforms.fields.html5 import DateField
@@ -10,6 +11,8 @@ from multitool.static.scripts.arduino_switch import run
 from multitool.main.forms import ModuleForm
 
 main = Blueprint('main', __name__)
+logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logger = logging.getLogger('Multitool')
 
 @main.route("/")
 # @main.route("/home")

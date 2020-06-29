@@ -1,3 +1,4 @@
+import logging
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from multitool import db, bcrypt
@@ -7,6 +8,8 @@ from multitool.users.forms import (RegistrationForm, LoginForm, UpdateAccountFor
 from multitool.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
+logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logger = logging.getLogger('Multitool')
 
 
 @users.route("/register", methods=['GET', 'POST'])

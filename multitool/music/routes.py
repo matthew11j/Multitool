@@ -1,19 +1,22 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
-from flask_wtf import Form
-from multitool import db, bcrypt
-from datetime import date, datetime, timedelta
-from flask_login import current_user
 import spotipy
 import spotipy.util as util
 import json
 import yaml
 import os
+import logging
+from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
+from flask_wtf import Form
+from multitool import db, bcrypt
+from datetime import date, datetime, timedelta
+from flask_login import current_user
 from multitool.static.scripts.weekly_track_playlist import WTP_run
 from multitool.static.scripts.my_spotify_api import get_artist_uri, get_song_uri
 from multitool.music.utils import get_track_obj, get_artist_uri_from_track, send_recommendation_email
 from multitool.music.forms import Recommendation
 
 music = Blueprint('music', __name__)
+logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logger = logging.getLogger('Multitool')
 
 def load_config():
     global user_config

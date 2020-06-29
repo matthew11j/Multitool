@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import youtube_dl
+import logging
 from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify, current_app
 from flask_wtf import Form
 from multitool import db, bcrypt
@@ -10,6 +11,8 @@ from multitool.mp3converter.forms import Song_Url
 # from multitool.mp3converter.utils import 
 
 mp3converter = Blueprint('mp3converter', __name__)
+logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logger = logging.getLogger('Multitool')
 
 class Converter_Logger(object):
     def debug(self, msg):

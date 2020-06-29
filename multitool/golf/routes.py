@@ -1,3 +1,5 @@
+import json
+import logging
 from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
 from flask_wtf import Form
 from wtforms.fields.html5 import DateField
@@ -8,9 +10,10 @@ from datetime import datetime, date
 from multitool.golf.utils import submit_round, get_par_averages, get_stats, is_null
 from multitool.models import Golf_Round, Golf_Course, Users
 from sqlalchemy import func, or_, and_
-import json
 
 golf = Blueprint('golf', __name__)
+logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logger = logging.getLogger('Multitool')
 
 @golf.route("/golftracker")
 def golf_tracker_dash():
@@ -19,7 +22,7 @@ def golf_tracker_dash():
     users = Users.query.filter(Users.username.notin_(omit_users))\
                         .order_by(Users.id)\
                         .all()
-
+                        
     return render_template('golftracker.html', title='Golf Tracker Dashboard', users=users)
 
 
