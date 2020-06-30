@@ -26,6 +26,7 @@ class Converter_Logger(object):
 
 
 def my_hook(d):
+    logger.info(status)
     if d['status'] == 'finished':
         print('Done downloading, now converting ...')
 
