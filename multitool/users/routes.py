@@ -8,7 +8,7 @@ from multitool.users.forms import (RegistrationForm, LoginForm, UpdateAccountFor
 from multitool.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
-logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
 logger = logging.getLogger('Multitool')
 
 

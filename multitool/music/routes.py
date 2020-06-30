@@ -15,7 +15,7 @@ from multitool.music.utils import get_track_obj, get_artist_uri_from_track, send
 from multitool.music.forms import Recommendation
 
 music = Blueprint('music', __name__)
-logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
 logger = logging.getLogger('Multitool')
 
 def load_config():

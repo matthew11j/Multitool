@@ -11,7 +11,7 @@ from multitool.mp3converter.forms import Song_Url
 # from multitool.mp3converter.utils import 
 
 mp3converter = Blueprint('mp3converter', __name__)
-logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
 logger = logging.getLogger('Multitool')
 
 class Converter_Logger(object):

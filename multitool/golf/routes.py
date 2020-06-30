@@ -12,7 +12,7 @@ from multitool.models import Golf_Round, Golf_Course, Users
 from sqlalchemy import func, or_, and_
 
 golf = Blueprint('golf', __name__)
-logging.basicConfig(filename='multitool.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
 logger = logging.getLogger('Multitool')
 
 @golf.route("/golftracker")
