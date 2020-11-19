@@ -115,7 +115,7 @@ function setStats(course) {
         statObj = obj2["stats"]["Total"];
     } else {
         let course_key = course.replace(" ", "_")
-        statObj = obj2["stats"][course_key]
+        statObj = obj2["stats"][course_key]['Total']
     }
     
     document.getElementById("eagle").textContent = statObj["eagle"];
@@ -192,14 +192,16 @@ function render_course_chart(obj) {
                     color2,
                     color3,
                     color4,
-                    color5
+                    color5,
+                    color6
                 ],
                 borderColor: [
                     color1b,
                     color2b,
                     color3b,
                     color4b,
-                    color5b
+                    color5b,
+                    color6b
                 ],
                 borderWidth: 1
             }]

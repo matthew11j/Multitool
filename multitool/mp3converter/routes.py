@@ -11,8 +11,8 @@ from multitool.mp3converter.forms import Song_Url
 # from multitool.mp3converter.utils import 
 
 mp3converter = Blueprint('mp3converter', __name__)
-logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
-logger = logging.getLogger('Multitool')
+# logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+# logger = logging.getLogger('Multitool')
 
 class Converter_Logger(object):
     def debug(self, msg):
@@ -26,7 +26,7 @@ class Converter_Logger(object):
 
 
 def my_hook(d):
-    logger.info(d)
+    # logger.info(d)
     if d['status'] == 'finished':
         print('Done downloading, now converting ...')
 

@@ -41,7 +41,7 @@ body {
   background: var(--bg);
   color: var(--color);
   margin-top: 5rem;
-  /* transition: background 500ms ease-in-out, color 1000ms ease-in-out; */
+  transition: background 0.3s linear;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -197,7 +197,6 @@ i:hover, .action:hover {
 } */
 
 .navbar {
-  /* background-color: var(--header-bg); */
   background-image: var(--gradient);
 }
 
@@ -216,7 +215,6 @@ i:hover, .action:hover {
   height: 39px;
   width: 39px;
   margin-right: 20px;
-  /* margin-bottom: 16px; */
 }
 
 .nav-img:hover {
@@ -297,8 +295,7 @@ i:hover, .action:hover {
 .card-sm {
   background: var(--bg);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  /* transition: all 0.3s cubic-bezier(.25,.8,.25,1); */
-  width: 23vw;
+  transition: background 0.3s linear;
 }
 
 .card {
@@ -520,4 +517,203 @@ select:-webkit-autofill:focus {
 .artist-name {
   font-style: italic;
   font-size: .8rem;
+}
+
+/* Nav Bar */
+.navbar2 {
+  background: radial-gradient(circle, #8064A2 80%,  #ecebeb 95% );
+  /* background: linear-gradient(90deg,#8064A2 60%, #A8C0FF 90%); */
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar2-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  max-width: 1500px;
+}
+
+.navbar2-logo {
+  color: #fff;
+  justify-self: start;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.fa-typo3 {
+  margin-left: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.nav2-menu {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 80px;
+  list-style: none;
+  text-align: center;
+  width: 60vw;
+  justify-content: end;
+  margin-right: 2rem;
+}
+
+.nav2-item {
+  height: 64px;
+}
+
+.nav2-links {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 ;
+  height: 100%;
+}
+
+.nav2-links:hover {
+  text-shadow: 3px 3px 5px black;
+  text-decoration: none;
+  border-bottom: 4px solid #8064A2;
+  transition: all 0.2s ease-out;
+}
+
+.fa-bars {
+  color: #fff;
+}
+
+.nav2-links-mobile {
+  display: none;
+}
+
+.menu2-icon {
+  display: none;
+}
+
+.nav2-img {
+  height: 100px;
+  width: 100px;
+  border: 3px solid #8064A2;
+}
+
+
+.button1 {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgba(255,255,255,0);
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: #FFFFFF;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.button1:hover {
+  border-color: rgba(255,255,255,1);
+}
+
+@media screen and (max-width: 960px) {
+  .NavbarItems2 {
+    position: relative;
+  }
+
+  .navbar2 {
+    background: #8064A2;
+  }
+
+  .nav2-menu {
+    grid-gap: 10px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+    position: absolute;
+    top: 64px;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .nav2-menu.active {
+    background: #242222;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .nav2-links {
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* display: table; */
+  }
+
+  .nav2-links:hover {
+    background-color: #fff;
+    color: #242424;
+    border-radius: 0;
+  }
+
+  .navbar2-logo {
+    position: absolute;
+    /* top: -5px; */
+    left: 0;
+    /* transform: translate(25%, 50%); */
+  }
+
+  .menu2-icon {
+    color: #fff;
+    display: block;
+    position: absolute;
+    top: -3px;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .fa-times {
+    color: #fff;
+    font-size: 2rem;
+  }
+
+  .nav2-links-mobile {
+    display: block;
+    text-align: center;
+    margin: 2rem auto;
+    border-radius: 4px;
+    width: 80%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #fff;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+  }
+
+  .nav2-links-mobile:hover {
+    background: #fff;
+    color: #242424;
+    transition: 250ms;
+  }
 }

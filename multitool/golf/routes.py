@@ -12,8 +12,8 @@ from multitool.models import Golf_Round, Golf_Course, Users
 from sqlalchemy import func, or_, and_
 
 golf = Blueprint('golf', __name__)
-logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
-logger = logging.getLogger('Multitool')
+# logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+# logger = logging.getLogger('Multitool')
 
 @golf.route("/golftracker")
 def golf_tracker_dash():
@@ -50,7 +50,36 @@ def golftracker(username):
 
     Dict = {}
     Dict['par_counts'] = get_par_averages(golf_courses, golf_rounds)
-    Dict['stats'] = get_stats(golf_courses, golf_rounds)
+    Dict['stats'] = get_stats(golf_courses, golf_rounds, None)
+
+    # print(json.dumps(Dict, indent=2, sort_keys=True))
+
+    return render_template('golftrackerUser.html', title='Golf Tracker', golf_rounds=golf_rounds, golf_courses=golf_courses, payload_js=json.dumps(courses_played), payload_js2=json.dumps(Dict), payload=Dict, username_created=username_created)
+
+@golf.route("/golftracker/courses/<username>")
+def courses(username):
+    if current_user.is_authenticated:
+        if current_user.username != username:
+            username_created = username
+        else:
+            username_created = current_user.username
+    else: 
+        username_created = username
+    
+    golf_rounds = Golf_Round.query.filter_by(created_by=username_created)
+    golf_courses = Golf_Course.query.all()
+
+    subquery = db.session.query(Golf_Round.course_played, func.count(Golf_Round.id).label('play_count'))\
+        .filter(Golf_Round.created_by == username_created)\
+        .group_by(Golf_Round.course_played).subquery()
+    
+    courses_played = db.session.query(Golf_Course.name, subquery.c.play_count)\
+        .outerjoin(subquery, Golf_Course.name == subquery.c.course_played)\
+        .all()
+
+    Dict = {}
+    Dict['par_counts'] = get_par_averages(golf_courses, golf_rounds)
+    Dict['stats'] = get_stats(golf_courses, golf_rounds, None)
 
     # print(json.dumps(Dict, indent=2, sort_keys=True))
 

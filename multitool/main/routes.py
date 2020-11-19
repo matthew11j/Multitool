@@ -11,8 +11,8 @@ from multitool.static.scripts.arduino_switch import run
 from multitool.main.forms import ModuleForm
 
 main = Blueprint('main', __name__)
-logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
-logger = logging.getLogger('Multitool')
+# logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+# logger = logging.getLogger('Multitool')
 
 @main.route("/")
 # @main.route("/home")

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+
+    <script src="https://kit.fontawesome.com/d220ec9397.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dark.css') }}">
+
+    {% if title %}
+        <title>Multitool - {{ title }}</title>
+    {% else %}
+        <title>Multitool</title>
+    {% endif %}
+</head>
+<body onload="toggleClick(true)" style="margin-top: 0px;">
+    <header class="site-header">
+        <div class="navbar2">
+            <div class="navbar2-container container"><a class="navbar2-logo" href="/nutrimeal">Nutrimeal</a>
+                <div class="menu2-icon">
+                    <i style="padding-right: 1px;" id="times-icon" class="fa fa-times" onclick="toggleClick(true)"></i>
+                    <i style="padding-top: 2px;" id="bar-icon" class="fa fa-bars" onclick="toggleClick(false)"></i>
+                </div>
+                <ul id="nav-listing" class="nav2-menu">
+                    <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/profile"><span>My Profile</span></a></li>
+                    <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/workout"><span>Workouts</span></a></li>
+                    <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/mealplan"><span>Meal Plans</span></a></li>
+                    <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/schedule"><span>Schedule</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main role="main" class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+  </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+</body>
+</html>

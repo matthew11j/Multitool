@@ -147,9 +147,13 @@ def get_par_averages(golf_courses, golf_rounds):
             print(':(')
     return course_avg_dict
 
-def get_stats(golf_courses, golf_rounds):
+def get_stats(golf_courses, golf_rounds, specific_course):
     course_list = []
     stats = {}
+
+    if golf_courses == None and specific_course != None:
+        golf_courses = [specific_course]
+
     for course in golf_courses:
         Course = {}
         Course['name'] = course.name
@@ -161,17 +165,15 @@ def get_stats(golf_courses, golf_rounds):
         course_list.append(Course)   
         course_key = course.name
         course_key = course_key.replace(" ", "_")
-        stats[course_key] = {'eagle': 0, 'birdie': 0, 'par': 0, 'bogey': 0, 'double_bogey': 0, 'triple_bogey': 0, 'over': 0}
+
+        course_stats = {}
+        course_stats['Total'] = {'eagle': 0, 'birdie': 0, 'par': 0, 'bogey': 0, 'double_bogey': 0, 'triple_bogey': 0, 'over': 0}
+        for i in range(1,19):
+            hole_key = 'hole' + str(i)
+            course_stats[hole_key] = {'eagle': 0, 'birdie': 0, 'par': 0, 'bogey': 0, 'double_bogey': 0, 'triple_bogey': 0, 'over': 0}
+        stats[course_key] = course_stats
 
     stats['Total'] = {'eagle': 0, 'birdie': 0, 'par': 0, 'bogey': 0, 'double_bogey': 0, 'triple_bogey': 0, 'over': 0}
-    eagle = 0
-    birdie = 0
-    par = 0
-    bogey = 0
-    double_bogey = 0
-    triple_bogey = 0
-    triple_bogey = 0
-    over = 0
     if is_null(golf_rounds) is 0:
         for golf_round in golf_rounds:
             course_name = golf_round.course_played
@@ -182,11 +184,14 @@ def get_stats(golf_courses, golf_rounds):
             for course in course_list:
                 index = 0
                 if course['name'] == course_name:
-                    while True:
-                        course_key = course_name
-                        course_key = course_key.replace(" ", "_")
-                        course_stats = stats[course_key]
+                    course_key = course_name
+                    course_key = course_key.replace(" ", "_")
+                    course_stats = stats[course_key]
 
+                    while True:
+                        hole = index + 1
+                        hole_key = 'hole' + str(hole)
+                        
                         score = scores[index]
                         pars = course['pars']
                         if score == 0:
@@ -194,36 +199,42 @@ def get_stats(golf_courses, golf_rounds):
                         
                         difference = score - pars[index]
                         if difference == -2:
-                            course_stats['eagle'] += 1
+                            course_stats[hole_key]['eagle'] += 1
+                            course_stats['Total']['eagle'] += 1
                             stats['Total']['eagle'] += 1
-                            eagle += 1
+
                         elif difference == -1:
-                            course_stats['birdie'] += 1
+                            course_stats[hole_key]['birdie'] += 1
+                            course_stats['Total']['birdie'] += 1
                             stats['Total']['birdie'] += 1
-                            birdie += 1
+
                         elif difference == 0:
-                            course_stats['par'] += 1
+                            course_stats[hole_key]['par'] += 1
+                            course_stats['Total']['par'] += 1
                             stats['Total']['par'] += 1
-                            par += 1
+
                         elif difference == 1:
-                            course_stats['bogey'] += 1
+                            course_stats[hole_key]['bogey'] += 1
+                            course_stats['Total']['bogey'] += 1
                             stats['Total']['bogey'] += 1
-                            bogey += 1
+
                         elif difference == 2:
-                            course_stats['double_bogey'] += 1
+                            course_stats[hole_key]['double_bogey'] += 1
+                            course_stats['Total']['double_bogey'] += 1
                             stats['Total']['double_bogey'] += 1
-                            double_bogey += 1
+
                         elif difference == 3:
-                            course_stats['triple_bogey'] += 1
+                            course_stats[hole_key]['triple_bogey'] += 1
+                            course_stats['Total']['triple_bogey'] += 1
                             stats['Total']['triple_bogey'] += 1
-                            birdie += 1
+
                         else:
-                            course_stats['over'] += 1
+                            course_stats[hole_key]['over'] += 1
+                            course_stats['Total']['over'] += 1
                             stats['Total']['over'] += 1
-                            over += 1
 
                         index += 1
                         if index > 17:
                             break
-
+    
     return stats

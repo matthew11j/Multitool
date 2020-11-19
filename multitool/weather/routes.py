@@ -6,8 +6,8 @@ from datetime import date, datetime, timedelta
 from multitool.static.scripts.get_weather_data import run
 
 weather = Blueprint('weather', __name__)
-logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
-logger = logging.getLogger('Multitool')
+# logging.basicConfig(filename='multitool_log.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S %p')
+# logger = logging.getLogger('Multitool')
 
 @weather.route("/weather")
 def weather_dash():

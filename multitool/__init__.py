@@ -32,6 +32,7 @@ def create_app(config_class=Config):
     from multitool.music.routes import music
     from multitool.weather.routes import weather
     from multitool.mp3converter.routes import mp3converter
+    from multitool.nutrimeal.routes import nutrimeal
     from multitool.errors.handlers import errors
     app.register_blueprint(users)
     app.register_blueprint(main)
@@ -39,6 +40,7 @@ def create_app(config_class=Config):
     app.register_blueprint(music)
     app.register_blueprint(weather)
     app.register_blueprint(mp3converter)
+    app.register_blueprint(nutrimeal)
     app.register_blueprint(errors)
 
     return app

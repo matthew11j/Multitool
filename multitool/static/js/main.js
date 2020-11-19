@@ -55,6 +55,26 @@ function toggleTheme() {
     }
 }
 
+function toggleClick(val) {
+    // if (val) {
+    //     document.getElementById("times-icon").style.visibility="hidden";
+    //     document.getElementById("bar-icon").style.visibility="visible";
+    // } else {
+    //     document.getElementById("times-icon").style.visibility="visible";
+    //     document.getElementById("bar-icon").style.visibility="hidden";
+    // }
+    if (val) {
+        document.getElementById("times-icon").style.display="none";
+        document.getElementById("bar-icon").style.display="block";
+        document.getElementById("nav-listing").classList.remove("active");
+    } else {
+        document.getElementById("times-icon").style.display="block";
+        document.getElementById("bar-icon").style.display="none";
+        document.getElementById("nav-listing").classList.add("active");
+    }
+    
+}
+
 // ----- Modals --------------------------------------------------------------------------------
 // var username = document.getElementById('username').textContent;    
 
