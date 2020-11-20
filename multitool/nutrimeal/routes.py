@@ -18,14 +18,10 @@ def home():
 def profile():
     return render_template('nutrimeal_profile.html', title='Nutrimeal Profile')
 
-@nutrimeal.route("/nutrimeal/workout")
-def workout():
-    return render_template('nutrimeal_workout.html', title='Nutrimeal Workout')
+@nutrimeal.route("/nutrimeal/explore")
+def explore():
+    return render_template('nutrimeal_explore.html', title='Nutrimeal Explore')
 
-@nutrimeal.route("/nutrimeal/mealplan")
-def mealplan():
-    return render_template('nutrimeal_mealplan.html', title='Nutrimeal Profile')
-
-@nutrimeal.route("/nutrimeal/schedule")
-def schedule():
-    return render_template('nutrimeal_schedule.html', title='Nutrimeal Schedule')
+@nutrimeal.route("/nutrimeal/edit")
+def edit():
+    return render_template('nutrimeal_edit.html', title='Nutrimeal Edit Schedule')

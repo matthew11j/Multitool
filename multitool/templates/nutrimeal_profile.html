@@ -2,9 +2,9 @@
 {% block content %}
     <div style="padding-top: 10px;" class="row">
         <div class="col-md-12">
-            <div style="height: 300px;" class="card card-sm mb-5 mx-2">
+            <div class="card mb-5 mx-2">
                 <div class="card-content">
-                    <table class="table" style="margin-bottom: 0;">
+                    <table class="table">
                         <tbody>
                             <tr>
                                 <td style="width: 125px; vertical-align: middle; padding: 0px;">
@@ -13,14 +13,231 @@
                                 <td style="vertical-align: top; padding: 0px; text-align: center;">
                                     <h5><b>Matthew Jackson</b></h5>
                                     <span style="font-size: 0.9rem; display: block; padding-bottom: 10px;"><i>@matthew11j</i></span>
-                                    <a href="something" class="button4" style="background-color:#8064A2">Edit</a>
+                                    <span><a href="/nutrimeal" class="button1" style="background-color:#8064A2">Edit</a></span>
+                                    <span style="padding-left: 15px;"><a href="/nutrimeal" class="button1" style="background-color:#8064A2">Share</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                    <hr />
+                    <table class="table">
+                        <tbody>
+                            <tr class="bio">
+                                <td>
+                                    <b>Age:</b> 22
+                                </td>
+                                <td>
+                                    <b>Height:</b> 6' 1"
+                                </td>
+                                <td>
+                                    <b>Weight:</b> 160 lbs.
                                 </td>
                             </tr>
                         </tbody>
                     </table>   
+                    <span style="font-weight: bold; font-style: italic;">Fitness Goals:</span>
+                    <ul>
+                        <li>Gain Muscle</li>
+                        <li>Eat Healthier</li>
+                        <li>Gain Confidence</li>
+                    </ul>
                 </div>
             </div>
-            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-5 mx-2">
+                <div class="card-content">
+                    <div class="row">
+                        <h4 style="font-style: italic; padding-left: 1rem;">Today's Schedule</h4>
+                        <span style="padding-left: 50px;"><a href="/nutrimeal/edit" class="button1" style="background-color:#8064A2">Edit</a></span>
+                    </div>
+                    <span style="font-style: italic; font-weight: bold;">Date: </span><span id="todays-date"></span>
+                    <hr />
+                    <div style="margin-bottom: 15px;">
+                        <div class="panel-heading collapse-header noselect" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true">
+                            <table class="table" style="margin-bottom: 5px;">
+                                <tbody>
+                                    <tr class="no-padding">
+                                        <td style="padding-bottom: 0px; font-size: 1.2rem;">
+                                            <span style="font-style: italic; font-weight: bold;">Workout</span><span style="padding-left: 15px;">(Pull Day)</span>
+                                        </td>
+                                        <td style="padding-bottom: 0px;">
+                                            <i><a class="collapse-button">
+                                                <i class="collapse-chevron fa fa-angle-down"></i>
+                                                <i class="collapse-chevron fa fa-angle-right"></i>
+                                            </a></i> 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>  
+                        <div id="collapseOne" class="collapse show">
+                            <table class="table" style="margin-bottom: 0px; border: 2px solid  #8064A2;">
+                                <thead>
+                                    <tr class="no-padding">
+                                        <th>Excercise</th>
+                                        <th>Sets</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="no-padding">
+                                        <td>
+                                            Lat Pull Down
+                                        </td>
+                                        <td>
+                                            4x8
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td>
+                                            Bicep Curls
+                                        </td>
+                                        <td>
+                                            5x7
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td>
+                                            Dumbell Rows
+                                        </td>
+                                        <td>
+                                            4x8
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td>
+                                            Hammer Curls
+                                        </td>
+                                        <td>
+                                            5x5
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td>
+                                            Assisted Pull Ups
+                                        </td>
+                                        <td>
+                                            3 (till fatigue)
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td>
+                                            Cooldown Bike/Stretch
+                                        </td>
+                                        <td>
+                                            15 mins
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+                    <div>
+                        <div class="panel-heading collapse-header noselect" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true">
+                            <table class="table" style="margin-bottom: 5px;">
+                                <tbody>
+                                    <tr class="no-padding">
+                                        <td style="padding-bottom: 0px; font-size: 1.2rem;">
+                                            <span style="font-style: italic; font-weight: bold;">Meal Plan</span>
+                                        </td>
+                                        <td style="padding-bottom: 0px;">
+                                            <i><a class="collapse-button">
+                                                <i class="collapse-chevron fa fa-angle-down"></i>
+                                                <i class="collapse-chevron fa fa-angle-right"></i>
+                                            </a></i> 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>  
+                        <div id="collapseTwo" class="collapse show">
+                            <table class="table" style="margin-bottom: 0px; border: 2px solid  #8064A2;">
+                                <thead>
+                                    <tr class="no-padding">
+                                        <th>Meal</th>
+                                        <th>Ingredients</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="no-padding">
+                                        <td style="font-style: italic;">
+                                            Breakfast
+                                        </td>
+                                        <td>
+                                            <ul style="padding-left: 20px;">
+                                                <li>Eggs (x3)</li>
+                                                <li>Everything Bagel (x1)</li>
+                                                <li>Bacon (x3)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td style="font-style: italic;">
+                                            Snack (1)
+                                        </td>
+                                        <td>
+                                            <ul style="padding-left: 20px;">
+                                                <li>Greek Yogurt (x1)</li>
+                                                <li>Protein Bar (x1)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td style="font-style: italic;">
+                                            Lunch
+                                        </td>
+                                        <td>
+                                            <ul style="padding-left: 20px;">
+                                                <li>Italian Sub (x1)</li>
+                                                <li>Brocoli (x1)</li>
+                                                <li>Banana (x1)</li>
+                                                <li>Protein Shake (x1)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td style="font-style: italic;">
+                                            Snack (2)
+                                        </td>
+                                        <td>
+                                            <ul style="padding-left: 20px;">
+                                                <li>Assorted Fruit (x1)</li>
+                                                <li>Protein Bar (x1)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td style="font-style: italic;">
+                                            Dinner
+                                        </td>
+                                        <td>
+                                            <ul style="padding-left: 20px;">
+                                                <li>Grilled Chicken (x1)</li>
+                                                <li>Rice (x1)</li>
+                                                <li>Asparagus (x1)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="no-padding">
+                                        <td style="font-style: italic;">
+                                            Snack (3)
+                                        </td>
+                                        <td>
+                                            <ul style="padding-left: 20px;">
+                                                <li>Ice Cream (x1)</li>
+                                                <li>Protein Bar (x1)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}

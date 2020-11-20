@@ -2,35 +2,10 @@
 {% block content %}
 <div style="padding-top: 10px;" class="row">
     <div class="col-md-12">
-        <div class="card mb-5 mx-2">
-            <div class="card-content">
-                <div class="row">
-                    <h4 style="font-style: italic; padding-left: 1rem;">Progress Tracking</h4>
-                </div>
-                <span style="font-style: italic; font-weight: bold;">Date: </span><span id="todays-date"></span>
-                <hr />
-                <input type="checkbox" id="workout" name="workout" value="Workout">
-                <label for="workout"> Workout Completed</label><br>
-                <div class="form-group">
-                    <span style="font-style: italic; font-weight: bold;">Notes: </span>
-                    <textarea class="form-control form-content-custom-text form-borderless" id="notes" name="notes"></textarea>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12" style="margin-top: -25px; padding-left: 25px; padding-bottom: 15px;">
-        <a href="/nutrimeal" class="button1" style="background-color:#8064A2">Past Workouts</a>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="card mb-5 mx-2">
+        <div class="card mb-5 mx-2" style="margin-bottom: 1rem !important;">
             <div class="card-content">
                 <div class="row">
                     <h4 style="font-style: italic; padding-left: 1rem;">Today's Schedule</h4>
-                    <span style="padding-left: 50px;"><a href="nutrimeal/edit" class="button1" style="background-color:#8064A2">Edit</a></span>
                 </div>
                 <span style="font-style: italic; font-weight: bold;">Date: </span><span id="todays-date2"></span>
                 <hr />
@@ -56,58 +31,64 @@
                         <table class="table" style="margin-bottom: 0px; border: 2px solid  #8064A2;">
                             <thead>
                                 <tr class="no-padding">
-                                    <th>Excercise</th>
+                                    <th style="width: 60%;">Excercise</th>
                                     <th>Sets</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="no-padding">
                                     <td>
-                                        Lat Pull Down
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Lat Pull Down">
                                     </td>
                                     <td>
-                                        4x8
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="4x8">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td>
-                                        Bicep Curls
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Bicep Curls">
                                     </td>
                                     <td>
-                                        5x7
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="5x7">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td>
-                                        Dumbell Rows
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Dumbell Rows">
                                     </td>
                                     <td>
-                                        4x8
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="4x8">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td>
-                                        Hammer Curls
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Hammer Curls">
                                     </td>
                                     <td>
-                                        5x5
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="5x5">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td>
-                                        Assisted Pull Ups
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Assisted Pull Ups">
                                     </td>
                                     <td>
-                                        3 (till fatigue)
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="3 (till fatigue)">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td>
-                                        Cooldown Bike/Stretch
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Cooldown Bike/Stretch">
                                     </td>
                                     <td>
-                                        15 mins
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="15 mins">
                                     </td>
+                                </tr>
+                                <tr class="no-padding">
+                                    <td>
+                                        <span><a href="something" class="button1" style="background-color:#8064A2">Add</a></span>
+                                    </td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table> 
@@ -135,86 +116,80 @@
                         <table class="table" style="margin-bottom: 0px; border: 2px solid  #8064A2;">
                             <thead>
                                 <tr class="no-padding">
-                                    <th>Meal</th>
+                                    <th style="width: 40%;">Meal</th>
                                     <th>Ingredients</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="no-padding">
                                     <td style="font-style: italic;">
-                                        Breakfast
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Breakfast">
                                     </td>
                                     <td>
-                                        <ul style="padding-left: 20px;">
-                                            <li>Eggs (x3)</li>
-                                            <li>Everything Bagel (x1)</li>
-                                            <li>Bacon (x3)</li>
-                                        </ul>
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Eggs (x3), Everything Bagel (x1), Bacon (x3)">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td style="font-style: italic;">
-                                        Snack (1)
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Snack (1)">
                                     </td>
                                     <td>
-                                        <ul style="padding-left: 20px;">
-                                            <li>Greek Yogurt (x1)</li>
-                                            <li>Protein Bar (x1)</li>
-                                        </ul>
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Greek Yogurt (x1), Protein Bar (x1)">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td style="font-style: italic;">
-                                        Lunch
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Lunch">
                                     </td>
                                     <td>
-                                        <ul style="padding-left: 20px;">
-                                            <li>Italian Sub (x1)</li>
-                                            <li>Brocoli (x1)</li>
-                                            <li>Banana (x1)</li>
-                                            <li>Protein Shake (x1)</li>
-                                        </ul>
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Italian Sub (x1), Brocoli (x1)">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td style="font-style: italic;">
-                                        Snack (2)
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Snack (2)">
                                     </td>
                                     <td>
-                                        <ul style="padding-left: 20px;">
-                                            <li>Assorted Fruit (x1)</li>
-                                            <li>Protein Bar (x1)</li>
-                                        </ul>
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Assorted Fruit (x1), Protein Bar (x1)">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td style="font-style: italic;">
-                                        Dinner
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Dinner">
                                     </td>
                                     <td>
-                                        <ul style="padding-left: 20px;">
-                                            <li>Grilled Chicken (x1)</li>
-                                            <li>Rice (x1)</li>
-                                            <li>Asparagus (x1)</li>
-                                        </ul>
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Grilled Chicken (x1), Rice (x1)">
                                     </td>
                                 </tr>
                                 <tr class="no-padding">
                                     <td style="font-style: italic;">
-                                        Snack (3)
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Snack (3)">
                                     </td>
                                     <td>
-                                        <ul style="padding-left: 20px;">
-                                            <li>Ice Cream (x1)</li>
-                                            <li>Protein Bar (x1)</li>
-                                        </ul>
+                                        <input class="form-control form-content-custom-small form-borderless" id="fake" name="fake" type="text" value="Ice Cream (x1), Protein Bar (x1)">
                                     </td>
+                                </tr>
+                                <tr class="no-padding">
+                                    <td>
+                                        <span><a href="something" class="button1" style="background-color:#8064A2">Add</a></span>
+                                    </td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table> 
                     </div>
                 </div>
                 
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="position: fixed; bottom: 0; background: #303030; width: 100%; border-top: 2px solid #8064A2;">
+    <div class="col-md-12" style="margin-top: 5px; margin-bottom: 5px;">
+        <div class="form-group" style="margin-bottom: 15px !important;">
+            <div style="float: right; padding-right: 15px;">
+                <span><a href="/nutrimeal" class="button1" style="background-color: #808080">Cancel</a></span>
+                <span><a href="/nutrimeal" class="button1" style="background-color:#8064A2">Save</a></span>
             </div>
         </div>
     </div>

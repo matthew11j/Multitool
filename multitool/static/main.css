@@ -342,6 +342,13 @@ i:hover, .action:hover {
   margin-top: 1rem;
 }
 
+.form-content-custom-small {
+  background-color: var(--bg2);
+  padding: .1rem .2rem;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
 .date-custom {
   background-color: var(--bg2);
   padding: .375rem .5rem;
@@ -609,10 +616,10 @@ select:-webkit-autofill:focus {
 
 .button1 {
   display: inline-block;
-  padding: 0.3em 1.2em;
+  padding: 0.1em 0.9em;
   margin: 0 0.1em 0.1em 0;
   border: 0.16em solid rgba(255,255,255,0);
-  border-radius: 2em;
+  border-radius: 7px;
   box-sizing: border-box;
   text-decoration: none;
   font-weight: 300;
@@ -624,6 +631,16 @@ select:-webkit-autofill:focus {
 
 .button1:hover {
   border-color: rgba(255,255,255,1);
+}
+
+tr.bio > td {
+  padding: 0px;
+  text-align: center;
+  font-style: italic;
+}
+
+tr.no-padding > td,th {
+  padding: 5px !important;
 }
 
 @media screen and (max-width: 960px) {
@@ -716,4 +733,32 @@ select:-webkit-autofill:focus {
     color: #242424;
     transition: 250ms;
   }
+}
+
+/* Collapsible */
+.collapse-header {
+  cursor: pointer;
+  vertical-align: middle; 
+}
+.collapse-button {
+  color:  #8064A2 !important;
+  font-size: 28px !important;
+  text-decoration: none !important;
+}
+.collapse-button:hover {
+  color: #604B7A !important;
+  text-decoration: none !important;
+}
+.collapse-chevron {
+  vertical-align: middle !important;
+  float: right;
+}
+.panel-heading.collapsed .fa-angle-down::before,
+.panel-heading .fa-angle-right::before {
+display: none;
+}
+
+.panel-heading.collapsed .fa-angle-right::before,
+.panel-heading .fa-angle-down::before {
+display: inline-block;
 }

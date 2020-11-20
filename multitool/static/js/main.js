@@ -55,14 +55,11 @@ function toggleTheme() {
     }
 }
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 function toggleClick(val) {
-    // if (val) {
-    //     document.getElementById("times-icon").style.visibility="hidden";
-    //     document.getElementById("bar-icon").style.visibility="visible";
-    // } else {
-    //     document.getElementById("times-icon").style.visibility="visible";
-    //     document.getElementById("bar-icon").style.visibility="hidden";
-    // }
     if (val) {
         document.getElementById("times-icon").style.display="none";
         document.getElementById("bar-icon").style.display="block";
@@ -72,7 +69,16 @@ function toggleClick(val) {
         document.getElementById("bar-icon").style.display="none";
         document.getElementById("nav-listing").classList.add("active");
     }
-    
+    var d = new Date();
+    var fullDate = monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    var date1 = document.getElementById("todays-date");
+    var date2 = document.getElementById("todays-date2");
+
+    if (date1)
+        date1.textContent = fullDate;
+
+    if (date2)
+        date2.textContent = fullDate;
 }
 
 // ----- Modals --------------------------------------------------------------------------------

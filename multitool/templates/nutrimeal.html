@@ -28,10 +28,10 @@
                     <i style="padding-top: 2px;" id="bar-icon" class="fa fa-bars" onclick="toggleClick(false)"></i>
                 </div>
                 <ul id="nav-listing" class="nav2-menu">
+                    <li class="nav2-item"><a class="nav2-links" href="/nutrimeal"><span>Dashboard</span></a></li>
                     <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/profile"><span>My Profile</span></a></li>
                     <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/workout"><span>Workouts</span></a></li>
                     <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/mealplan"><span>Meal Plans</span></a></li>
-                    <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/schedule"><span>Schedule</span></a></li>
                 </ul>
             </div>
         </div>
@@ -48,6 +48,25 @@
         {% endwith %}
         {% block content %}{% endblock %}
   </main>
+  <header>
+    <div style="position: fixed; bottom: 0; width: 100%; z-index: 999; background-color: #303030; height: 64px; border-top: 2px solid #8064A2;">
+        <table style="height: 100%; width: 100%;">
+            <tbody>
+                <tr style="text-align: center;">
+                    <td style="width: 33%;">
+                        <a href="/nutrimeal"><i id="times-icon" style="font-size: 1.9rem; color: #8064A2;" class="fa fa-dashboard"></i></a>
+                    </td>
+                    <td style="width: 33%;">
+                        <a href="/nutrimeal/explore"><i id="times-icon" style="font-size: 1.9rem; color: #8064A2;" class="fa fa-search"></i></a>
+                    </td>
+                    <td style="width: 33%;">
+                        <a href="/nutrimeal/profile"><img id="nav_img" class="rounded-circle nav-img" src="/static/images/IMG_9880.jpg"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</header>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
