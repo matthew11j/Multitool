@@ -32,6 +32,18 @@
                     <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/profile"><span>My Profile</span></a></li>
                     <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/workout"><span>Workouts</span></a></li>
                     <li class="nav2-item"><a class="nav2-links" href="/nutrimeal/mealplan"><span>Meal Plans</span></a></li>
+                    <hr class="mobile-dark-mode" />
+                    <div class="mobile-dark-mode" style="margin-left: 100px;">
+                        <div  class="secondary-text" style="display: table-cell; width: 70%;">
+                            Dark Mode
+                        </div>
+                        <div style="display: table-cell; width: 30%;">
+                            <label class="switch">
+                              <input id="themeToggle" type="checkbox" onclick="toggleTheme()">
+                              <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -49,7 +61,7 @@
         {% block content %}{% endblock %}
   </main>
   <header>
-    <div style="position: fixed; bottom: 0; width: 100%; z-index: 999; background-color: #303030; height: 64px; border-top: 2px solid #8064A2;">
+    <div class="toolbar">
         <table style="height: 100%; width: 100%;">
             <tbody>
                 <tr style="text-align: center;">

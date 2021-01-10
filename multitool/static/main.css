@@ -643,6 +643,9 @@ tr.no-padding > td,th {
   padding: 5px !important;
 }
 
+.toolbar {display: none;}
+.mobile-dark-mode {display: none;}
+
 @media screen and (max-width: 960px) {
   .NavbarItems2 {
     position: relative;
@@ -667,21 +670,36 @@ tr.no-padding > td,th {
   }
 
   .nav2-menu.active {
-    background: #242222;
+    background-color: var(--bg2);
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
     z-index: 1;
   }
 
+  .toolbar {
+    background-color: var(--bg2);
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+    height: 64px;
+    border-top: 2px solid #8064A2;
+  }
+
+  .mobile-dark-mode {
+    display: inline;
+  }
+
   .nav2-links {
     text-align: center;
+    color: var(--color);
     padding: 0;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* display: table; */
   }
 
   .nav2-links:hover {

@@ -5,7 +5,7 @@
 }
 
 [data-theme="dark"] .secondary-text {
-    color: var(--color2);
+    color: var(--color);
 }
 
 [data-theme="dark"] .navbar-nav > .nav-item {

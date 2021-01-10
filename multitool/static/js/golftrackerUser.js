@@ -180,6 +180,8 @@ function render_course_chart(obj) {
     var color5b = "rgba(248, 194, 206, 1)"
     var color6b = "rgba(219, 181, 247, 1)"
 
+    var color_arr = color_generator(courses.length)
+
     var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
@@ -187,22 +189,8 @@ function render_course_chart(obj) {
             datasets: [{
                 label: 'Courses Played',
                 data: times_played,
-                backgroundColor: [
-                    color1,
-                    color2,
-                    color3,
-                    color4,
-                    color5,
-                    color6
-                ],
-                borderColor: [
-                    color1b,
-                    color2b,
-                    color3b,
-                    color4b,
-                    color5b,
-                    color6b
-                ],
+                backgroundColor: color_arr,
+                
                 borderWidth: 1
             }]
         },
@@ -221,7 +209,7 @@ function render_course_chart(obj) {
             //         }
             //     }]
             // },
-            responsive: false
+            responsive: true
         }
     });   
 
@@ -239,6 +227,29 @@ function render_course_chart(obj) {
           }
         }
     };
+}
+
+function color_generator(course_cnt) {
+    var color_arr = [];
+
+    var r = 128;
+    var g = 100;
+    var b = 164;
+    for (var i=0; i<course_cnt; i++) {
+        if (i != 0) {
+            r += Math.floor(Math.random() * 11);
+            b += Math.floor(Math.random() * 11) - 5;
+        }
+        // var color1 = Math.floor(Math.random() * 85) + 115; 
+        // var color2 = Math.floor(Math.random() * 150);
+        // var color3 = Math.floor(Math.random() * 100) + 130;
+        var color_str = "rgba(" + r + ", " + g + ", " + b + ", 1)"
+        color_arr.push(color_str);
+    }
+
+    
+
+    return color_arr;
 }
 
 // ----- Modals --------------------------------------------------------------------------------
