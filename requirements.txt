@@ -27,7 +27,7 @@ pycparser==2.19
 pyFirmata==1.1.0
 pyserial==3.4
 pytz==2019.3
-PyYAML==5.3
+PyYAML==5.4
 requests==2.22.0
 six==1.13.0
 spotipy==2.9.0
